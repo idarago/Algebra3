@@ -1,0 +1,708 @@
+\documentclass[12pt]{book}
+
+% This first part of the file is called the PREAMBLE. It includes
+% customizations and command definitions. The preamble is everything
+% between \documentclass and \begin{document}.
+
+\usepackage[margin=1in]{geometry}  % set the margins to 1in on all sides
+\usepackage{graphicx}              % to include figures
+\usepackage{amsmath}               % great math stuff
+\usepackage{amsfonts}              % for blackboard bold, etc
+\usepackage{amsthm}                % better theorem environments
+\usepackage{amssymb}
+\usepackage[activeacute, spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+
+\setcounter{tocdepth}{3}% to get subsubsections in toc
+
+\let\oldtocsection=\tocsection
+
+\let\oldtocsubsection=\tocsubsection
+
+\let\oldtocsubsubsection=\tocsubsubsection
+
+% various theorems, numbered by section
+
+\newtheorem{teo}{Teorema}[section]
+\newtheorem{lem}[teo]{Lema}
+\newtheorem{prop}[teo]{Proposición}
+\newtheorem{cor}[teo]{Corolario}
+
+\theoremstyle{definition}
+\newtheorem{conj}[teo]{Conjetura}
+\newtheorem{obs}[teo]{Observación}
+\newtheorem{defn}[teo]{Definición}
+\newtheorem{ax}[teo]{Axioma}
+\newtheorem{ex}[teo]{Ejemplo}
+
+\newcommand{\bd}[1]{\mathbf{#1}}  % for bolding symbols
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}      % for Real numbers
+\newcommand{\ZZ}{\mathbb{Z}}      % for Integers
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
+\newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\hom}{\mathrm{Hom}}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\mcm}{mcm}
+\DeclareMathOperator{\mcd}{mcd}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\sg}{sg}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\rank}{rk}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\car}{car}
+\DeclareMathOperator{\Nil}{Nil}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\ann}{Ann}
+\def\acts{\curvearrowright}
+\def\stca{\curvearrowleft}
+
+
+
+\begin{document}
+\pagenumbering{roman}\clearpage\tableofcontents\newpage\pagenumbering{arabic}
+
+\chapter{Teoría de Cuerpos}
+
+\section{Definiciones Básicas}
+
+Nuestro interés va a radicar en la Teoría de Cuerpos. Una primera pregunta natural para preguntarse es, si dado un anillo conmutativo $A$ existe un cuerpo $k$ y un morfismo inyectivo de anillos $\iota:A\hookrightarrow k$. Si existieran $a,b\in A-\{0\}$ tales que $ab=0$ entonces $0=\iota(0)=\iota(ab)=\iota(a)\iota(b)$, con $\iota(a)\neq 0$ y $\iota(b)\neq 0$ por la inyectividad de $\iota$, y esto es absurdo por ser $k$ un cuerpo. Entonces es necesario que $A$ sea un dominio íntegro. Pero veamos que esto es suficiente. En efecto, definimos $k=\mathrm{Frac}(A)$ su cuerpo de fracciones con el morfismo canónico $\iota:A\to k$ dado por $\iota(a) = \dfrac{a}{1}$. Además, la propiedad universal del cuerpo de fracciones nos dice que $\mathrm{Frac}(A)$ es el cuerpo más chico que cumple esta propiedad. Es decir, si $f:A\to B$ es un morfismo de anillos tal que $f(A-\{0\})\subseteq \mathcal{U}(B)$, entonces existe un único $\overline{f}:\mathrm{Frac}(A)\to B$ tal que el siguiente diagrama conmuta:
+\begin{center}
+\begin{tikzcd}[row sep=3.3em,column sep=4em,minimum width=2em]
+ A\arrow[]{d}[left,font=\normalsize]{\iota}\arrow[]{r}[above, font=\normalsize]{f}& B \\
+\mathrm{Frac}(A)\arrow[dashed]{ur}[right, font=\normalsize]{\overline{f}} & \\
+\end{tikzcd}
+\end{center}
+
+Además, sabemos que $\ZZ$ es un objeto inicial en la categoría de anillos. Es decir, para cualquier anillo $A$, existe un único morfismo de anillos $\lambda:\mathbb{Z}\to A$, y podemos mirar así el núcleo de este morfismo. Si $\ker \lambda = 0$ entonces por el Primer Teorema de Isomorfismo debemos tener que $\ZZ \simeq \im \lambda\subseteq A$. Por lo tanto, si $A=k$ es un cuerpo, usando la propiedad universal del cuerpo de fracciones obtenemos un morfismo $f:\mathbb{Q}\to k$ que debe ser inyectivo pues $\mathbb{Q}$ es un cuerpo (y así sus ideales son sólo los triviales). Entonces, si $\ker\lambda = 0$ tenemos que $\mathbb{Q}$ es el mínimo subcuerpo en el sentido de inclusión en $k$. En este caso se dice que $k$ tiene característica $0$.
+
+En el caso que $\ker\lambda \neq 0$, como debe ser un ideal de $\ZZ$, debemos tener $\ker \lambda = n\ZZ$ con $n>1$. Entonces, nuevamente por el Teorema de Isomorfismo se tiene que $\ZZ/\ker\lambda \simeq \im\lambda\subseteq k$. Esto quiere decir que $\ZZ/n\ZZ$ es un dominio íntegro pues está metido en un cuerpo. Pero esto a su vez implica que el ideal $n\ZZ$ debe ser primo, y así como $\ZZ$ es un Dominio de Ideales Principales, el ideal $n\ZZ$ debe ser maximal. Entonces $\ZZ_p$ es un cuerpo que está metido en $k$ y es el más chico en el sentido de inclusión. En este caso se dice que $k$ es un cuerpo de característica $p$.
+
+Vamos a notar $\ZZ_p = \FF_p$. Dado un cuerpo $k$ entonces se define su \textbf{cuerpo primo} como el mínimo subcuerpo contenido en $k$ en el sentido de la inclusión. Si $k$ es de característica $0$, su cuerpo primo es $\QQ$ y si es de característica $p$ su cuerpo primo es $\FF_p$.
+
+Sea $A\subseteq B$ un subanillo y $b\in B$. Entonces $A[b]$ es la mínima $A$-subálgebra de $B$ que contiene a $b$. Si definimos el morfismo evaluación $\mathrm{ev}_b:A[x]\to B$ dado por $\mathrm{ev}_b(f) = f(b)$, entonces $A[b] = \im \mathrm{ev}_b$. Por lo tanto, por el Primer Teorema de Isomorfismo, tenemos que $A[b]\simeq A[x]/\ker \mathrm{ev}_b$.
+
+\begin{defn}
+Una \textbf{extensión de cuerpos} $F/k$ consiste de un cuerpo $k$ y un cuerpo $F$ tal que $k$ es un subcuerpo de $F$.
+\end{defn}
+
+\begin{obs}
+Sea $F/k$ una extensión. Entonces $F$ es una $k$-álgebra. En particular, $F$ es un $k$-espacio vectorial. Se llama el \textbf{grado de la extensión} a la dimensión de $F$ como $k$-espacio vectorial y se nota $[F:k] = \dim_k F$.
+\end{obs}
+
+\begin{defn}
+Una extensión $F/k$ se dice \textbf{finita} si $[F:k]<+\infty$. Si no, se dice infinita.
+\end{defn}
+
+\begin{obs}
+Si $[F:k]=1$ entonces $F=k$. Esto es obvio pues los $k$-espacios vectoriales tienen noción de rango. Si $\CC$ es el cuerpo de los complejos, entonces $[\CC:\RR]=2$, pues en efecto, $\{1,i\}$ es una base de $\CC$ como $\RR$-espacio vectorial. Sin embargo, tanto $\RR/\QQ$ como $\CC/\QQ$ son extensiones infinitas pues $\QQ$ es numerable y así cualquier $\QQ^n$ con $n\in\mathbb{N}$, mientras que tanto $\RR$ como $\CC$ no lo son.
+\end{obs}
+
+\begin{defn}
+Sea $F/k$ una exntesión de cuerpos y $\alpha\in F$. Decimos que $\alpha$ es \textbf{algebraico} sobre $k$ si existe $f\in k[x]$ no nulo tal que $f(\alpha)=0$. Equivalentemente, $\mathrm{ev}_\alpha:k[x]\to F$ no es inyectivo (ie. $\ker \ev_\alpha \neq 0$).
+\end{defn}
+
+\begin{obs}
+Sea $\alpha\in F$ algebraico sobre $k$. Entonces $\ker\ev_\alpha\subseteq k[x]$ es un ideal no nulo. Como $k[x]$ es un DIP, existe $p\in k[x]$ tal que $\langle p\rangle = \ker\ev_\alpha$. Por otra parte, como $k[x]/\langle p\rangle \simeq k[\alpha]\subseteq F$ y $k[\alpha]$ es un subanillo de $F$ y $F$ es cuerpo, $k[\alpha]$ debe ser dominio íntegro y así $\langle p\rangle$ debe ser un ideal primo. Pero como $k[x]$ es DIP, esto implica que $p$ es un polinomio irreducible, y además $p\mid g$ para todo $g\in k[x]$ tal que $g(\alpha)=0$. Por otra parte, puedo tomar a $p$ como mónico pues $k$ es cuerpo (simplemente divido por el coeficiente principal y eso no altera al ideal). Si $g\in k[x]$, $g$ es irreducible y $g(\alpha)=0$, entonces $p\mid g$, pero como $g$ es irreducible, debemos tener $g=\lambda p$ con $\lambda \in k^\times$.
+
+Entonces, si $\alpha$ es algebraico sobre $k$, existe un único $p\in k[x]$ irreducible y mónico tal que $p(\alpha)=0$. A este polinomio $p$ se lo llama el \textbf{polinomio minimal} de $\alpha$ en $k$ y se lo denota por $f(\alpha,k), m(\alpha,k)$ o $\mathrm{Irr}(\alpha,k)$.
+
+Entonces $m(\alpha,k)$ cumple que es el único irreducible y mónico que anula a $\alpha$, es el único mónico que cumple que $p\mid g$ para todo $g\in k[x]$ tal que $g(\alpha)=0$ y además es el polinomio mónico de grado mínimo que anula a $\alpha$.
+\end{obs}
+
+\begin{obs}
+Sea $F/k$ una extensión y $\alpha\in F$ algebraico sobre $k$. Entonces $k[x]/\ker \ev_\alpha \simeq k[\alpha]\subseteq F$. Como $F$ es cuerpo, $k[\alpha]$ debe ser dominio íntegro y así $\ker\ev_\alpha$ es un ideal primo, que es no nulo por ser $\alpha$ algebraico. Como $k[x]$ es un DIP, debemos tener entonces que $\ker\ev_\alpha$ es un ideal maximal y así $k[\alpha]$ es un cuerpo. Esto nos permite concluir que por ejemplo $\QQ[\sqrt{2}]$ y $\QQ[\sqrt[3]{5}]$ son cuerpos.
+\end{obs}
+
+\begin{defn}
+Sea $F/k$ una extensión y $\alpha\in F$. Definimos $k(\alpha)$ como el mínimo subcuerpo de $F$ que contiene a $k$ y $\alpha$.
+\end{defn}
+
+\begin{obs}
+Notemos que $k\subseteq k[\alpha]\subseteq k(\alpha)\subseteq F$. Es decir, el mínimo subcuerpo que contiene a $k$ y $\alpha$ contiene al mínimo subanillo que contiene a $k$ y $\alpha$. Entonces, como $k[\alpha]\subseteq F$ debe ser dominio íntegro, y así $k(\alpha)$ debe ser su cuerpo de fracciones. Esto implica que $k(\alpha)=\left\{\dfrac{f(\alpha)}{g(\alpha)} : f,g\in k[x], g(\alpha)\neq 0 \right\}$.
+\end{obs}
+
+\begin{prop}
+Sea $F/k$ una extensión y $\alpha\in F$. Entonces $k[\alpha] = k(\alpha)$ si y sólo si $\alpha$ es algebraico sobre $k$. En ese caso, $[k(\alpha):k] = \gr(m(\alpha,k))$.
+\begin{proof}
+$(\Longleftarrow)$ Si $\alpha$ es algebraico, ya vimos que $k[\alpha]$ es un cuerpo y así $k[\alpha]=k(\alpha)$.
+$(\Longrightarrow)$ Si $k[\alpha]=k(\alpha)$ y $\alpha$ no es algebraico, entonces $\ker\ev_\alpha =0$ y así $k[\alpha]\simeq k[x]$. Pero $k[x]$ no es un cuerpo mientras que $k[\alpha]=k(\alpha)$ sí lo es. Absurdo.
+
+Para probar la segunda afirmación, sea $p=m(\alpha,k)$ el polinomio minimal y $d=\gr p$ su grado. Veamos que $\mathcal{B}=\{1,\alpha,\alpha^2,\ldots,  \alpha^{d-1}\}$ es una base de $k(\alpha)$ como $k$-espacio vectorial. Primero, veamos que $\mathcal{B}$ es linealmente independiente. En efecto, sean $a_i\in k$ tales que $a_0 + a_1 \alpha + \ldots + a_{d-1}\alpha^{d-1}=0$. Sea $g(x) = a_0 + a_1x + \ldots + a_{d-1}x^{d-1}$. Como $g(\alpha)=0$ y $\gr g < \gr p$, debemos tener que $g=0$ y así $a_i =0$ para todo $i$. Esto implica que $\mathcal{B}$ es linealmente independiente. Resta ver que $\mathcal{B}$ genera. Como $k(\alpha)=k[\alpha]$, si $x\in k(\alpha)$ entonces $x=f(\alpha)$ para algún $f\in k[x]$. Por algoritmo de división, $f=ph+r$ con $r=0$ o $\gr r < d$. Entonces, $f(\alpha) = p(\alpha)h(\alpha) + r(\alpha) = r(\alpha)$. Entonces $x=f(\alpha)=r(\alpha) = b_0 + b_1\alpha + \ldots + b_{d-1}\alpha^{d-1}$, y estamos.
+\end{proof}
+\end{prop}
+
+\begin{defn}
+Sea $F/k$ una extensión de cuerpos. $\alpha\in F$ se dice \textbf{trascendente} sobre $k$ si no es algebraico.
+\end{defn}
+
+\begin{obs}
+Notar que $\alpha$ es trascendente sobre $k$ si y sólo si $k[\alpha]\simeq k[x]$.
+\end{obs}
+
+\begin{defn}
+Una extensión $F/k$ se dice \textbf{algebraica} si todo $\alpha\in F$ es algebraico sobre $k$.
+\end{defn}
+
+\begin{prop}
+Si $F/k$ es una extensión finita entonces es algebraica.
+\begin{proof}
+Sea $\alpha\in F$. Debo ver que es algebraico sobre $k$. Como $[F:k]<+\infty$ existe un $n\in \NN$ tal que $\{1,\alpha,\ldots , \alpha^{n}\}$ resulta linealmente dependiente, y así existen $a_i\in k$ no todos cero tales que $a_0 + a_1 \alpha + \ldots + a_{n}\alpha^{n} = 0$ y así tengo un polinomio no nulo que anula a $\alpha$.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+La recíproca es falsa: es decir, que una extensión $F/k$ sea algebraica no implica $[F:k]<+\infty$. Un ejemplo (que más adelante probaremos) es $\overline{\QQ}/\QQ$ donde se define $\overline{\QQ} = \{a\in\CC : a \text{ es algebraico sobre }\QQ\}$.
+\end{obs}
+
+\begin{defn}
+Una \textbf{torre de extensiones} es una cadena de contenciones de subcuerpos $k_1\subseteq \ldots \subseteq k_n$.
+\end{defn}
+
+\begin{prop}
+Si $k\subseteq F\subseteq E$ es una torre de extensiones, entonces $[E:k] = [E:F][F:k]$.
+\begin{proof}
+Sea $\{x_i\}_{i\in I}$ una base de $E$ como $F$-espacio vectorial. Entonces, $[E:F] = \sharp I$. Sea $\{y_j\}_{j\in J}$ una base de $F$ como $k$-espacio vectorial. Entonces, $[F:k]=\sharp J$. Afirmo que $\{x_i y_j\}_{i\in I, j\in J}$ es una base de $E$ como $k$-espacio vectorial. Veamos que genera primero: Si $x\in E$ entonces $x=\displaystyle\sum_{i} \alpha_i x_i = \displaystyle\sum_{i}\sum_{j} \alpha_{ij}y_j x_i$, donde la segunda igualdad se da porque $\alpha_i \in F$. Ahora, veamos que son linealmente independientes. Si $\displaystyle\sum_{i,j}c_{ij}x_iy_j=0$ entonces debemos tener que $\displaystyle\sum_{i}\left(\sum_{j}c_{ij}y_j\right) x_i = 0$ y así como $\{x_i\}_{i\in I}$ es base, cada $\displaystyle\sum_{j}c_{ij}y_j=0$ y así como $\{y_j\}_{j\in J}$ es base debemos tener que $c_{ij}=0$ para todo $i,j$. Y listo.
+\end{proof}
+\end{prop}
+
+\begin{defn}
+Sea $F/k$ una extensión de cuerpos y $S\subseteq F$ un subconjunto. Entonces $k[S]$ es la mínima $k$-subálgebra de $F$ que contiene a $S$. Además, $k(S)$ es el mínimo subcuerpo de $F$ que contiene a $k$ y $S$. Entonces $k\subseteq k[S]\subseteq k(S)\subseteq F$. Como $k[S]\subseteq F$ es un dominio íntegro, debemos tener que $k(S)$ es su cuerpo de fracciones. Si $S=\{\alpha_1,\ldots , \alpha_m\}$ entonces $k[S] = k[\alpha_1,\ldots , \alpha_m] = \{f(\alpha_1,\ldots , \alpha_m) : f\in k[x_1,\ldots , x_m]\}$. Por lo tanto, su cuerpo de fracciones es $k(S) = k(\alpha_1,\ldots , \alpha_m) = \left\{ \dfrac{f(\alpha_1,\ldots , \alpha_m)}{g(\alpha_1,\ldots ,\alpha_m)} : f,g\in k[x_1,\ldots , x_m], g(\alpha_1,\ldots , \alpha_m)\neq 0 \right\}$.
+\end{defn}
+
+\begin{obs}
+Sea $k(\alpha_1,\alpha_2)$. Entonces $k(\alpha_1,\alpha_2) = (k(\alpha_1))(\alpha_2) = (k(\alpha_2))(\alpha_1)$. Es decir, puedo ir agregando las raíces de a una.
+\end{obs}
+
+\begin{obs}
+Sea $k\subseteq F\subseteq E$ una torre de extensiones y $\alpha\in E$ algebraico sobre $k$. Entonces $\alpha$ es algebraico sobre $F$ y $m(\alpha,F)\mid m(\alpha,k)$ como polinomios en $F[x]$. Un ejemplo es $x^2 - 5$ es el minimal de $\sqrt{5}$ en $\QQ$ mientras que en $\RR$ tenemos que $x-\sqrt{5}$ es su minimal.
+\end{obs}
+
+\begin{defn}
+Sea $A$ un dominio íntegro. Decimos que un polinomio $p\in A[x]$ es \textbf{primitivo} si los únicos elementos de $A$ que dividen a todos los coeficientes de $p$ son las unidades.
+\end{defn}
+
+\begin{obs}
+Sea $A$ un DFU y $k$ su cuerpo de fracciones. Si $f(x)\neq 0\in k[x]$ entonces $f(x) = \gamma f_1(x)$ con $\gamma\in k$ y $f_1(x)$ un polinomio primitivo sobre $A[x]$. Más aún, esta factorización es única a menos de unidades en $A$. En efecto, si $f(x) = \alpha_0 + \alpha_1 x + \ldots + \alpha_n x^n$ donde $\alpha_i\in k$ y $\alpha_n\neq 0$. Podemos escribir $\alpha_i = a_i b_i^{-1}$ para ciertos $a_i,b_i\in A$. Por lo tanto, si $b = b_1\cdots b_n$, tenemos que $bf(x) = cf_1(x)$ donde $f_1(x)\in A[x]$ es un polinomio primitivo. Esto quiere decir que $f(x) = \gamma f_1(x)$ donde $\gamma = cb^{-1}\in k$. Ahora, si $f(x)=\overline{\gamma}f_2(x)$, entonces $\overline{\gamma} = de^{-1}$, y así $cef_1(x) = bdf_2(x)$. Pero esto quiere decir que $f_1$ y $f_2$ son asociados y $\overline{\gamma} = u\gamma$ con $u$ unidad, como queríamos.
+
+De esto se deduce inmediatamente que si $f,g\in A[x]$ son primitivos, y son asociados en $k[x]$, entonces deben ser asociados en $A[x]$. En efecto, como $f(x) = \alpha g(x)$ con $k\ni\alpha\neq 0$ y por la unicidad de la escritura, $\alpha$ debe ser unidad en $A$.
+\end{obs}
+
+\begin{obs}
+El producto de polinomios primitivos es primitivo en un $A$ DFU. Sean $f(x),g(x)$ polinomios primitivos, pero $h(x)=f(x)g(x)$ no lo es. Entonces, existe algún elemento irreducible (equiv. primo por ser $A$ DFU) $p\in A$ tal que $p\nmid f(x), p\nmid g(x)$ pero $p\mid h(x)$. Como $p$ es primo, esto implica que $A/\langle p\rangle$ es un dominio íntegro, y así $A/\langle p\rangle [x]$ es un dominio íntegro también. Si aplicamos el morfismo canónico de proyección $A[x]\to A/\langle p\rangle [x]$ (es decir, el único morfismo que está definido por $a\in A\mapsto \overline{a}\in A/\langle p\rangle$ y $x\mapsto x$ en virtud de la propiedad universal del anillo de polinomios) tenemos que $\overline{f}(x)\overline{g}(x) = \overline{h}(x)=\overline{0}$. Pero $\overline{f}(x)\neq \overline{0}$ y $\overline{g}(x)\neq \overline{0}$, contradiciendo que $A/\langle p\rangle$ sea un dominio íntegro.
+\end{obs}
+
+\begin{lem}[Lema de Gauss]
+Sea $A$ un DFU y $k$ su cuerpo de fracciones. Si $f$ es irreducible en $A[x]$ entonces $f$ es irreducible en $k[x]$.
+\begin{proof}
+Supongamos que $f(x)\in A[x]$ tiene grado positivo y es irreducible en $A[x]$. Esto quiere decir que $f$ es primitivo (pues si no separamos algún divisor de todos los coeficientes). Supongamos que $f$ es reducible en $k[x]$ y escribamos $f(x) = \varphi_1(x)\varphi_2(x)$ con $\varphi_1,\varphi_2\in k[x]$. Podemos escribir entonces $\varphi_1(x) = \alpha_1 f_1(x)$ con $\alpha_1\in k$ y $f_1$ primitivo en $A[x]$ (y lo mismo para $\varphi_2(x)=\alpha_2 f_2(x)$). Entonces, $f(x) = \alpha_1\alpha_2 f_1(x)f_2(x)$. Como el producto de polinomios primitivos es primitivo. Por la observación anterior, debemos tener que $f(x)$ y $f_1(x)f_2(x)$ son asociados en $A[x]$ pues lo son en $k[x]$. Esto contradice la irreducibilidad de $f(x)$ en $A[x]$. El lema sigue.
+\end{proof}
+\end{lem}
+
+\begin{teo}
+Si $A$ es un DFU entonces $A[x]$ también es un DFU.
+\begin{proof}
+
+Sea $f(x)\in A[x]$ un polinomio no nulo y que no es unidad. Sea $k$ el cuerpo de fracciones de $A$. Entonces, podemos escribir $f(x) = d f_1(x)$ con $d\in k$ y $f_1$ primitivo. Si $\gr f_1(x) >0$ y $f_1(x)$ no es una unidad ni es irreducible, tendremos que $f_1(x) = f_{11}(x)f_{12}(x)$ con $\gr f_{11},\gr f_{12} > 0$. Claramente los dos polinomios deben ser primitivos, pues si alguno no lo fuera (sin pérdida de la generalidad $f_{11}$) tendríamos $a\mid f_{11}$ entonces $a\mid f$ (pues divide a todos los coeficientes), lo que implica $a$ unidad y así $f_{11}$ primitivo. Por lo tanto, si procedemos por inducción sobre el grado podemos escribir $f_1(x) = q_1(x)\cdots q_t(x)$ con $q_i(x)\in A[x]$ irreducibles. Si $d$ no es una unidad, escribimos $d=p_1\cdots p_s$ con $p_i\in A$ irreducibles. Claramente, estos son irreducibles en $A[x]$. Utilizando las factorizaciones de $d$ y $f_1(x)$, obtenemos una factorización de $f(x)$. 
+
+Sólo resta probar la unicidad de la factorización a menos de unidades y reordenamiento. Supongamos primero que $f(x)$ es primitivo. Entonces, sus factores irreducibles tienen grado positivo. Tenemos $f(x) = q_1(x)\cdots q_h(x) = q_1'(x)\cdots  q_k'(x)$ donde los $q_i,q_j'$ son irreducibles de grado positivo. Entonces, estos son irreducibles en $k[x]$ por el Lema de Gauss. Como $k[x]$ es un DFU (pues es un dominio euclídeo al ser $k$ cuerpo), debemos tener que $h=k$ y que existe una permutación $\sigma\in S_k$ tal que $q_i'(x)$ y  $q_{\sigma(i)}(x)$ son asociados en $k[x]$ (y por lo tanto en $A[x]$ como vimos en una observación anterior). Por lo tanto, la unicidad en el caso que $f(x)$ es primitivo sigue. Supongamos ahora que $f(x)$ no es primitivo. Entonces, toda factorización en irreducibles en $A[x]$ contiene factores en $A$. Como vimos en una observación anterior, esa parte en $A$ es única salvo unidades. Como $A$ es un DFU, esa parte en $D$ tiene factorización única. Ahora, la parte que resta (si es que resta algo) es un polinomio primitivo. Pero para los polinomios primitivos ya probamos que la factorización es única. Y estamos. 
+
+\end{proof}
+\end{teo}
+
+\begin{cor}
+Si $A$ es un DFU entonces $A[x_1,\ldots , x_n]$ también lo es.
+\begin{proof}
+Simplemente es proceder por inducción sobre la cantidad de variables.
+\end{proof}
+\end{cor}
+
+\begin{obs}
+Sabemos que DIP implica DFU. Veamos que la recíproca es falsa. En efecto, como $\ZZ$ es DFU, su anillo de polinomios $\ZZ[x]$ también lo es. Pero $\ZZ[x]$ no es DIP pues el ideal $\langle 2,x\rangle$ no es principal.
+\end{obs}
+
+\begin{lem}[Criterio de Eisenstein]
+Sea $A$ un DFU y $k$ su cuerpo de fracciones. Si $f\in A[x]$, $f=a_0 + a_1x + \ldots + a_n x^n$ y se cumple que para algún primo $p\in A$, $p\nmid a_n$, $p\mid a_i$ para todo $0\leq i <n$ y $p^2\nmid a_0$, entonces $f$ resulta irreducible en $k[x]$.
+\begin{proof}
+
+Supongamos que $f(x)$ fuera reducible sobre $A[x]$. Supongamos que existen polinomios $g(x),h(x)\in A[x]$ de grado positivo de modo tal que $f(x)=g(x)h(x)$. Luego, si $g(x) = b_0 + b_1 x + \ldots + b_m x^m$ ($b_m\neq 0$) y $h(x)=c_0 + c_1x+\ldots + c_k x^k$ ($c_k\neq 0$), tenemos que $a_0 = b_0 c_0$. Como $p\mid a_0$ y es primo, debemos tener que $p\mid b_0$ o $p\mid c_0$. Pero no pueden pasar ambas alternativas a la vez, pues si no $p^2 \mid b_0c_0=a_0$. Supongamos sin pérdida de generalidad que $p\mid b_0$ y $p\nmid c_0$. Además, notemos que $a_n = b_m c_k$ y como $p\nmid a_n$, debemos tener $p\nmid b_m$. Sea $r$ el menor índice tal que $p\nmid b_r$. Entonces, $a_r = (b_0c_r + \ldots + b_{r-1}c_1) + b_rc_0$, con $r\leq m < m+k=n$. Entonces, $p\mid a_r$. Pero $p$ divide a todo el paréntesis y $p\nmid b_r c_0$ pues no divide a ninguno de los dos. Absurdo, que provino de suponer que $f$ fuera reducible.
+
+Si $f$ no se puede escribir como producto de polinomios de grado positivo, tenemos que $f(x) = \alpha g(x)$ con $\alpha\in A$ y $g$ primitivo. Si $g$ es primitivo, entonces haciendo el mismo argumento que antes, debe ser irreducible en $A[x]$ y por Lema de Gauss, en $k[x]$. Entonces, $f(x)$ es asociado a un irreducible en $k[x]$ y así irreducible en $k[x]$. Y estamos.
+
+\end{proof}
+\end{lem}
+
+\begin{ex}
+Supongamos que queremos calcular $[\QQ(i,\sqrt{2}),\QQ]$. Notemos que $x^2 -2$ es el minimal de $\sqrt{2}$ en $\QQ$, ya que es irreducible por Criterio de Eisenstein y anula a $\sqrt{2}$. Entonces, $[\QQ(\sqrt{2}),\QQ]=2$. Ahora, notemos que $m(i,\QQ(\sqrt{2})) \mid m(i,\QQ) = x^2 + 1$. Entonces, $\gr m(i,\QQ(\sqrt{2})) \leq 2$. Pero como $i\notin \QQ(\sqrt{2})$, debe tener grado $2$. Esto quiere decir que $[\QQ(\sqrt{2})(i):\QQ(\sqrt{2})] = 2$. Por lo tanto, $[\QQ(i,\sqrt{2}):\QQ]=4$.
+
+Ahora, supongamos que queremos calcular $[\QQ(\sqrt[4]{5},\sqrt[5]{3}) : \QQ]$. Vemos que $[\QQ(\sqrt[4]{5}):\QQ]=4$ pues el minimal de $\sqrt[4]{5}$ sobre $\QQ$ es $x^4 - 5$ (pues nuevamente, lo anula y es irreducible por Criterio de Eisenstein). De forma similar, $[\QQ(\sqrt[5]{3}):\QQ]=5$ pues el minimal de $\sqrt[5]{3}$ es $x^5 - 3$ (lo anula y es irreducible por Criterio de Eisenstein nuevamente). Entonces, sabemos que $4$ y $5$ dividen al grado de la extensión original, y como son coprimos, $20$ debe hacerlo. Pero como el polinomio minimal $m(\sqrt[4]{5},\QQ(\sqrt[5]{3}) \mid m(\sqrt[4]{5},\QQ)$, tenemos que el grado de la extensión está acotado $[\QQ(\sqrt[5]{3})(\sqrt[4]{5}):\QQ(\sqrt[5]{3})]\leq [\QQ(\sqrt[4]{5}):\QQ]=4$. Entonces, esto nos dice que $[\QQ(\sqrt[4]{5},\sqrt[5]{3}) : \QQ] = [\QQ(\sqrt[5]{3})(\sqrt[4]{5}):\QQ(\sqrt[5]{3})] [\QQ(\sqrt[5]{3}):\QQ] \leq 20$. Pero como $20\mid [\QQ(\sqrt[4]{5},\sqrt[5]{3}) : \QQ]$, debe ser $20\leq [\QQ(\sqrt[4]{5},\sqrt[5]{3}) : \QQ]$. Por lo tanto, tenemos ambas desigualdades y así debe valer la igualdad.
+
+Finalmente, supongamos que queremos calcular el polinomio minimal de $\sqrt{2}+\sqrt[3]{3}$ sobre $\QQ$. Escribimos $\alpha = \sqrt{2}+\sqrt[3]{3}$. Entonces, $\alpha-\sqrt{2} = \sqrt[3]{3}$. Elevando al cubo a ambos lados tenemos que $(\alpha-\sqrt{2})^3 = 3$. Es decir, $\alpha^3 - 3\alpha^2 \sqrt{2} + 6\alpha - 2\sqrt{2} = 3$. Entonces $\alpha^3 + 6\alpha - 3 = \sqrt{2}(3\alpha^2 + 2)$. Esto en particular nos dice que $\sqrt{2}\in\QQ(\alpha)$, y así $\sqrt[3]{3}\in\QQ(\alpha)$. Elevando al cuadrado esa identidad y pasando restando los términos, se tiene que un polinomio de grado $6$ anula a $\alpha$. Si vemos que es irreducible ya estaremos. Pero para eso, a su vez, nos alcanzará probar que $[\QQ(\alpha):\QQ]=6$. Notemos que $\QQ(\sqrt{2}+\sqrt[3]{3}) = \QQ(\sqrt{2},\sqrt[3]{3})$. En efecto, la contención $\subseteq)$ es obvia y la otra contención la probamos unos renglones más arriba. Además, como $[\QQ(\sqrt{2}):\QQ]= 2$ y $[\QQ(\sqrt[3]{3}):\QQ]=3$, y son coprimos, $6\mid [\QQ(\sqrt{2},\sqrt[3]{3}):\QQ]$. esto implica que $[\QQ(\sqrt{2},\sqrt[3]{3}):\QQ]\geq 6$. Pero como tenemos un polinomio de grado $6$ que anula a $\alpha$, debe ser el minimal, y así irreducible.
+
+\end{ex}
+
+\begin{defn}
+Una extensión $F/k$ se dice \textbf{finitamente generada} si $F=k(\alpha_1,\ldots , \alpha_m)$ para ciertos $\alpha_i\in F$.
+\end{defn}
+\begin{defn}
+Una extensión $F/k$ se dice \textbf{simple} si $F=k(\alpha)$ para algún $\alpha\in F$.
+\end{defn}
+
+\begin{obs}
+Notemos que $\QQ(\pi)/\QQ$ es una extensión simple (pero no es algebraica). Además, $\QQ(\sqrt{2},\sqrt[3]{3})/\QQ$ es simple pues como vimos $\QQ(\sqrt{2},\sqrt[3]{3})=\QQ(\sqrt{2}+\sqrt[3]{3})$.
+
+Además, si $F/k$ es una extensión finita, es claro que $F/k$ es finitamente generada. En efecto, si $\{\alpha_1,\ldots , \alpha_m\}$ es una base de $F$ como $k$-espacio vectorial, es fácil ver que $F=k(\alpha_1,\ldots ,\alpha_m)$. Pero la recíproca no es cierta: es decir, que una extensión sea finitamente generada no implica que sea finita. En efecto, $\QQ(\pi)/\QQ$ es una extensión finitamente generada (simple) pero no es finita, pues si lo fuera, vimos que eso implica que es algebraica, y así $\pi$ sería algebraico. Pero esto es falso.
+\end{obs}
+
+\begin{prop}
+Sea $F/k$ una extensión. Entonces $F/k$ es finita si y sólo si es finitamente generada y algebraica.
+\begin{proof}
+
+$(\Longrightarrow)$ Con una proposición anterior vimos que finita implica algebraica y en la observación anterior vimos que finita implica finitamente generada.
+
+$(\Longleftarrow)$ Supongamos que $F=k(\alpha_1,\ldots , \alpha_m)$ con los $\alpha_i$ algebraicos sobre $k$. Como $\alpha_1$ es algebraico sobre $k$, tenemos que $[k(\alpha_1):k]=n_1<+\infty$. Como $\alpha_2$ es algebraico sobre $k$, lo es sobre $k(\alpha_1)$, y así $[k(\alpha_1,\alpha_2):k(\alpha_1)]=n_2<+\infty$. Continuando así, tenemos que $[k(\alpha_1,\ldots ,\alpha_{i+1}):k(\alpha_1,\ldots , \alpha_i)]=n_{i+1}<+\infty$. Simplemente multiplicando los grados tenemos que $[F:k]=\displaystyle\prod_{i=1}^n n_i < +\infty$.
+
+\end{proof}
+\end{prop}
+
+\begin{obs}
+Notemos que en la demostración $(\Longleftarrow)$ sólo usamos que los $\alpha_i$ son algebraicos sobre $k$. Entonces, si $\alpha_1,\ldots ,\alpha_m$ son algebraicos sobre $k$ resulta que toda la extensión $k(\alpha_1,\ldots , \alpha_m)/k$ es algebraica. En efecto, si $F/k$ es una extensión y $S\subseteq F$ un subconjunto (ya sea finito o infinito), si para todo $s\in S$ resulta que $s$ es algebraico sobre $k$ entonces $k(S)/k$ resulta algebraica. Esto es porque si $\alpha\in k(S)$ existen $s_1,\ldots , s_m\in S$ tales que $\alpha \in k(s_1,\ldots , s_m)$ y esta es algebraica.
+\end{obs}
+
+\section{Clases Distinguidas}
+Consideremos una forma muy simple de obtener una extensión de cuerpos nueva dadas $E/k$ y $F/k$.
+
+\begin{defn}
+Sean $k,E,F,L$ cuerpos tales que $k\subseteq E,F$ y $E,F\subseteq L$. Se define el \textbf{compuesto} de $E$ y $F$ como el mínimo subcuerpo de $L$ que contiene a $E$ y $F$. Es decir, tenemos el siguiente diagrama de extensiones de cuerpos:
+\begin{center}
+\begin{tikzcd}[row sep=1.3em,column sep=1.3em,minimum width=2em]
+ & L\arrow[dash]{d} & \\
+ & EF\arrow[dash]{rd} &  \\
+E \arrow[dash]{ur}\arrow[dash]{dr} & & F \\
+& k\arrow[dash]{ur} &
+\end{tikzcd}
+\end{center}
+Notar que por definición, se tiene que $EF= E(F)=F(E)$.
+\end{defn}
+
+\begin{obs}
+Si $E=k(\alpha_1,\ldots , \alpha_m)$ entonces $EF= F(\alpha_1,\ldots , \alpha_m)$ (pues nuevamente, es el cuerpo más chico que contiene a $E$ y $F$).
+\end{obs}
+
+\begin{defn}
+Una clase $\mathscr{C}$ de extensiones se dice \textbf{distinguida} si satisface:
+\begin{itemize}
+\item Dada una torre de extensiones $k\subseteq F\subseteq E$, se tiene que $E/F\in\mathscr{C}$ y $F/k\in\mathscr{C}$ si y sólo si $E/k\in \mathscr{C}$.
+\item Si $E/k\in\mathscr{C}$ entonces $EF/F\in\mathscr{C}$.
+\end{itemize}
+\end{defn}
+
+\begin{obs}
+Si $\mathscr{C}$ es una clase distinguida y $E/k, F/k\in\mathscr{C}$ entonces debemos tener que $EF/k\in\mathscr{C}$. En efecto, esto es porque por la segunda condición $EF/F\in\mathscr{C}$ y por la primera, como $EF/F, F/k\in\mathscr{C}$ entonces $EF/k\in\mathscr{C}$.
+\end{obs}
+
+\begin{prop}
+La clase de extensiones finitas es una clase distinguida.
+\begin{proof}
+Para ver la primera condición, notemos que $[E:k] = [E:F][F:k]$. Entonces, $E/k$ es infinita si y sólo si alguna de las $E/F$ o $F/k$ lo son. Para ver la segunda condición, notemos que como $E/k$ es finita, es finitamente generada y algebraica. Esto quiere decir que $E=k(\alpha_1,\ldots ,\alpha_m)$ y así $EF=F(\alpha_1,\ldots ,\alpha_m)$. Por lo tanto $EF/F$ es finitamente generada y algebraica, pues los $\alpha_i$ son algebraicos sobre $k\subseteq F$ y así sobre $F$. Esto quiere decir que $EF/F$ es finita, como queríamos probar.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+La clase de extensiones algebraicas es una clase distinguida.
+\begin{proof}
+Para ver la primera condición, notemos que si $E/k$ es algebraica, entonces $E/F$ lo es (pues todo $x\in E$ es raíz de un polinomio con coeficientes en $k\subseteq F$ y así con coeficientes en $F$) y $F/k$ también (pues si todo $x\in E$ es raíz de un polinomio con coeficientes en $k$, con más razón todo $x\in F\subseteq E$ lo es). Ahora, supongamos que $E/F$ y $F/k$ son algebraicas. Sea $\alpha\in E$. Como $\alpha$ es algebraico sobre $F$, existen $a_0,\ldots ,a_n\in F$ tales que $a_0 + a_1 \alpha + \ldots + a_n\alpha^n = 0$, con $a_n\neq 0$. Entonces, $\alpha$ es algebraico sobre $k(a_0,\ldots , a_n)$. Entonces, $k(a_0,\ldots , a_n)(\alpha)$ es una extensión finita (por ser finitamente generada y algebraica) de $k(a_0,\ldots ,a_n)$ y esta a su vez es una extensión finita (por lo mismo). Entonces $k(a_0,\ldots ,a_n,\alpha)$ es una extensión finita sobre $k$ y así $\alpha$ es algebraico sobre $k$.
+Para ver la segunda condición, notemos que $EF=F(E)$. Entonces, basta ver que todo $x\in E$ es algebraico sobre $F$. Pero lo son sobre $k\subseteq F$. Y estamos.
+\end{proof}
+\end{prop}
+
+\section{Morfismos de Extensiones}
+
+\begin{defn}
+Si $\sigma:E\to F$ es un morfismo de cuerpos (es decir, un morfismo de anillos entre cuerpos). Si $f\in E[x]$, denotamos $f^\sigma\in F[x]$ al polinomio que se obtiene de aplicar $\sigma$ a los coeficientes de $f$. Es decir, si $f=a_0 + a_1x+ \ldots + a_n x^n\in E[x]$ entonces $f^\sigma = \sigma(a_0) + \sigma(a_1)x + \ldots + \sigma(a_n)x^n\in F[x]$.
+\end{defn}
+
+\begin{defn}
+Un \textbf{morfismo de extensiones} $\sigma: E/k\to F/k$ es un morfismo de cuerpos $\sigma:E\to F$ tal que $\sigma(x)=x\;\forall x\in k$. Es decir, el siguiente diagrama conmuta: \begin{center}
+\begin{tikzcd}[row sep=3.3em,column sep=4em,minimum width=2em]
+ E\arrow[]{r}[above, font=\normalsize]{\sigma}& F \\
+k\arrow[hookrightarrow]{u}[left,font=\normalsize]{\mathrm{inc}} \arrow[hookrightarrow]{ur}[right, font=\normalsize]{\mathrm{inc}} & \\
+\end{tikzcd}
+\end{center} Es decir, $\sigma:E\to F$ es un morfismo de $k$-álgebras.
+\end{defn}
+
+\begin{obs}
+Notemos que si $\sigma:E/k\to F/k$ es un morfismo de extensiones, entonces $\sigma:E\to F$ es un monomorfismo $k$-lineal. En efecto, $\sigma$ es monomorfismo pues $E$ es un cuerpo y así el núcleo debe ser trivial, y es $k$-lineal pues $\sigma(\lambda x)=\sigma(\lambda)\sigma(x)=\lambda \sigma(x)$ para todo $\lambda\in k$.
+
+Ahora, si $[E:k]=[F:k]$ y ambas son finitas, entonces $\sigma$ resulta un isomorfismo de $k$-espacios vectoriales (pero no necesariamente de cuerpos, como se puede ver con $\QQ(\sqrt{2})/\QQ$ y $\QQ(\sqrt{3})/\QQ$). Se deduce entonces que si $\sigma:E/k\to E/k$ es un endomorfismo de extensiones, si $E/k$ es una extensión finita entonces $\sigma$ es un automorfismo.
+
+Además, si $\sigma:E/k\to F/k$ y $f\in k[x]$, entonces $f^\sigma = f$ pues $\left.\sigma\right|_{k}= \id$. También, notemos que si $\sigma:E/k\to F/k$ es un morfismo de extensiones y $f\in E[x]$, si $\alpha\in E$ es raíz de $f$, es claro que $\sigma(\alpha)$ es raíz de $f^\sigma\in F[x]$. En efecto, $f(\alpha)=a_0 + a_1\alpha + \ldots + a_n \alpha^n = 0$ y así $0=\sigma(f(\alpha)) = \sigma(a_0) + \sigma(a_1)\sigma(\alpha)+\ldots + \sigma(a_n)\sigma(\alpha)^n = f^\sigma(\sigma(\alpha))$.
+
+En virtud de estas últimas afirmaciones, es evidente que si $\sigma:E/k\to F/k$ es un morfismo de extensiones y $\alpha\in E$ es raíz de $f\in k[x]$, entonces $\sigma(\alpha)$ es raíz de $f$.
+\end{obs}
+
+\begin{prop}
+Si $E/k$ es una extensión algebraica, entonces todo endomorfismo $\sigma:E/k\to E/k$ es un automorfismo.
+\begin{proof}
+Ya observamos que $\sigma$ es un monomorfismo $k$-lineal. Con ver que es un epimorfismo ya estaremos. Sea $\alpha\in E$. Debo ver que $\alpha\in\im \sigma$. Sea $p$ el polinomio minimal de $\alpha\in k$ y sean $\alpha_1,\ldots ,\alpha_m$ las raíces de $p$ en $E$ (son finitas porque $E$ es un cuerpo y hay alguna pues $\alpha\in E$). Consideremos entonces $E'=k(\alpha_1,\ldots, \alpha_m)$. La extensión $E'/k$ es finita pues es algebraica y finitamente generada. Como $\left.\sigma\right|_{k}=\id$ y $\sigma(\alpha_i)=\alpha_j$ para algún $j$ (pues $\sigma(\alpha_i)$ es una raíz en $E$ de $p$), tenemos que $\sigma(E')\subseteq E'$. Entonces, $\sigma$ se restringe (y correstringe) bien a un endomorfismo $\overline{\sigma}:E'/k\to E'/k$. Como $E'/k$ es finita, tenemos que $\overline{\sigma}$ es un automorfismo y así existe un $\gamma\in E'\subseteq E$ tal que $\overline{\sigma}(\gamma) = \alpha$. Y estamos.
+\end{proof}
+\end{prop}
+
+\begin{prop}[Morfismos que salen de extensiones simples]
+Sea $k(\alpha)/k$ una extensión simple y $L/k$ alguna extensión.
+
+Si $\alpha$ es trascendente sobre $k$ y $\sigma:k(\alpha)/k\to L/k$ es un morfismo de extensiones, entonces $\sigma(\alpha)\in L$ es trascendente sobre $k$. Más aún, la asignación $\sigma\mapsto\sigma(\alpha)$ induce una correspondencia biunívoca entre los morfismos de extensiones $\sigma:k(\alpha)/k\to L/k$ y los elementos trascendentes de $L$ sobre $k$.
+
+Si $\alpha$ es algebraico sobre $k$ y $p=m(\alpha,k)$ y $\sigma:k(\alpha)/k\to L/k$ es un morfismo de extensiones, entonces $\sigma(\alpha)$ es raíz de $p$ y la aplicación $\sigma\mapsto \sigma(\alpha)$ induce una correspondencia biunívoca entre los morfismos de extensiones $\sigma:k(\alpha)/k\to L/k$ y las raíces de $p$ en $L$.
+\begin{proof}
+Para la primera parte, notemos que si $\alpha$ es trascendente, entonces $k[\alpha]\simeq k[x]$. Luego, dado $\beta\in L$ existe un único morfismo de anillos $\sigma_\beta: k[\alpha]\to L$ tal que $\sigma_\beta(\alpha)=\beta$ y $\left.\sigma_\beta\right|_{k}=\id$, en virtud de la propiedad universal del anillo de polinomios. Además, notemos que $\sigma_\beta$ se factoriza a través de $k(\alpha)$ si y sólo si para todo $f(\alpha)\neq 0$ se tiene que $\sigma_\beta(f(\alpha))$ es inversible en $L$. Es decir, $\sigma_\beta(f(\alpha))=f(\beta)$ es distinto de $0$ para todo polinomio $f\in k[x]$ no nulo. Es decir, $\beta$ trascendente.
+Es decir, por cada trascendente tengo un morfismo y existe algún morfismo si y sólo si el elemento es trascendente.
+
+Para la segunda parte, ya vimos que si $\sigma:k(\alpha)/k\to L/k$ es un morfismo de extensiones entonces $\sigma(\alpha)$ es raíz de $p$. Resta ver que si $\beta\in L$ es raíz de $p$, entonces existe algún morfismo $\sigma_\beta:k(\alpha)/k\to L/k$ tal que $\sigma_\beta(\alpha)=\beta$. Estamos forzados a definir $\sigma_\beta(f(\alpha))=f(\beta)$ (notemos que esto está definido sobre todo $k(\alpha)$ pues al ser $\alpha$ trascendente sobre $k$ tenemos $k(\alpha)=k[\alpha]$). Veamos que está bien definido. En efecto, debo ver que si $f(\alpha)=g(\alpha)\in k(\alpha)$ entonces debo tener $f(\beta)=g(\beta)$. Pero notemos que $(f-g)(\alpha)=0$ y así $p\mid f-g$. Como $\beta$ es raíz de $p$, debemos tener que $(f-g)(\beta)=0$ y así $f(\beta)=g(\beta)$. La proposición sigue.
+\end{proof}
+\end{prop}
+
+\section{Clausura Algebraica}
+
+\begin{prop}
+Sea $k$ un cuerpo y $f\in k[x]$ un polinomio no constante. Entonces, existe $E/k$ una extensión finita tal que $f$ tiene alguna raíz en $E$.
+\begin{proof}
+Como $f$ es no constante, existe $p\in k[x]$ irreducible tal que $p\mid f$. Basta probar la proposición entonces para $f=p$ irreducible. Como $p$ es irreducible y $k[x]$ es DIP, consideremos el cuerpo $E=k[x]/\langle p\rangle$. Además, $k$ se mete en $E$ pues $k\hookrightarrow k[x]\stackrel{\pi}{\longrightarrow} k[x]/\langle p\rangle$. Es decir, tenemos $\tau = \pi\circ\mathrm{inc}:k\to k[x]/\langle p\rangle =E$ morfismo (inyectivo pues $k$ es cuerpo). Entonces, $\alpha=\overline{x}\in E$ es raíz de $p\in k[x]$ pues $p(\alpha)=p(\overline{x}) = \overline{p(x)}=\overline{0}$. Pero como $E=k[\alpha]$, tenemos que $[E:k]=\gr p < +\infty$. Como queríamos probar.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+En el sentido formal y estricto de la definición, no conseguimos una extensión finita $E/k$ pues $k$ no es un subcuerpo de $E$. Sin embargo, podemos considerar en general a las extensiones $E/k$ como cuerpos $E$ provistos de un morfismo (inyectivo) $\iota:k\to E$. Veamos que si existe $E'$ cuerpo provisto de un morfismo $\tau:k\to E'$, entonces puedo construir un cuerpo $E$ tal que $k\subseteq E$ que sea isomorfo a $E'$.
+
+Sea $S$ un conjunto tal que $\sharp S = \sharp (E'-\tau(k))$ con $S\cap k=\emptyset$. Tomo $E=k\cup S$ y defino $\overline{\tau}:E\to E'$ por alguna biyección tal que $\left.\overline{\tau}\right|_{k} = \tau$. Le damos vía $\overline{\tau}$ estructura a $E$ de cuerpo, que se restringe bien a la estructura de $k$: $x+y := \overline{\tau}^{-1}(\overline{\tau}(x)+\overline{\tau}(y))$ y $xy:=\overline{\tau}^{-1}(\overline{\tau}(x)\overline{\tau}(y))$. Además, $\overline{\tau}:E\to E'$ resulta un isomorfismo de cuerpos con esta estructura.
+
+\end{obs}
+
+\begin{cor}
+Sea $k$ un cuerpo $f_1,\ldots ,f_m\in k[x]$ polinomios no constantes. Entonces, existe una extensión finita $E/k$ que tiene alguna raíz $\alpha_i$ de cada $f_i$ para $1\leq i\leq m$.
+\begin{proof}
+Construyo, por la proposición anterior, $k=E_0 \subseteq E_1\subseteq \ldots \subseteq E_m = E$ cuerpos tales que $f_i\in E_{i-1}[x]$ tiene alguna raíz en $E_i$ y uso que el grado de las extensiones es multiplicativo en torres.
+\end{proof}
+\end{cor}
+
+\begin{defn}
+Un cuerpo $E$ se dice \textbf{algebraicamente cerrado} si todo polinomio $f\in E[x]$ no constante tiene alguna raíz en $E$.
+\end{defn}
+
+\begin{teo}
+Sea $E$ un cuerpo. Son equivalentes:
+\begin{enumerate}
+\item $E$ es algebraicamente cerrado.
+\item Todo polinomio no constante $f\in E[x]$ se factoriza linealmente en $E[x]$.
+\item Todo polinomio $f\in E[x]$ irreducible tiene grado $1$.
+\item $E$ no tiene extensiones algebraicas propias. Es decir, si $F/E$ es algebraica entonces $F=E$.
+\end{enumerate}
+\begin{proof}
+$(1)\Longrightarrow (2)$: Sea $f\in E[x]$ no constante. Entonces, existe $\alpha\in E$ raíz de $f$ por ser $E$ algebraicamente cerrado. Esto quiere decir que $f(x) = (x-\alpha) g(x)$ con $\gr g < \gr f$. Recursivamente, $g$ también tiene una raíz y siguiendo así, factorizo linealmente a $f$.
+
+$(2)\Longrightarrow (3)$: Sea $p\in E[x]$ irreducible. En particular, no es constante. Entonces, como se factoriza linealmente por hipótesis, existe un polinomio de grado $1$ que lo divide. Pero como $p$ es irreducible, debe ser el único factor, y así $p$ tiene grado $1$.
+
+$(3)\Longrightarrow (4)$: Sea $F/E$ una extensión algebraica y $\alpha\in F$. Entonces, existe un polinomio $p\in E[x]$ irreducible tal que $p(\alpha)=0$ (el polinomio minimal de $\alpha$ en $E$). Pero por hipótesis, este polinomio tiene grado $1$, y así $\alpha\in E$.
+
+$(4)\Longrightarrow (1)$: Sea $f\in E[x]$ no constante. Por la proposición anterior, existen una extensión finita $F/E$ y $\alpha\in F$ raíz de $f$. Como $F=E$ por hipótesis, tenemos $\alpha\in F=E$ y así todos los polinomios en $E[x]$ no constantes tienen alguna raíz en $E$.
+\end{proof}
+\end{teo}
+
+\begin{defn}
+Sea $k$ un cuerpo. Una \textbf{clausura algebraica} de $k$ es una extensión de cuerpos $E/k$ tal que $E/k$ es algebraica y $E$ es algebraicamente cerrado.
+\end{defn}
+
+\begin{prop}
+Sea $E/k$ una extensión algebraica. Si todo $f\in k[x]$ no constante se factoriza linealmente en $E[x]$ entonces $E$ es algebraicamente cerrado.
+\begin{proof}
+Sea $g\in E[x]$ no constante. Debo ver que existe $\alpha\in E$ raíz de $g$. Por una proposición anterior, existe una extensión $F/E$ finita (en particular algebraica) y $\alpha\in F$ raíz de $g$. Como $F/E$ y $E/k$ son algebraicas, tenemos que $F/k$ lo es. Entonces, existe un polinomio irreducible $p\in k[x]$ tal que $p(\alpha)=0$ (el minimal de $\alpha$ en $k$). En particular, $p$ es no constante. Por lo tanto, $p$ se factoriza linealmente en $E[x]$ por hipótesis, y así resulta que $\alpha\in E$. Como queríamos probar.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $E/k$ una extensión y sea $F=\{x\in E : x \text{ es algebraico sobre }k\}$. Entonces $F$ es un subcuerpo de $E$ que contiene a $k$.
+\begin{proof}
+Sean $\alpha,\beta\in F$. Entonces, $k(\alpha,\beta)$ es una extensión algebraica. Como es un cuerpo, y $\alpha,\beta\in k(\alpha,\beta)$ tenemos que las sumas, productos e inversos están en $k(\alpha,\beta)$ y en particular son algebraicos sobre $k$. Entonces están en $F$ y resulta un subcuerpo de $E$. Que contiene a $k$ es obvio pues todos los elementos de $k$ son algebraicos sobre $k$.
+\end{proof}
+\end{prop}
+
+\begin{defn}
+Sea $E/k$ una extensión. Definimos la \textbf{clausura algebraica de $k$ en $E$} al subcuerpo $F=\{x\in E : x\text{ es algebraico sobre }k\}$. Lo denotamos $F=\overline{k}^E$.
+\end{defn}
+
+\begin{prop}
+Si $E/k$ es una extensión y $E$ es algebraicamente cerrado, entonces $\overline{k}^E$ resulta una clausura algebraica de $k$. Es decir, $\overline{k}^E$ es algebraicamente cerrado (pues esa extensión es algebraica por definición).
+\begin{proof}
+Sea $F=\overline{k}^E$ por comodidad. Como $F/k$ es una extensión algebraica, basta ver que $F$ es algebraicamente cerrado. Para esto, veamos que todo polinomio $f\in k[x]$ se factoriza linealmente en $F[x]$. Pero esto es obvio, pues como $E$ es algebraicamente cerrado y $f\in k[x]\subseteq E[x]$, tenemos que $f$ se factoriza linealmente en $E[x]$. Por lo tanto, $f = c(x-\alpha_1)\cdots (x-\alpha_m)$ para $\alpha_i\in E$. Como los $\alpha_i$ son algebraicos sobre $k$ (por ser raíces de $f\in k[x]$) debemos tener $\alpha_i\in F$. Por lo tanto, $f$ se factoriza linealemente en $F[x]$. La proposición sigue.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+Esta última proposición nos dice que si queremos encontrar una clausura algebraica de $k$, basta con encontrar un cuerpo algebraicamente cerrado que contenga a $k$. La primera demostración del siguiente teorema está basada en esa idea.
+\end{obs}
+
+\begin{teo}
+Sea $k$ un cuerpo. Entonces existe $E/k$ clausura algebraica.
+\begin{proof}[Demostración de Artin]
+Por la proposición anterior, basta encontrar una extensión $E/k$ tal que $E$ es algebraicamente cerrado. Sea $\{f_i\}_{i\in I}$ el conjunto de todos los polinomios no constantes de $k[x]$. Consideremos entonces $A=k[x_i]_{i\in I}$. Si $f_i\in k[x]$, $f_i = a_0 + a_1 x + \ldots + a_n x^n$. Considero $f_i(x_i) = a_0 + a_1 x_i + \ldots + a_n x_i^n \in A$. Sea $J=\langle f_i(x_i)\rangle_{i\in I}\subseteq A$ el ideal generado por esos polinomios. Supongamos que $J=A$. En particular, $1\in J$ y así $1=\displaystyle\sum_{\ell=1}^{m} q_{i_\ell} f_{i_\ell}(x_{i_\ell})$ con $q_{i_\ell}\in A$ para $1\leq \ell\leq m$. Pero sabemos que existe una extensión finita $F/k$ que contiene $\{\alpha_{i_\ell}\}_{\ell=1,\ldots, m}$ raíces en $F$ de $f_{i_\ell}\in k[x]$. Por la propiedad universal del álgebra de polinomios, existe un único morfismo $\mu:A\to F$ de $k$-álgebras que cumple $\mu(x_i)=\begin{cases}0 \text{ si }i\neq i_\ell \;\forall \ell \\ \alpha_{i_\ell} \text{ si }i=i_\ell \end{cases}$. Pero entonces tenemos que $1= \mu(1) = \displaystyle\sum_{\ell=1}^m \mu(q_{i_\ell}) f_{i_\ell}(\alpha_{i_\ell}) = 0$. Absurdo.
+
+Esto nos dice que $J\neq A$. Entonces, existe un ideal maximal $\mathfrak{m}\subseteq A$ que contiene a $J$. Consideremos $E_1 = A/\mathfrak{m}$ cuerpo (por ser cociente por un ideal maximal). Como tenemos que $k\hookrightarrow k[x_i]_{i\in I}=A \stackrel{\pi}{\longrightarrow} A/\mathfrak{m}=E_1$, tenemos que $E_1$ contiene una copia de $k$, y así interpretamos a $E_1$ como una extensión de cuerpos de $k$. Pero en $E_1$, todo $f\in k[x]$ no constante tiene alguna raíz. En efecto, $f = f_i$ para algún $i\in I$ (pues estos son todos los polinomios) y así $f_i(\overline{x_i}) = \overline{f_i(x_i)} = \overline{0}\in E_1$.
+
+Inductivamente, construimos una torre de extensiones $k\subseteq E_1\subseteq \ldots \subseteq E_n\subseteq E_{n+1}\subseteq \ldots$ donde $E_j$ es cuerpo para todo $j\in\NN$ y todo $f\in E_j[x]$ no constante tiene alguna raíz en $E_{j+1}$. Consideremos entonces $E = \displaystyle\bigcup_{j\geq 1} E_j$. Esto es un cuerpo con suma y producto heredado de los $\{E_j\}_{j\in\NN}$. Si $f\in E[x]$ no es constante, entonces $f\in E_n[x]$ para algún $n\in\NN$ y así tiene alguna raíz en $E_{n+1}\subseteq E$. Y estamos.
+\end{proof}
+\begin{proof}[Demostración de Jacobson]
+Primero, notemos que si $E/k$ es una extensión algebraica entonces $\sharp E \leq \max\{\sharp k, \aleph_0\}$. En efecto, si $\mathscr{P}_n = \{f\in k[x] : f\text{ irreducible y mónico de grado } n\}$, y $I_n=\{1,\ldots, n\}$ entonces tenemos que $\sharp E \leq \sharp\displaystyle\bigcup_{n\in \NN} \mathscr{P}_n\times I_n$ puesto que cada polinomio de grado $n$ tiene a lo sumo $n$ raíces. Como $\mathscr{P}_n$ está en biyección con $k^{n}$, la afirmación sigue.
+
+Ahora, sea $\mathscr{C}$ un conjunto con $k\subseteq \mathscr{C}$ tal que $\sharp \mathscr{C} > \max\{\sharp k , \aleph_0\}$. Consideremos el conjunto $S=\{(E,+,\cdot): E\subseteq \mathscr{C} \text{ cuerpo tal que }E/k \text{ es algebraica}\}$. Es claro que $S\neq\emptyset$ pues $k\in S$. Definimos un orden parcial $\leq$ en $S$ por $(E,+,\cdot)\leq (E',+',\cdot')$ si $E\subseteq E'$ es un subcuerpo. Por Lema de Zorn en $S$, hay algún elemento maximal $E$. Afirmo que $E/k$ es una clausura algebraica. En efecto, la extensión $E/k$ es algebraica pues $E\in S$. Veamos que $E$ es algebraicamente cerrado, que es equivalente a ver que no tiene extensiones algebraicas propias. Sea $F/E$ una extensión algebraica. Entonces, $\sharp F= \sharp E\leq \max\{\sharp k,\aleph_0\} < \sharp\mathscr{C}$. Entonces, existe $\varphi:F\to \mathscr{C}$ inyectiva tal que $\left.\varphi\right|_{E}=\id$. Esto quiere decir que $\varphi(F)\subseteq\mathscr{C}$ y tiene estructura de cuerpo heredada de $F$ vía $\varphi$. Entonces, $\varphi(F)$ es una extensión algebraica de $E$ (por serlo $F/E$ y $\varphi$ resultar isomorfismo ya que a la biyección la convertimos en isomorfismo por como le dimos la estructura a $\varphi(F)$). Pero como $E/k$ es algebraica, resulta que $\varphi(F)/k$ es algebraica. Por la maximalidad de $E$ resulta que $\varphi(F)\subseteq E$ y así $F=E$. Como queríamos probar.
+
+\end{proof}
+\end{teo}
+
+Ahora, vamos a necesitar generalizar un poco un resultado que ya vimos:
+
+\begin{lem}
+Sea $k(\alpha)/k$ una extensión algebraica y $\tau:k\to L$ un morfismo de cuerpos. Entonces, existe una biyección entre $\{\sigma:k(\alpha)\to L \text{ morfismo de cuerpos tales que }\left.\sigma\right|_{k}=\tau\}$ y las raíces de $m(\alpha,k)^\tau$ en $L$.
+\begin{proof}
+Notemos que $\sigma:k(\alpha)\to L$ tal que $\left.\sigma\right|_{k}=\tau$ queda determinado por su valor $\sigma(\alpha)$. Por otra parte, ya vismo que $\sigma(\alpha)$ debe ser raíz de $m(\alpha,k)^\tau$. Ahora, si $\beta\in L$ es raíz de $m(\alpha,k)^\tau$, definimos $\sigma_\beta:k(\alpha)\to L$ por $\sigma_\beta(f(\alpha)) = f^\tau(\beta)$. Chequeemos que esto está bien definido: si $f(\alpha)=g(\alpha)$, entonces $m(\alpha,k)\mid f-g$. Esto implica que $m(\alpha,k)^\tau \mid f^\tau - g^\tau$ y así $f^\tau(\beta) = g^\tau(\beta)$. Por lo tanto a cada morfismo le asociamos una raíz y a cada raíz un morfismo. Y listo.
+\end{proof}
+\end{lem}
+
+\begin{teo}
+Sea $E/k$ una extensión algebraica, $L$ un cuerpo algebraicamente cerrado y $\tau:k\to L$ un morfismo de cuerpos. Entonces, existe $\sigma:E\to L$ que extiende a $\tau$. Es decir, el siguiente diagrama conmuta: \begin{center}
+\begin{tikzcd}[row sep=3.3em,column sep=4em,minimum width=2em]
+ E\arrow[dashed]{r}[above, font=\normalsize]{\sigma}& L \\
+k\arrow[hookrightarrow]{u}[left,font=\normalsize]{\mathrm{inc}} \arrow[]{ur}[right, font=\normalsize]{\mathrm{\tau}} &
+\end{tikzcd}
+\end{center}
+En particular, si $L/k$ es una extensión con $L$ algebraicamente cerrado, entonces existe un morfismo de extensiones $\sigma:E/k\to L/k$. 
+Además, si $E/k$ y $L/k$ son clausuras algebraicas, $\sigma$ resulta un isomorfismo.
+\begin{proof}
+Consideremos el conjunto de las extensiones parciales $$S=\{(F,\eta) : F/k \text{ subextensión de }E/k, \eta:F\to L \text{ morfismo de extensiones tal que }\left.\eta\right|_{k}=\tau\}$$ El conjunto $S$ está ordenado por $(F,\eta)\leq (F',\eta')$ si $F\subseteq F'$ subcuerpo y $\left.\eta'\right|_{k} = \eta$. Veamos que si $\{(F_i,\eta_i)\}_{i\in I}$ es una cadena entonces tiene cota superior. En efecto, $F=\displaystyle\bigcup_{i\in I} F_i$ es un cuerpo y $\eta:F\to L$ queda definido por $\left.\eta\right|_{F_i}=\eta_i$. Luego, $(F,\eta)$ es cota superior y así por Lema de Zorn existe algún elemento maximal $(\tilde{E},\sigma)\in S$. Bastará probar entonces que $\tilde{E}=E$. Si no fuera así, entonces existe $\alpha\in E$, $\alpha\notin \tilde{E}$. Como $E/k$ es algebraica, $\alpha$ resulta algebraico sobre $k$, y así sobre $\tilde{E}$. Por el lema anterior, puedo extender $\sigma$ a $\tilde{\sigma}:\tilde{E}(\alpha)\to L$ pues al ser $L$ algebraicamente cerrado, $m(\alpha,k)^\sigma$ tiene alguna raíz en $L$ y así hay algún morfismo que lo extiende (pues están en biyección). Esto implicaría que $(\tilde{E}(\alpha),\tilde{\sigma})\in S$, que contradice la maximalidad de $(\tilde{E},\sigma)$. Esto quiere decir que $\tilde{E}=E$ y así tengo una extensión como quería.
+
+Para la segunda afirmación, supongamos que $E/k$ y $L/k$ son clausuras algebraicas. Entonces, existe un $\sigma:E/k\to L/k$ por lo ya visto. Como ya sabemos, resulta automáticamente un monomorfismo. Veamos que $\sigma(E)=L$. Como $E/k$ es una clausura algebraica, entonces $\sigma(E)/k$ lo es (por ser $\sigma$ un isomorfismo con su imagen) y como $L/k$ es algebraica, $L/\sigma(E)$ lo es. Pero entonces $L=\sigma(E)$ puesto que las clausuras algebraicas no tienen extensiones algebraicas propias.
+\end{proof}
+\end{teo}
+
+\begin{defn}
+El teorema anterior nos dice que la clausura algebraica de un cuerpo $k$ es única a menos de isomorfismo. Por lo tanto, notamos $\overline{k}$ a la clausura algebraica de $k$ (a menos de isomorfismo).
+\end{defn}
+
+\begin{obs}
+El Teorema Fundamental del Álgebra nos dice que $\CC/\RR$ es una clausura algebraica (pues sabemos que esa extensión es finita y así algebraica y el teorema nos dice que $\CC$ es algebraicamente cerrado).
+\end{obs}
+
+\section{Extensiones Normales}
+
+\begin{defn}
+Sea $k$ un cuerpo y $f\in k[x]$. Dada una extensión $E/k$ decimos que $f$ se \textbf{descompone} en $E$ si $f$ se factoriza linealmente en $E[x]$. Dada una extensión algebraica $E/k$ se dice que $E$ es un \textbf{cuerpo de descomposición} de $f\in k[x]$ si cumple:
+\begin{itemize}
+\item $f$ se descompone en $E$.
+\item $E$ está generado (como $k$-álgebra) por las raíces de $f$ en $E$. Es decir, $E=k(\alpha_1,\ldots ,\alpha_m)$ si $\alpha_i$ son las raíces de $f$ en $E$.
+\end{itemize}
+\end{defn}
+
+\begin{obs}
+Una forma de construir el cuerpo de descomposición de $f\in k[x]$ es tomar una clausura $\overline{k}$ y tomar $E = k(\alpha_1,\ldots , \alpha_m)$ con $\alpha_i$ \textbf{todas} las raíces de $f$ en $\overline{k}$.
+\end{obs}
+
+\begin{ex}
+$\QQ(\sqrt[4]{2})$ no es el cuerpo de descomposición de $f=x^4 - 2$ pues no tiene a todas las raíces de $f$.
+
+Si $k=\QQ$ y queremos el cuerpo de descomposición de $f=ax^2 + bx+c\in\QQ[x]$, basta tomar $\QQ(\sqrt{b^2 - 4ac})$ (pues si las raíces están, el discriminante debe estar y si el discriminante está, conseguimos las raíces fácilmente).
+
+Si $p$ es primo y $\xi_n$ una raíz $n$-ésima primitiva, entonces $\QQ(\sqrt[n]{p},\xi_n)$ es el cuerpo de descomposición de $f=x^n - p$.
+\end{ex}
+
+\begin{defn}
+Sea $k$ un cuerpo y $(f_i)_{i\in I}\in k[x]$ una familia de polinomios. Una extensión algebraica $E/k$ se dice un \textbf{cuerpo de descomposición} de la familia $(f_i)_{i\in I}$ si \begin{itemize}\item Todos los $f_i$ se descomponen en $E$.\item $E$ está generado como $k$-álgebra por las raíces en $E$ de todos los $f_i$. \end{itemize}
+\end{defn}
+
+\begin{obs}
+Dado $k$ y $(f_i)_{i\in I}\in k[x]$ se puede construir un cuerpo de descomposición de la familia $(f_i)_{i\in I}$ tomando una clausura algebraica $\overline{k}$ y $E=k(\alpha_j^{i})_{i\in I, j\in A_i}$ donde $\alpha_j^{i}$ son las raíces de $f_i$ en $\overline{k}$.
+\end{obs}
+
+\begin{prop}
+Sean $E/k$ y $F/k$ cuerpos de descomposición de la familia $(f_i)_{i\in I}\in k[x]$. Entonces, existe $\sigma:E/k\to F/k$ isomorfismo de extensiones.
+\begin{proof}
+Tomo $\overline{F}$ una clausura algebraica de $F$. Notemos que existe algún morfismo $\sigma:E/k\to \overline{F}/k$ de extensiones (en virtud del último teorema de la sección anterior, tomando $\tau$ por la inclusión y usando que $\overline{F}$ es algebraicamente cerrado).  Para todo $i\in I$, escribimos $f_i = c_i (x - \alpha_1^i)\cdots (x - \alpha_m^i)$ con $\alpha_j^i\in E$ las raíces de $f_i$. Como $f_i\in k[x]$, entonces tenemos $f_i = f_i^\sigma = c_i (x - \sigma(\alpha_1^i))\cdots (x - \sigma(\alpha_m^i))\in\overline{F}[x]$. Como $\sigma(\alpha_j^i)$ son las raíces de $f_i^\sigma\in \overline{F}[x]$, debemos tener que están en $F$ por ser $F$ un cuerpo de descomposición. Por lo tanto, esto nos dice que $\sigma(E)\subseteq F$. Además, como toda raíz de $f_i$ es $\sigma(\alpha_j^i)$ y así está generado por esas, $\sigma$ es sobreyectivo. La proposición sigue.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+El cuerpo de descomposición de $\{f_1,\ldots ,f_m\}\subseteq k[x]$ es el cuerpo de descomposición de $f=f_1\cdots f_m$. Por lo tanto, o bien estudiamos familias infinitas o sólo un polinomio.
+\end{obs}
+
+\begin{teo}
+Sea $F/k$ una extensión algebraica y sea $\overline{k}$ una clausura algebraica de $k$ que contiene a $F$. Son equivalentes:
+\begin{enumerate}
+\item Para todo $\sigma:F/k\to \overline{k}/k$ morfismo de extensiones tenemos que $\sigma(F)=F$.
+\item $F$ es el cuerpo de descomposición de una familia de polinomios en $k[x]$.
+\item Todo $f\in k[x]$ irreducible que tiene alguna raíz en $F$ se descompone en $F[x]$.
+\end{enumerate}
+\begin{proof}
+$(1)\Longrightarrow (2)$ Sea $\alpha\in F$. Como $F/k$ es una extensión algebraica, $\alpha$ es algebraico sobre $k$. Tomemos $p_\alpha = m(\alpha,k)$ el polinomio minimal de $\alpha$ en $k$. Sea $\beta\in\overline{k}$ raíz de $p_\alpha$. Existe $\mu: k(\alpha)/k\to \overline{k}/k$ tal que $\mu(\alpha)=\beta$. Como $F/k(\alpha)$ es algebraica, puedo extender a $\mu$, por el teorema anterior, a un $\sigma:F\to \overline{k}$. Como $\mu$ fija a $k$ y $\mu(\alpha)=\beta$ entonces $\left.\sigma\right|_{k} = \id$ y $\sigma(\alpha)=\beta$. Esto quiere decir que $\sigma:F/k\to\overline{k}/k$ es un morfismo de extensiones que manda $\alpha$ a $\beta$. Por hipótesis, $\sigma(\alpha)\in F$ y así $\beta\in F$. Entonces, $p_\alpha$ se factoriza linealmente en $F[x]$. Por lo tanto, $F$ es el cuerpo de descomposición de $\{p_{\alpha}\}_{\alpha\in F}$ y la implicación sigue.
+
+$(1)\Longrightarrow (3)$ Tomo $f\in k[x]$ irreducible con $\alpha\in F$ raíz de $f$. Entonces, $f=p_\alpha$ (salvo constante). Por la demostración de $(1)\Longrightarrow (2)$ tenemos que $f$ se descompone en $F$ y listo.
+
+$(2)\Longrightarrow (1)$ Sea $\sigma:F/k\to \overline{k}/k$ un morfismo de extensiones. Sé que $F$ por hipótesis es $F=k(\alpha_j^{i})_{i\in I, j\in A_i}$ con $\alpha_j^i$ raíces de $f_i$ en $\overline{k}$. Pero notemos que $\sigma(\alpha_j^i) = \alpha_{j'}^i$ pues debe ser raíz de $f^\sigma = f$. Entonces, como el morfismo queda determinado por su acción sobre los elementos que agrego, tenemos $\sigma(F)\subseteq F$ y listo.
+
+$(3)\Longrightarrow (1)$ Sea $\sigma:F/k\to \overline{k}/k$ un morfismo de extensiones. Sea $\alpha\in F$. Consideremos $p_\alpha = m(\alpha,F)$ el polinomio minimal de $\alpha$ en $F$. Notemos que $\sigma(\alpha)$ es raíz de $p_\alpha$ en $\overline{k}$. Por hipótesis, como se factoriza linealmente, $\sigma(\alpha)\in F$ y listo.
+\end{proof}
+\end{teo}
+
+\begin{defn}
+Una extensión algebraica que cumpla (cualquiera de) las tres condiciones anteriores se dice \textbf{normal}.
+\end{defn}
+
+\begin{obs}
+Supongamos que $F=k(\alpha_1,\ldots , \alpha_r)$ con $\alpha_i$ algebraicos sobre $k$. $F/k$ es normal si y sólo si para cada $\alpha_i$ las raíces del polinomio minimal $m(\alpha_i,k)$ en $\overline{k}\supseteq F$ ya están en $F$. En efecto, sabemos que un morfismo de extensiones $\sigma$ queda determinado por su acción en los generadores $\alpha_i$ y sabemos que $\sigma(\alpha_i)\in F$ pues cualquier $\sigma$ manda raíces en raíces que sabemos que están en $F$.
+\end{obs}
+
+\begin{prop}
+Si $F/k$ es una extensión de grado $2$, entonces $F/k$ es normal.
+\begin{proof}
+Como $F/k$ es finita, sabemos que es algebraica. Sea $\alpha\in F$, $\alpha\notin k$. Considero $k\subseteq k(\alpha)\subseteq F$. Como $[k(\alpha):k]>1$ pues $\alpha\notin k$, tenemos que $k(\alpha)=F$ pues $2=[F:k] = [F:k(\alpha)][k(\alpha):k]$, y así $[F:k(\alpha)]=1$. Entonces, el polinomio minimal $m(\alpha,k)$ tiene grado $2$. En $\overline{k}$ esto quiere decir que $m(\alpha,k) = (x-\alpha)(x-\beta)$. Como $\alpha$ es raíz de $m(\alpha,k)$ y $\alpha\in k(\alpha)$ entonces $x-\alpha \mid m(\alpha,k)$ en $k(\alpha)[x]$. Pero esto quiere decir que $x-\beta = \dfrac{m(\alpha,k)}{x-\alpha}\in k(\alpha)[x]$. Por lo tanto, $\beta \in k(\alpha)$ y así todas las raíces de $m(\alpha,k)$ están en $F$ y, por la observación anterior, estamos.
+\end{proof}
+\end{prop}
+
+\begin{ex}
+Las extensiones normales no forman una clase distinguida. $\QQ(\sqrt[4]{2})/\QQ$ no es normal pues $\sqrt[4]{2}\, i\notin\QQ(\sqrt[4]{2})$, mientras que $\QQ(\sqrt{2})/\QQ$ y $\QQ(\sqrt[4]{2})/\QQ(\sqrt{2})$ sí lo son por ser extensiones cuadráticas. Esto muestra en particular la no-transitividad de la normalidad de extensiones.
+\end{ex}
+
+\begin{prop}
+Supongamos que tenemos $k\subseteq E,F \subseteq L$ cuerpos. Entonces, se cumplen las siguientes:
+\begin{enumerate}
+\item Si $E/k$ es normal entonces $EF/F$ es normal.
+\item Si $L/k$ es normal entonces $L/E$ es normal.
+\item Si $E/k$ y $F/k$ son normales, entonces $EF/k$ y $E\cap F/k$ son normales.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}
+
+\item Dado un morfismo de extensiones $\sigma:EF/F\to \overline{EF}/F$ debo ver que $\sigma(EF)\subseteq EF$. Pero $\sigma(EF)\subseteq \sigma(E)\sigma(F)$ trivialmente. Pero $\sigma(E)=E$ por ser $E/k$ una extensión normal (el morfismo se correstringe a un morfismo de extensiones sobre $k$), y $\sigma(F)=F$ pues queda fijo por ser morfismo de extensiones.
+
+\item Si tomo un morfismo $\sigma:L/E \to \overline{L}/E$, quiero ver que $\sigma(L)=L$. Pero ese morfismo se restringe y correstringe a un morfismo $\overline{\sigma}: L/k \to \overline{L}/k$, en el cual sabemos que $\overline{\sigma}(L) = L$ por ser $L/k$ normal. Y listo.
+
+\item Es fácil ver que $EF/k$ haciendo el mismo truco que para el primer ítem. Es decir, si $\sigma: EF/k\to \overline{EF}/k$ es un morfismo de extensiones, tenemos que $\sigma(EF)\subseteq\sigma(E)\sigma(F)$ y tenemos que $\sigma(E)=E$ pues $\sigma$ se restringe a un morfismo de extensiones $E/k\to\overline{EF}/k$ y sabemos que $E/k$ es normal, y que $\sigma(F)=F$ por la razón análoga. Que la intersección es normal es obvio pues para cualquier $f\in k[x]$ irreducible que tiene alguna raíz en $E\cap F$, como $E/k$ es normal, sabemos que $f$ se descompone sobre $E$ y como $F/k$ es normal, $f$ se descompone sobre $F$. Es decir, todas sus raíces están en $E$ y $F$ y así $f$ se descompone en $E\cap F$.
+
+\end{enumerate}
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $k$ un cuerpo, $f\in k[x]$ un polinomio y $F/k$ el cuerpo de descomposición de $f$. Entonces $[F:k]\leq (\gr f)!$.
+\begin{proof}
+Tomo $\overline{k}$ una clausura algebraica de $k$. Como $F/k$ es el cuerpo de descomposición de $f$, tenemos que $F=k(\alpha_1,\ldots ,\alpha_r)$ donde $\{\alpha_1,\ldots ,\alpha_r\}$ son todas las raíces de $f$ en $\overline{k}$. Como la cantidad de raíces es menor o igual que el grado del polinomio, tenemos que $r\leq \gr f$. Notemos que $[k(\alpha_1):k]\leq n$ ya que $[k(\alpha_1):k]=\gr m(\alpha,k)$ y $m(\alpha,k)\mid f$. Como $\alpha_1\in k(\alpha_1)$ y $f(\alpha_1)=  0$ entonces $x-\alpha_1 \mid f$ en $k(\alpha_1)[x]$. Por lo tanto $\dfrac{f}{x-\alpha_1}\in k(\alpha_1)[x]$ tiene grado $\gr f - 1$. Como $m(\alpha_2, k(\alpha_1))\mid \dfrac{f}{x-\alpha_1}$, tenemos que su grado es menor o igual que $\gr f - 1$. Procediendo inductivamente, podemos probar para cada $i$ que $[k(\alpha_1,\ldots ,\alpha_{i+1}): k(\alpha_1,\ldots ,\alpha_i)]\leq \gr f - i$. Como $r\leq n$, usando que el grado es multiplicativo en torres obtenemos $[k(\alpha_1,\ldots , \alpha_r):k]\leq (\gr f)(\gr f -1)\cdots (\gr f - (r-1))\leq (\gr f)!$. Como queríamos probar.
+\end{proof} 
+\end{prop}
+
+\section{Raíces múltiples y Separabilidad}
+
+\begin{prop}
+Sea $F/k$ una extensión de cuerpos y $f,g\in k[x]$. Si $\mcd_k(f:g)$ denota al máximo común divisor entre $f$ y $g$ en $k[x]$ y $\mcd_F(f,g)$ denota al máximo común divisor entre $f$ y $g$, entonces $\mcd_k(f:g) = \mcd_F(f:g)$, y lo denotamos simplemente $(f:g)$.
+\begin{proof}
+Notemos que $\mcd_k(f:g)\mid \mcd_F(f:g)$ en $F[x]$ pues $\mcd_k(f:g)$ divide a ambos polinomios en $k[x]$ y así en $F[x]$, y por lo tanto tiene que dividir máximo común divisor de $f,g$ en $F[x]$. Ahora, notemos que como $k[x]$ es un dominio de ideales principales, $\langle f,g\rangle = \langle \mcd_k(f:g)\rangle$, y así existen $a,b\in k[x]$ tales que $\mcd_k(f:g) = af + bg$. En particular, esta igualdad también vale en $F[x]$. Pero como $\mcd_F(f:g)\mid f,g$ en $F[x]$, tenemos que $\mcd_F(f:g)\mid af + bg = \mcd_k(f:g)$. Como los máximos comunes divisores de polinomios son mónicos por definición y logramos probar que se dividen mutuamente, deben ser lo mismo. Y estamos.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+En particular, si $f,g\in k[x]$ son irreducibles y mónicos ($f\neq g$) sabemos que deben ser coprimos en $k[x]$. Pero la proposición anterior nos dice que deben ser coprimos en $\overline{k}[x]$. Es decir, no tienen ninguna raíz en común (en $\overline{k}$).
+\end{obs}
+
+\begin{defn}
+Sea $f\in k[x]$ no constante. Podemos factorizar al polinomio $f$ (en $\overline{k}$) como $f=c(x-\alpha_1)^{m_1}\cdots (x-\alpha_r)^{m_r}$ con $\alpha_i\neq \alpha_j$ si $i\neq j$. Decimos que $\alpha_i$ tiene \textbf{multiplicidad} $m_i$ en $f$. Se dice que $\alpha_i$ es una raíz múltiple si $m_i> 1$ y es simple si $\alpha_i=1$.
+\end{defn}
+
+\begin{defn}
+Sea $f\in k[x]$, $f=a_0 + a_1 x + \ldots + a_n x^n$. Se define el polinomio derivado de $f$ por $f'=a_1 + 2a_2 x + \ldots + na_nx^n$.
+\end{defn}
+
+\begin{obs}
+Es fácil ver que $(f+g)' = f' + g'$, $(fg)' = f'g + fg'$ y que $(af)' = af'$ ($a\in k$).
+\end{obs}
+
+\begin{prop}
+Sea $f\in F[x]$ y $\alpha\in F$ raíz de $f$. Son equivalentes:
+\begin{enumerate}
+\item $\alpha$ es raíz múltiple (es decir, $(x-\alpha)^2 \mid f$ en $F[x]$).
+\item $x-\alpha\mid f$ y $x-\alpha\mid f'$ en $F[x]$.
+\end{enumerate}
+\begin{proof}
+$(1)\Longrightarrow (2)$: Supongamos que $f= (x-\alpha)^2 g$. Entonces, por la regla del producto, $f' = 2(x-\alpha)g + (x-\alpha)^2 g'$. En particular, $x-\alpha\mid f'$.
+
+$(2)\Longrightarrow (1)$: Como $x-\alpha \mid f$ tenemos que $f = (x-\alpha)h$ y así $f' = (x-\alpha)h' + h$. Pero como $x-\alpha\mid f'$ tenemos que $x-\alpha \mid h$ y así $ h = (x-\alpha)\tilde{h}$ y así $f=(x-\alpha)^2 \tilde{h}$.
+\end{proof}
+\end{prop}
+
+\begin{cor}
+Sea $f\in k[x]$. $f$ no tiene raíces múltiples (en $\overline{k}$) si y sólo si $(f:f')=1$.
+\begin{proof}
+$(\Longrightarrow)$ Si $(f:f')\neq 1$ entonces en $\overline{k}[x]$ no serían coprimos tampoco. Entonces, existe un polinomio irreducible en $\overline{k}[x]$ que divide a $f$ y $f'$. Pero los irreducibles en un cuerpo algebraicamente cerrados son los polinomios de grado $1$. Esto quiere decir que existe un polinomio $x-\alpha \mid f,f'$ y así $\alpha$ sería raíz múltiple de $f$.
+
+$(\Longleftarrow)$ Si $f$ tiene raíz múltiple $\alpha\in\overline{k}$ entonces $x-\alpha \mid f,f'$. Entonces, $(f:f')\neq 1$.
+\end{proof}
+\end{cor}
+
+\begin{defn}
+Un polinomio $f\in k[x]$ se dice \textbf{separable} si $f\neq 0$ y sus raíces (en $\overline{k}$) son todas simples.
+\end{defn}
+
+\begin{prop}
+Sea $f\in k[x]$ irreducible. Son equivalentes:
+\begin{enumerate}
+\item $f$ es separable.
+\item $f$ tiene alguna raíz simple (en $\overline{k}$).
+\item $f'\neq 0$.
+\end{enumerate}
+\begin{proof}
+$(1)\Longrightarrow(2)$ No hay nada que probar.
+
+$(2)\Longrightarrow(3)$ Sea $\alpha\in\overline{k}$ una raíz simple de $f$. Si $f' = 0$ entonces $x-\alpha\mid f$ y $x-\alpha\mid f'=0$. Entonces $\alpha$ resultaría raíz múltiple. Absurdo.
+
+$(3)\Longrightarrow(1)$ Si $f'\neq 0$, como $\gr f'< \gr f$ y $f$ irreducible, tenemos que $f\nmid f'$. Por lo tanto, $(f:f')=1$. Entonces $f$ no tiene raíces múltiples y listo.
+\end{proof}
+\end{prop}
+
+\begin{cor}
+Si $\car k = 0$ entonces todo polinomio irreducible es separable.
+\begin{proof}
+Si $a_n$ es el coeficiente principal de $f$, entonces $na_n\neq 0$ es el coeficiente principal de $f'$ y así $f'\neq 0$.
+\end{proof}
+\end{cor}
+
+\begin{ex}
+Puede pasar que algún polinomio irreducible en característica $p$ tenga derivada nula. Es decir, no todo polinomio irreducible es separable. En efecto, supongamos que $k$ es un cuerpo con $\car k = p$. Sea $a\in k$ tal que no existe ningún $b\in k$ con $b^p = a$. Por ejemplo, consideremos $k=\FF_p(t)$ con $t$ trascendente y $a=t$. Sea $f = x^p - a\in \FF_p(t)[x]$. En $\overline{\FF_p(t)}$ existe algún $\alpha$ raíz de $f$. Tenemos entonces $\alpha^p = a$. Es decir, $x^p - a = x^p - \alpha^p = (x-\alpha)^p$. Por lo tanto, $\alpha$ es la única raíz de $\overline{\FF_p(t)}$ y tiene multiplicidad $p$. Además, $f$ es irreducible pues como $\alpha\notin \FF_p(t)$, tenemos que $\alpha^r \notin \FF_p(t)$ para todo $1\leq r \leq p-1$. Entonces, si $f=gh$ tenemos que $g= (x-\alpha)^r\in\overline{\FF_p(t)}[x]$ por la unicidad de la factorización. Por lo tanto, el coeficiente independiente de $g$ es $\alpha^r$ que no está en $\FF_p(t)$.
+
+Entonces, $f=x^p - a\in \FF_p(t)[x]$ es irreducible, pero $f' = 0$.
+
+Si $\car k = p$, entonces $f'=0$ si y sólo si $ra_r = 0$ en $k$. Cuando $p\nmid r$ tiene que pasar que $a_r=0$. Entonces, $f'=0$ si y sólo si $f = a_0 + a_p x^p + \ldots + a_{rp}x^{rp} = g(x^p)$ donde  $g = a_0 + a_p x + \ldots + a_{rp}x^r$.
+\end{ex}
+
+\begin{defn}
+Un cuerpo $k$ se dice \textbf{perfecto} si todo $f\in k[x]$ irreducible es separable.
+\end{defn}
+
+\begin{ex}
+Todo cuerpo de característica $0$ es perfecto.
+\end{ex}
+
+\end{document}
+
+
