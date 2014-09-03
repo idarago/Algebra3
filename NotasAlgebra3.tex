@@ -699,9 +699,151 @@ Si $\car k = p$, entonces $f'=0$ si y sólo si $ra_r = 0$ en $k$. Cuando $p\nmid
 Un cuerpo $k$ se dice \textbf{perfecto} si todo $f\in k[x]$ irreducible es separable.
 \end{defn}
 
-\begin{ex}
+\begin{obs}
 Todo cuerpo de característica $0$ es perfecto.
-\end{ex}
+\end{obs}
+
+\begin{prop}
+Sea $k$ un cuerpo de característica $p>0$. $k$ es perfecto si y sólo si $k=k^p$ (es decir, para todo $a\in k$ existe $b\in k$ tal que $a=b^p$).
+\begin{proof}
+$(\Longrightarrow)$ Si $k\neq k^p$ entonces $f=x^p - a$ es irreducible con $a\neq b^p$, con el mismo razonamiento que en el ejemplo anterior. Pero tenemos $f'=0$. Es decir, es irreducible pero no separable.
+
+$(\Longleftarrow)$ Sea $f\in k[x]$ irreducible. Debo ver que $f'\neq 0$. Supongamos que $f'=0$. Entonces $f(x)=g(x^p)$ para $g\in k[x]$. Es decir, $f = a_0 + a_1x^p + \ldots + a_r x^{rp}$. Como $k=k^p$, tenemos que $a_i = b_i^p$ para ciertos $b_i\in k$. Pero entonces tenemos que $$f= b_0^p + \ldots + b_r^p x^{rp} = (b_0 + b_1x + \ldots + b_rx^r)^p$$ que no es irreducible. La proposición sigue.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $k$ un cuerpo con característica $p>0$ y $f\in k[x]$ irreducible. Entonces, existe $q\in k[x]$ irreducible y separable y $h\in\NN_0$ tal que $f(x) = q(x^{p^h})$.
+\begin{proof}
+Consideremos $A=\{n\in\NN_0 : \exists g\in k[x] \text{ con }f=g(x^{p^n})\}$. Notemos que $0\in A$ y así $A\neq\emptyset$ y que está acotado pues $\gr f<+\infty$. Sea $h$ el máximo de $A$. Sea $q\in k[x]$ tal que $f(x)=q(x^{p^h})$. Es claro que $q$ es irreducible pues si $q=q_1q_2$ con $q_1,q_2\in k[x]$ tendríamos que $f(x) = q_1(x^{p^h})q_2(x^{p^h})$, que es absurdo pues $f$ es irreducible. Además, $q$ es separable pues si no lo fuere tendríamos que $q'=0$ y así $q(x)=g(x^p)$. Esto implica que $f(x)=g(x^{p^{h+1}})$, que contradice la maximalidad de $h$.
+\end{proof}
+\end{prop}
+
+\begin{cor}
+Si $\car k = p>0$ y $\alpha\in\overline{k}$ entonces las raíces de $m(\alpha,k)$ (en $\overline{k}$) tienen todas la misma multiplicidad y esa multiplicidad es una potencia de $p$.
+\begin{proof}
+Por la proposición anterior, existe $q\in k[x]$ irreducible y separable tal que $m(\alpha,k) = q(x^{p^h})$ para algún $h\in\NN_0$. Sean $y_1,\ldots , y_n$ las raíces de $q$ en $\overline{k}$. Tenemos que $y_i\neq y_j$ si $i\neq j$ ya que $q$ es separable. Es decir, $q=\displaystyle\prod_{i=1}^n (x-y_i)\in\overline{k}[x]$. Sean $x_1,\ldots , x_n\in\overline{k}$ tales que $x_i^{p^h} = y_i$. Es claro que $x_i\neq x_j$ si $i\neq j$ pues si no al elevar a la $p^h$ tendríamos $y_i=y_j$. Entonces, $m(\alpha,k) = q(x^{p^h}) = \displaystyle\prod_{i=1}^n (x^{p^h} - y_i) = \prod_{i=1}^n (x^{p^h} - x_i^{p^h}) = \prod_{i=1}^n (x-x_i)^{p^h}$. Esto quiere decir que todas las raíces del minimal de $\alpha$ en $k$ tienen multiplicidad $p^h$ como queríamos probar.
+\end{proof}
+\end{cor}
+
+\begin{defn}
+Sean $E/k, F/k$ son extensiones de cuerpos. Denotamos al conjunto de morfismos de extensiones por $\hom(E/k,F/k) = \{\sigma:E/k\to F/k | \sigma \text{ morfismo de extensiones} \}$, a los endomorfismos $\End(E/k) = \hom(E/k,E/k)$ y a los automorfismos (endomorfismos que son isomorfismos) $\Aut(E/k)$.
+\end{defn}
+
+\begin{defn}
+Sea $E/k$ una extensión algebraica. El \textbf{grado de separabilidad} de $E/k$ es $[E:k]_s = \sharp \hom(E/k,\overline{k}/k)$. Notemos que la definición no depende de la clausura algebraica elegida pues es única a menos de isomorfismo.
+\end{defn}
+
+\begin{obs}
+Si $\alpha$ es algebraico sobre $k$, entonces $[k(\alpha):k]_s$ es la cantidad de raíces distintas de $m(\alpha,k)$ (en $\overline{k}$), pues vimos que tenemos una biyección entre los morfismos de extensiones $\sigma:k(\alpha)/k\to\overline{k}/k$ y las raíces del minimal de $\alpha$ en $k$. Entonces, es claro que $[k(\alpha):k]_s \leq [k(\alpha):k]$, y que $m(\alpha,k)$ es separable si y sólo si $[k(\alpha):k]_s=[k(\alpha):k]$.
+\end{obs}
+
+\begin{prop}
+Sea $k\subseteq F\subseteq E$ una torre de extensiones finitas. Entonces el grado de separabilidad es multiplicativo en torres. Es decir, $[E:k]_s = [E:F]_s [F:k]_s$.
+\begin{proof}
+Ejercicio.
+\end{proof}
+\end{prop}
+
+\begin{cor}
+Si $E/k$ es una extensión finita, entonces $[E:k]_s \leq [E:k]$.
+\begin{proof}
+Notemos que, por la observación anterior, para cada $1\leq i\leq r$ tenemos que $[k(\alpha_1,\ldots ,\alpha_{i-1})(\alpha_i) : k(\alpha_1,\ldots , \alpha_{i-1})]_s \leq [k(\alpha_1,\ldots ,\alpha_{i-1})(\alpha_i) : k(\alpha_1,\ldots , \alpha_{i-1})]$ y ahora simplemente es usar que ambos grados son multiplicativos en torres.
+\end{proof}
+\end{cor}
+
+\begin{defn}
+Sea $E/k$ una extensión finita. Decimos que la extensión $E/k$ es \textbf{separable} si $[E:k]_s = [E:k]$. Si $\alpha$ es algebraico sobre $k$ se dice que es separable sobre $k$ si la extensión $k(\alpha)/k$ es separable.
+\end{defn}
+
+\begin{obs}
+Notemos que $\alpha$ es separable si y sólo si $[k(\alpha):k]_s = [k(\alpha):k]$. Pero eso es que la cantidad de raíces distintas del minimal de $\alpha$ sea exactamente el grado. Es decir, que el minimal de $\alpha$ en $k$ sea separable.
+\end{obs}
+
+\begin{obs}
+Si tenemos una torre de extensiones finitas $k\subseteq F\subseteq E$, entonces $E/k$ es separable si y sólo si $E/F$ y $F/k$ lo son. En efecto, simplemente es usar que el grado de separabilidad es multiplicativo en torres y que si alguno de los grados de separabilidad fuera más chico que el grado de la extensión entonces el producto quedaría menor también.
+\end{obs}
+
+\begin{teo}
+Sea $E/k$ una extensión finita. Entonces, $E/k$ es separable si y sólo si para todo $\alpha\in E$ tenemos que $\alpha$ es separable.
+\begin{proof}
+$(\Longrightarrow)$ Si $\alpha\in E$, entonces tenemos la torre $k\subseteq k(\alpha)\subseteq E$ y como $E/k$ es separable, por la observación anterior, resulta que $k(\alpha)/k$ es separable y así $\alpha$ separable sobre $k$.
+
+$(\Longleftarrow)$ Como $E/k$ es finita, es finitamente generada y algebraica. Luego $E=k(\alpha_1,\ldots ,\alpha_r)$ con cada $\alpha_i$ algebraico sobre $k$. Por hipótesis, cada $\alpha_i$ es separable sobre $k$. Notemos que si $\alpha_i$ es separable sobre $k$ entonces $\alpha_i$ es separable sobre $k(\alpha_1,\ldots , \alpha_{i-1})$. En efecto, esto es porque $m(\alpha_i, k(\alpha_1,\ldots ,\alpha_{i-1}))\mid m(\alpha_i,k)$ y como $m(\alpha_i,k)$ tiene sus raíces simples por ser $\alpha_i$ separable sobre $k$, sus divisores también tienen sus raíces simples. Ahora, como tenemos que cada subextensión en la torre es separable, debemos tener que toda la extensión es separable. Y listo.
+\end{proof}
+\end{teo}
+
+\begin{obs}
+En la demostración anterior probamos que si los generadores son separables entonces la extensión lo es.
+\end{obs}
+
+\begin{defn}
+Sea $E/k$ una extensión algebraica. Se dice que $E/k$ es \textbf{separable} si para todo $\alpha\in E$ tenemos que $\alpha$ es separable sobre $k$.
+\end{defn}
+
+\begin{obs}
+Sigue valiendo lo de los generadores: es decir, si $S$ es un conjunto de generadores de $E/k$ y todos los elementos de $S$ son separables sobre $k$ entonces $E/k$ es separable. En efecto, para cada $x\in E$ existen $s_1,\ldots , s_n\in S$ tales que $x\in k(s_1,\ldots , s_n)$. Como los generadores de esa extensión finita son separables, la extensión lo es y así $x$ es separable sobre $k$.
+\end{obs}
+
+\begin{prop}
+Las extensiones separables forman una clase distinguida.
+\begin{proof}
+Ejercicio.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+Sea $\alpha$ algebraico sobre $k$. Si $\car k=0$ entonces $\alpha$ es separable sobre $k$ y así $[k(\alpha):k]_s = [k(\alpha):k]$. Ahora, si $\car k = p>0$, entonces existe $h\in\NN_0$ tal que $p^h\cdot [k(\alpha):k]_s = [k(\alpha):k]$, por el corolario que vimos que nos decía que el en el minimal todas las raíces tenían la misma multiplicidad que era una potencia de $p$.
+\end{obs}
+
+\begin{prop}
+Si $E/k$ es una extensión finita, entonces:
+\begin{enumerate}
+\item Si $\car k =0$ entonces $[E:k]_s = [E:k]$.
+\item Si $\car k = p>0$ entonces $[E:k]_s \mid [E:k]$ y el cociente es una potencia de $p$.
+\end{enumerate}
+\begin{proof}
+Simplemente es usar la observación anterior y que ambos grados son multiplicativos en torre.
+\end{proof}
+\end{prop}
+
+\begin{defn}
+Sea $E/k$ una extensión finita. Se define el \textbf{grado de inseparabilidad} como $$[E:k]_{\mathrm{ins}} = \dfrac{[E:k]}{[E:k]_s}$$
+\end{defn}
+
+\begin{obs}
+Si $\car k =0$ entonces $[E:k]_{\mathrm{ins}}=1$. Si $\car k =p>0$ entonces $[E:k]_{\mathrm{ins}} = p^n$ con $n\in\NN_0$. Además, si $k\subseteq F\subseteq E$ es una torre de extensiones finitas, tenemos que $[E:k]_{\mathrm{ins}} = [E:F]_{\mathrm{ins}} [F:k]_{\mathrm{ins}}$, pues los otros dos grados son multiplicativos en torres.
+\end{obs}
+
+\begin{prop}
+Sea $k\subseteq F\subseteq E$ una torre de extensiones algebraicas. Si $F/k$ es separable y $\alpha\in E$ separable sobre $F$, entonces $\alpha$ es separable sobre $k$.
+\begin{proof}
+Sea $m(\alpha,F)\in F[x]$ el polinomio minimal y $a_0,\ldots , a_n$ sus coeficientes. Consideremos $k(a_0,\ldots , a_n)$, que es algebraica (pues al ser todos los $a_i$ elementos de $F$ que es una extensión algebraica, son algebraicos) y finitamente generada. Entonces, $k(a_0,\ldots , a_n)/k$ es finita y separable (es separable pues el minimal de $\alpha$ en $F$ y en $k(a_0,\ldots , a_n)$ es el mismo). Como $k(a_0,\ldots ,a_n)(\alpha)/k(a_0,\ldots , a_n)$ es separable, tenemos que $k(a_0,\ldots , a_n,\alpha)/k$ es separable y así $\alpha$ es separable sobre $k$. Y estamos.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $E/k$ una extensión algebraica. Consideremos el subconjunto de $E$ de los separables $F=\{x\in E : x\text{ es separable sobre }k\}$. Entonces:
+\begin{enumerate}
+\item $F/k$ es una subextensión de $E/k$.
+\item $F/k$ es separable.
+\item Si $\alpha\in E$ es separable sobre $F$, entonces $\alpha\in F$.
+\item Si $E/k$ normal, entonces $F/k$ es normal.	
+\end{enumerate}
+\begin{proof}
+La primera afirmación se sigue de que si $\alpha,\beta\in F$, entonces $k(\alpha,\beta)$ es una extensión separable (pues los generadores lo son), y así todo elemento de la extensión se separable. En particular, $\alpha+\beta, \alpha\beta, \alpha^{-1},\beta^{-1}$. La segunda afirmación es evidente pues todo elemento es separable. La tercera afirmación sigue directamente de la proposición anterior. 
+
+Para la última afirmación, sea $\sigma:F/k\to \overline{k}/k$ un morfismo de extensiones. Debo ver que $\sigma(F)=F$. Como $E/F$ es algebraica, $\sigma$ se extiende $\tilde{\sigma}:E/k\to \overline{k}/k$. Además, como $E/k$ es normal, tenemos que $\tilde{\sigma}(E)=E$. Sea $x\in F$. Quiero ver que $\sigma(x)\in F$. Pero $\sigma(x)=\tilde{\sigma}(x)\in E$. Como $\sigma(x)$ es raíz del minimal de $x$ en $k$ tenemos que $\sigma(x)$ es separable (pues $x$ es separable si y sólo si $m(x,k)$ lo es, y $m(\sigma(x),k)=m(x,k)$). Entonces, $\sigma(x)$ es separable y así está en $F$. La proposición sigue.
+\end{proof}
+\end{prop}
+
+\begin{defn}
+Sea $E/k$ una extensión algebraica y $F=\{x\in E : x\text{ es separable sobre }k\}$. Entonces, $F/k$ se llama la \textbf{clausura separable} de $E/k$.
+\end{defn}
+
+\begin{defn}
+Una extensión algebraica $E/k$ se dice \textbf{Galoisiana} (o de Galois) si es normal y separable.
+\end{defn}
 
 \end{document}
 
