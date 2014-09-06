@@ -71,6 +71,7 @@
 \DeclareMathOperator{\spec}{Spec}
 \DeclareMathOperator{\ev}{ev}
 \DeclareMathOperator{\ann}{Ann}
+\DeclareMathOperator{\Gal}{Gal}
 \def\acts{\curvearrowright}
 \def\stca{\curvearrowleft}
 
@@ -838,12 +839,136 @@ Para la última afirmación, sea $\sigma:F/k\to \overline{k}/k$ un morfismo de e
 \end{prop}
 
 \begin{defn}
-Sea $E/k$ una extensión algebraica y $F=\{x\in E : x\text{ es separable sobre }k\}$. Entonces, $F/k$ se llama la \textbf{clausura separable} de $E/k$.
+Sea $E/k$ una extensión algebraica. Si miramos el conjunto $$F=\{x\in E : x\text{ es separable sobre }k\}$$ Entonces $F/k$ se llama la \textbf{clausura separable} de $E/k$.
 \end{defn}
+
+\begin{defn}
+Sea $E/k$ una extensión algebraica y $\car k= p > 0$. Decimos que $\alpha\in E$ es \textbf{puramente inseparable} sobre $k$ si existe un $n\in\NN_0$ tal que $\alpha^{p^n}\in k$.
+\end{defn}
+
+\begin{teo}
+Sea $E/k$ una extensión algebraica y $\car k = p >0$. Son equivalentes:
+\begin{enumerate}
+\item $[E:k]_s = 1$.
+\item Todo $\alpha\in\overline{k}$ es puramente inseparable sobre $k$.
+\item Para todo $\alpha\in E$, $m(\alpha,k) = x^{p^n}-a\in k[x]$ para algún $n\in\NN_0$.
+\item $E=k(S)$ donde $S$ es un conjunto de elementos puramente inseparables sobre $k$.
+\end{enumerate}
+\begin{proof}
+$(1)\Longrightarrow (2)$: Sea $\alpha\in E$. Debo ver que $\alpha^{p^n}\in k$ para algún $n\in\NN_0$. Como $[E:k]_s=1$, entonces $[k(\alpha):k]_s=1$ (pues el grado de separabilidad es multiplicativo en torres y $k(\alpha)$ es un subcuerpo de $E$). Esto nos dice que $m(\alpha,k)$ tiene una única raíz en $\overline{k}$. Entonces, $m(\alpha,k) = (x-\alpha)^r$. Pero vimos que las raíces de los minimales tienen multiplicidad una potencia de la característica del cuerpo. Es decir, $m(\alpha,k) = (x-\alpha)^{p^n} = x^{p^n} - \alpha^{p^n}\in k[x]$. Entonces, $\alpha^{p^n}\in k$ como queríamos.
+
+$(2)\Longrightarrow (3)$: Sea $\alpha\in E$ puramente inseparable. Entonces, existe un $n\in\NN_0$ tal que $\alpha^{p^n}\in k$. Esto quiere decir que $\alpha$ es raíz de $x^{p^n} - \alpha^{p^n}\in k[x]$. Pero eso es $(x-\alpha)^{p^n}$. Entonces, $m(\alpha,k)\mid (x-\alpha)^{p^n}$ y así $m(\alpha,k) = (x-\alpha)^r\in k[x]$. Pero vimos que las potencias de los minimales en $\car k = p>0$ es potencia de $p$, así que $m(\alpha,k) = (x-\alpha)^{p^h} = x^{p^h} - \alpha^{p^h}$.
+
+$(3)\Longrightarrow (4)$: Es obvio, ya que todo elemento es puramente inseparable pues tenemos $m(\alpha,k)=x^{p^n}-a$ y así $\alpha^{p^n}= a\in k$.
+
+$(4)\Longrightarrow (1)$: Sea $E=k(\alpha_i)_{i\in I}$ con cada $\alpha_i$ puramente inseparable sobre $k$. Debo ver que $\sharp \hom(E/k,\overline{k}/k=1$. Si tomo la clausura con $E\subseteq \overline{k}$, entonces tenemos que ver que el único morfismo de extensiones $\sigma:E/k\to\overline{k}/k$ entonces $\sigma(\alpha_i) = \alpha_i$ (es decir, que el único morfismo que hay es la inclusión). Pero como $\alpha_i^{p^{h_i}}\in k$, tenemos que $m(\alpha_i,k) = (x-\alpha_i)^{p^{h_i}}$ y así $\alpha_i$ es la única raíz de su minimal. Como $\sigma$ manda raíces del minimal en raíces del minimal, debe ser $\sigma(\alpha_i)=\alpha_i$, como queríamos.
+\end{proof}
+\end{teo}
+
+\begin{defn}
+Una extensión algebraica $E/k$ se dice puramente inseparable si cumple alguna de las propiedades del teorema anterior.
+\end{defn}
+
+\begin{prop}
+Sea $E/k$ una extensión algebraica y $F$ la clausura separable de $E/k$. Entonces, $E/F$ es puramente inseparable.
+\begin{proof}
+Sea $\alpha\in E$. Sabemos que existen $n\in\NN_0$ y $g\in F[x]$ irreducible y separable tal que $m(\alpha,F) = g(x^{p^n})$. Sean $r_1,\ldots , r_s$ las raíces de $g$ en una clausura algebraica. Entonces, como $g$ es separable, $g=(x-r_1)\cdots (x-r_s)$. Pero notemos que esto quiere decir que $g(\alpha^{p^n}) = (\alpha^{p^n} - r_1)\cdots (\alpha^{p^n}-r_s) = 0$ y así $\alpha^{p^n} = r_i$ para algún $1\leq i\leq s$. Como $g$ es irreducible, es el minimal de $r_i$ y así, como $g$ es separable, $r_i$ resulta separable. Pero como $r_i\in E$ es separable, por definición $r_i\in F$. Entonces $\alpha^{p^n} = r_i\in F$. Y listo.
+\end{proof}
+\end{prop}
+
+\section{Extensiones Galoisianas}
 
 \begin{defn}
 Una extensión algebraica $E/k$ se dice \textbf{Galoisiana} (o de Galois) si es normal y separable.
 \end{defn}
+
+\begin{defn}
+Sea $E$ un cuerpo y $G\subseteq \Aut(E)$ un subgrupo de los automorfismos (de cuerpo) de $E$. El \textbf{cuerpo fijo} por $G$ de $E$ se define como $E^G = \{x\in E : \sigma(x)=x \;\forall\sigma\in G\}$. Es fácil ver que $E^G \subseteq E$ es un subcuerpo.
+\end{defn}
+
+\begin{defn}
+Si la extensión $E/k$ es Galois, entonces $(\Aut(E/k),\circ)$ los automorfismos de extensiones forman un grupo, que llamamos el \textbf{grupo de Galois} de $E/k$ y se lo denota $\Gal(E/k)$.
+\end{defn}
+
+\begin{teo}
+Si $E/k$ es Galois, entonces $k = E^{\Gal(E/k)}$. Es decir, los elementos fijos dejados por $\Gal(E/k)$ son precisamente los de $k$.
+\begin{proof}
+La contención $k\subseteq E^{\Gal(E/k)}$ es obvia, pues por definición los automorfismos de $E/k$ dejan fijo a $k$. Para probar la otra contención, sea $\alpha\in E^G$. Es decir, $\alpha\in E$ y $\sigma(\alpha)=\alpha$ para todo $\sigma\in \Gal(E/k)$. Supongamos que $\alpha\notin k$. Esto implica que $\gr m(\alpha,k)>1$. Como $E/k$ es separable, existe un $\beta\in\overline{k}$ tal que $\beta$ es raíz de $m(\alpha,k)$ y $\beta\neq \alpha$.
+
+Pero notemos que podemos definir $\sigma:k(\alpha)/k\to \overline{k}/k$ por $\sigma(\alpha)=\beta$ y $\left. \sigma\right|_{k}=\id$ (por la propiedad universal del anillo de polinomios). Como $E/k(\alpha)$ es algebraica, $\sigma$ se extiende a $\overline{\sigma}: E/k\to \overline{k}/k$ y $\overline{\sigma}(\alpha)=\beta$. Pero como $E/k$ es una extensión normal, tenemos que $\overline{\sigma}(E) = E$. Es decir, $\overline{\sigma}$ es un automorfismo de $E/k$, y así debería dejar fijo a $\alpha$. Absurdo.
+\end{proof}
+\end{teo}
+
+\begin{obs}
+Sea $k\subseteq F\subseteq E$ una torre de extensiones. Si $E/k$ es Galois, entonces $E/F$ es de Galois (pues si $E/k$ es normal, $E/F$ lo es y lo mismo para separable).
+\end{obs}
+
+\begin{cor}[Teorema Fundamental de la Teoría de Galois I]
+Sea $E/k$ una extensión de Galois. Entonces, la función $$ \varphi:\{\text{Cuerpos intermedios de }E/k\}\to \{\text{Subgrupos de }\Gal(E/k)\}$$ dada por $\varphi(F)=\Gal(E/F)$ es inyectiva.
+\begin{proof}
+Notemos que $\varphi$ está bien definida ya que $E/F$ es Galois por serlo $E/k$. Además, $\Gal(E/F)\subseteq \Gal(E/k)$ es un subgrupo. Ahora, supongamos que $\varphi(F)=\varphi(F')$ para ciertos $F,F'$ cuerpos intermedios. Entonces, tendríamos que $\Gal(E/F) = \Gal(E/F')$ y así $F = E^{\Gal(E/F)} = E^{\Gal(E/F')} = F'$. Como queríamos probar.
+\end{proof}
+\end{cor}
+
+\begin{obs}
+Si $k\subseteq F\subseteq F'\subseteq E$, entonces $\varphi(F)\supseteq \varphi(F')$ (es decir, es contravariante). Además, si $k\subseteq F,F'\subseteq E$ se tiene que $\Gal(E/FF') = \Gal(E/F)\cap \Gal(E/F')$. Es decir, $\varphi(FF') = \varphi(F)\cap \varphi(F')$.
+\end{obs}
+
+\begin{prop}
+Sea $E/k$ una extensión finita. Entonces, $E/k$ es Galois si y sólo si $|\Gal(E/k)| = [E:k]$.
+\begin{proof}
+Si la extensión es finita y Galois, entonces $$|\Gal(E/k)| \stackrel{(1)}{=} \sharp\End(E/k) \stackrel{(2)}{=} \sharp \hom(E/k,\overline{k}/k) \stackrel{(3)}{=} [E:k]_s \stackrel{(4)}{=} [E:k]$$ Donde $(1)$ se da porque la extensión es finita (y así los automorfismos coinciden con los endomorfismos), $(2)$ se da por ser $E/k$ normal, $(3)$ por definición y $(4)$ por ser separable. Para ver la vuelta, si no valiera alguna de las propiedades de ser normal o separable, en la cadena de igualdades anterior habría una desigualdad y no tendríamos que $|\Gal(E/k)|= [E:k]$.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+En particular, si $E/k$ es Galois y finita, entonces el grupo de galois $\Gal(E/k)$ es finito y así la cantidad de subgrupos del grupo de galois son finitos. Por la primera parte del Teorema Fundamental de la Teoría de Galois, sólo existen finitos cuerpos intermedios.
+\end{obs}
+
+\begin{prop}
+Sea $E/k$ una extensión finita y separable. Entonces $E/k$ tiene finitos cuerpos intermedios.
+\begin{proof}
+La idea va a ser meter a $E$ en una \textit{clausura normal} y ahí usar la observación anterior (pues obtendríamos una extensión finita y Galois). Para hacer esto, si $E=k(\alpha_1,\ldots , \alpha_r)$ con cada $\alpha_i$ separables, construímos $E'$ agregando a $E$ las raíces de $m(\alpha_i,k)$ (en $\overline{E}$) para cada $1\leq i\leq r$. Esta extensión queda finita pues agregamos finitas raíces. Entonces, tenemos la torre $k\subseteq E\subseteq E'$. Notemos que $E'$ es separable sobre $k$ pues todos los generadores lo son (esto es verdad pues los minimales de los generadores son los $m(\alpha_i,k)$ y esos son separables porque los $\alpha_i$ lo son). Además, es normal porque la definimos para que así lo sea. Entonces, $E'/k$ es Galois y finita, y por la observación anterior tiene finitos cuerpos intermedios. Como $E\subseteq E'$, los cuerpos intermedios de $E/k$ son cuerpos intermedios de $E'/k$, y así finitos. Como queríamos probar.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+Si $k$ es perfecto, entonces toda extensión finita $E/k$ tiene finitos cuerpos intermedios. En efecto, esto es obvio pues si un cuerpo es perfecto debe ser separable.
+\end{obs}
+
+\begin{prop}
+Sea $k$ un cuerpo.  Si $G\subseteq k^\times$ es un subgrupo de las unidades de $k$ tal que $|G|<+\infty$, entonces $G$ es cíclico.
+\begin{proof}
+Notemos que $G$ es abeliano y finito. Entonces, por el Teorema de Estructura (para $\ZZ$-módulos) tenemos que $G\simeq G_{p_1}\times\ldots\times G_{p_r}$ donde cada $G_{p_i}$ es una componentes $p_i$-primarias de $G$. Como $p_i\neq p_j$, basta ver que cada $G_{p_i}$ es cíclico para cada $1\leq i\leq r$. Sea $a_i\in G_{p_i}$ tal que $\ord a_i$ es máximo. Luego, $\ord a_i = p_i^{m_i}$ para algún $m_i\in\NN_0$. Notemos que $x^{p_i^{m_i}}-1\in k[x]$ tiene como máximo $p_i^{m_i}$ raíces. Además, para cada $x\in G_{p_i}$ tenemos que $x^{p_i^{m_i}}=1$. Como $|\langle a_i\rangle| = \ord a_i = p_i^{m_i}$ y así $\langle a_i\rangle = G_{p_i}$. Como queríamos probar.
+\end{proof}
+\end{prop}
+
+\begin{cor}
+Si $k$ es un cuerpo finito, entonces $k^\times$ es cíclico.
+\begin{proof}
+Es aplicar directamente el teorema anterior.
+\end{proof}
+\end{cor}
+
+\begin{teo}[Teorema del Elemento Primitivo]
+Sea $E/k$ una extensión finita. Si $E/k$ tiene finitos cuerpos intermedios, entonces existe $\alpha\in E$ tal que $E=k(\alpha)$. En particular, si $k$ es un cuerpo perfecto (por la observación anterior) luego $E$ es una extensión simple.
+\begin{proof}
+Si $k$ es finito, entonces $E$ también es un cuerpo finito (pues son finitas combinaciones lineales de finitos elementos de la base). Entonces, $E^\times$ es cíclico y así $E=k(\alpha)$ donde $\alpha$ es un generador de $E^\times$.
+
+Si $k$ es infinito, sean $\alpha,\beta\in E$. Consideremos las subextensiones $k(\alpha+c\beta)$ con $c\in k$. Como hay finitos cuerpos intermedios, debemos tener $c_1,c_2\in k$ tales que $k(\alpha + c_1\beta) = k(\alpha + c_2\beta)$ y llamemos $F$ a esa extensión. Esto quiere decir que $\alpha + c_1\beta, \alpha+c_2\beta\in F$ y así la resta también está. Es decir, $(c_2-c_1)\beta \in F$. Como $c_1\neq c_2$, tenemos que $c_2 - c_1 \in k^\times$ y así $\beta\in F$. Esto implica que $\alpha\in F$. Por lo tanto, probamos que $k(\alpha,\beta)\subseteq F$. Como $F\subseteq k(\alpha,\beta)$ trivialmente,  debemos tener que $k(\alpha,\beta) = F$. Procediendo recursivamente, vemos que $E=k(\alpha_1,\ldots,\alpha_r) = k(\alpha_1 + c_2\alpha_2 + \ldots + c_r\alpha_r)$. El teorema sigue.
+\end{proof}
+\end{teo}
+
+\begin{obs}
+Vale la recíproca: si $\alpha\in\overline{k}$ es algebraico sobre $k$, entonces $k(\alpha)/k$ tiene finitos cuerpos intermedios.
+\end{obs}
+
+\begin{cor}
+Una extensión es simple si y sólo si tiene finitos cuerpos intermedios.
+\begin{proof}
+Simplemente es combinar la observación y el teorema anterior.
+\end{proof}
+\end{cor}
 
 \end{document}
 
