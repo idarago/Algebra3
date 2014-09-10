@@ -961,6 +961,9 @@ Si $k$ es infinito, sean $\alpha,\beta\in E$. Consideremos las subextensiones $k
 
 \begin{obs}
 Vale la recíproca: si $\alpha\in\overline{k}$ es algebraico sobre $k$, entonces $k(\alpha)/k$ tiene finitos cuerpos intermedios.
+\begin{proof}
+Sea $\overline{k}$ una clausura algebraica de $k$ y $\alpha\in\overline{k}$. Sea $F$ un cuerpo intermedio de $k(\alpha)/k$. Consideremos entonces $p_F = m(\alpha,F)$. Tenemos que $p_F\mid p_k$ en $\overline{k}[x]$. Esto implica que existen finitos $p_F$. Veamos que si $p_F = p_{F'}$ entonces $F=F'$. En efecto, si tenemos que $p_F = a_n x^n + \ldots + a_1x+a_0$ defino $F_0 = k(a_0,\ldots,a_n)$. Como $k\subseteq F$ y cada $a_i\in F$, entonces $F_0\subseteq F$. Es fácil ver que $k(\alpha) = F(\alpha)=F_0(\alpha)$. Pero notemos que $$[F(\alpha):F] = \gr p_F = \gr p_{F_0} = [F_0(\alpha):F_0]$$ Esto implica que $[F:k] = [F_0 : k]$ y como $F_0\subseteq F$ debemos tener $F_0=F$. Por lo tanto, si $p_F = p_{F'}$ tendríamos que $F_0 = F_0'$ y así $F = F'$. Como queríamos probar.
+\end{proof}
 \end{obs}
 
 \begin{cor}
@@ -969,6 +972,57 @@ Una extensión es simple si y sólo si tiene finitos cuerpos intermedios.
 Simplemente es combinar la observación y el teorema anterior.
 \end{proof}
 \end{cor}
+
+\begin{lem}
+Sea $E/k$ separable. Si existe $n\in\NN_0$ tal que $[k(\alpha):k]\leq n$ para todo $\alpha\in E$, entonces $[E:k]\leq n$. En particular, la extensión es finita.
+\begin{proof}
+Sea $\gamma\in E$ tal que $k(\gamma)/k$ tiene grado máximo. Si $E\neq k(\gamma)$, entonces existe $\beta\in E$ tal que $\beta\notin k(\gamma)$. Consideremos entonces $k(\gamma,\beta)$. Esto es una extensión finita y separable, y así por el Teorema del Elemento Primitivo, existe $\omega$ tal que $k(\gamma,\beta) = k(\omega)$. Pero sabemos que $[k(\omega):k] = [k(\gamma,\beta):k] > [k(\gamma):k]$, que tenía grado máximo. Absurdo, que vino de suponer que $E\neq k(\gamma)$.
+\end{proof}
+\end{lem}
+
+\begin{teo}[Artin]
+Sea $E$ un cuerpo y $G\subseteq\Aut E$ un subgrupo finito. Si $k=E^G$, entonces $E/k$ es de Galois y $\Gal(E/k) = G$, y así $[E:k]=|G|$.
+\begin{proof}
+Sea $\alpha\in E$. Sea $\{\sigma_1,\ldots , \sigma_r\}\subseteq G$ maximal respecto de la propiedad que $\sigma_i(\alpha)\neq\sigma_j(\alpha)$ para todo $i\neq j$. Si $\tau\in G$, entonces tenemos $$\{\tau\circ\sigma_1(\alpha),\ldots , \tau\circ\sigma_r(\alpha)\} = \{\sigma_1(\alpha),\ldots ,\sigma_r(\alpha)\}$$ pues si $\tau\circ\sigma_i(\alpha) \neq \sigma_j(\alpha)$ para todo $1\leq j\leq r$, entonces $\{\sigma_1,\ldots , \sigma_r, \tau\circ\sigma_i\}$ cumple la propiedad, y esto contradice la maximalidad. Además, como $\tau$ es una biyección queda que todos los $\tau\circ\sigma_i(\alpha)$ son distintos.
+Notemos también que $\alpha\in \{\sigma_1(\alpha),\ldots , \sigma_r(\alpha)\}$, ya que simplemente tomando $\tau = \sigma_1^{-1}$ obtenemos $\sigma^{-1}\circ \sigma(\alpha) = \alpha$.
+
+Ahora bien, si $f_\alpha = \displaystyle\prod_{i=1}^r (x-\sigma_i(\alpha))\in E[x]$, tenemos que $\alpha$ es raíz de $f_\alpha$. Es claro también que es separable (pues cada $\sigma_i(\alpha)\neq \sigma_j(\alpha)$) y además se está factorizando linealmente en $E[x]$. Pero más aún, $f_\alpha\in k[x]$. En efecto, si $\tau\in G$, tenemos que $f_\alpha^\tau = f_\alpha$ pues $\{\tau\circ\sigma_i(\alpha)\}_{1\leq i \leq r}$ simplemente es una permutación de $\{\sigma_i(\alpha)\}_{1\leq i \leq r}$. Como al aplicar $\tau$ simplemente permuté las raíces, los coeficientes deben quedar fijos y así, como son dejados fijos por todos los elementos de $G$, esto implica $f_\alpha\in k[x]$.
+
+Como el $\alpha\in E$ era arbitrario, esto implica que la extensión $E/k$ es de Galois. Para ver la otra afirmación, notemos que siempre tenemos la inclusión $G\subseteq \Gal(E/k) = \Gal(E/E^G)$ pues simplemente es un juego de palabras ($G$ está entre los automorfismos que dejan fijos a las cosas dejadas fijas por $G$). Para ver la igualdad, como para todo $\alpha\in E$ tenemos que $[k(\alpha):k]\leq n$ pues $m(\alpha,k)\mid f_\alpha$ y $\gr f_\alpha = r\leq |G|$, el lema anterior implica que $|\Gal(E/k)| = [E:k]\leq |G|$. Es decir, $G$ está incluído en un conjunto de su mismo cardinal. Entonces $\Gal(E/k)=G$, y el teorema sigue.
+\end{proof} 
+\end{teo}
+
+\begin{cor}[Teorema Fundamental de la Teoría de Galois II]
+Sea $E/k$ una extensión de Galois y finita. Entonces, la función $$ \varphi:\{\text{Cuerpos intermedios de }E/k\}\to \{\text{Subgrupos de }\Gal(E/k)\}$$ dada por $\varphi(F)=\Gal(E/F)$ es biyectiva con inversa $\varphi^{-1}(H) = E^H$.
+\begin{proof}
+La inyectividad ya la vimos (bajo el nombre de Teorema Fundamental de la Teoría de Galois I). Ahora, notemos que por el teorema anterior, $E/E^H$ es Galois y $\Gal(E/E^H) = H$, lo que implica que $\varphi^{-1}(H)=E^H$.
+\end{proof}
+\end{cor}
+
+\begin{obs}
+Sea $F/k$ una extensión de Galois y $\sigma:F\to F'$ un isomorfismo de cuerpos. Entonces, $F/k\stackrel{\sigma}{\longrightarrow} F'/\sigma(k)$ es un isomorfismo. Consideremos ahora la conjugación $\widehat{\sigma}:\Gal(F/k)\to \Gal(F'/\sigma(k))$ dada por $\widehat{\sigma}(\varphi) = \sigma\varphi\sigma^{-1}$. Luego, es fácil ver que $\Gal(F'/\sigma(k)) = \widehat{\sigma}(\Gal(F/k))$.
+\end{obs}
+
+\begin{prop}
+Sea $E/k$ Galois y sea $F/k$ una subextensión. Entonces:
+\begin{itemize}
+\item $F/k$ es normal si y sólo si $\Gal(E/F)\triangleleft \Gal(E/k)$.
+\item Si $F/k$ es normal, entonces $\Gal(F/k) \simeq \Gal(E/k)/\Gal(E/F)$.
+\end{itemize}
+\begin{proof}
+
+Primero, supongamos que $F/k$ es normal. Luego, $\rho:\Gal(E/k)\to \Gal(F/k)$, $\sigma\mapsto\left.\sigma\right|_{F}$ resulta un morfismo de grupos. En efecto, esto está bien definido por la normalidad de $F/k$. Además, $\rho$ resulta un epimorfismo pues todo $\sigma:F/k\to \overline{k}/k$ se extiende a un morfismo $\overline{\sigma}:E/k\to\overline{k}/k$ ya que $E/F$ es algebraica. Como $E/F$ es normal, resulta que $\overline{\sigma}\in \Gal(F/k)$. Entonces, $\rho(\overline{\sigma})=\sigma$ y esto prueba que es epimorfismo. Ahora bien, como $\ker \rho = \{\omega\in\Gal(E/k) : \left.\omega\right|_{F}=\id\} = \Gal(E/F)$ se sigue que $\Gal(E/F)\triangleleft \Gal(E/k)$ por ser el núcleo de un morfismo que sale de ahí. Finalmente, $$\Gal(F/k) = \im \rho \simeq \Gal(E/k)/\ker\rho = \Gal(E/k)/\Gal(E/F)$$ en virtud del Primer Teorema de Isomorfismo.
+
+Resta ver la vuelta. Es decir, si $\Gal(E/F)\triangleleft\Gal(E/k)$, entonces $F/k$ es normal. Sea $\sigma:F/k\to \overline{k}/k$ un morfismo de extensiones. Debo ver que $\sigma(F)=F$. Extendamos $\sigma$ a $\overline{\sigma}:E/k\to\overline{k}/k$. Como $E/k$ es normal, se tiene que $\overline{\sigma}\in\Gal(E/k)$. Esto implica que $\overline{\sigma}$ es un isomorfismo de cuerpos, y esto a su vez implica que $E/F\stackrel{\overline{\sigma}}{\longrightarrow} E/\sigma(F)$ es un isomorfismo y así $\Gal(E/\sigma(F)) = \widehat{\overline{\sigma}}(\Gal(E/F))$ por la observación anterior. Pero como este subgrupo es normal, al conjugar obtengo lo mismo. Es decir, $\Gal(E/\sigma(F)) = \Gal(E/F)$. Por el Teorema Fundamental de la Teoría de Galois I se debe tener que $F=\sigma(F)$. Y estamos.
+
+\end{proof}
+\end{prop}
+
+\begin{ex}
+Calcular el grupo de Galois de $\QQ(\sqrt[3]{2},\xi_3)/\QQ$ donde $\xi_3$ es una raíz cúbica de la unidad.
+
+Esta extensión es de Galois pues es algebraica (sus elementos son algebraicos), es separable (pues $\car \QQ=0$) y es normal pues es el cuerpo de descomposición de $x^3 - 2$. Ahora, es fácil ver que $[\QQ(\sqrt[3]{2},\xi_3):\QQ]=6$ (¡ejercicio!). Esto quiere decir que el grupo de Galois $\Gal(\QQ(\sqrt[3]{2},\xi_3)/\QQ)$ tiene $6$ elementos y así sabemos que debe ser $S_3$ o $\ZZ_6$. Pero si fuera $\ZZ_6$, sería abeliano y así sabemos que todos sus subgrupos son normales y así todas las subextensiones lo serían. Pero $\QQ(\sqrt[3]{2})/\QQ$ no es normal. Entonces, el grupo de Galois debe ser $S_3$.
+\end{ex}
 
 \end{document}
 
