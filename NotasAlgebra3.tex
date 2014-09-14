@@ -973,6 +973,20 @@ Simplemente es combinar la observación y el teorema anterior.
 \end{proof}
 \end{cor}
 
+\begin{teo}
+Sea $E/k$ una extensión algebraica tal que todo polinomio con coeficientes en $k$ tiene alguna raíz en $E$. Entonces, $E$ es algebraicamente cerrado.
+\begin{proof}
+Primero, supongamos que $k$ es perfecto. Sea $f\in k[x]$ irreducible y sea $F/k$ su cuerpo de descomposición. Como $k$ es perfecto, por el Teorema del Elemento Primitivo, existe $\alpha\in F$ tal que $F=k(\alpha)$. Por hipótesis, existe $\beta\in E$ raíz de $m(\alpha,k)$. Pero $F/k$ es normal por ser un cuerpo de descomposición, y esto implica que $k(\alpha)=k(\beta)\subseteq E$. Esto es, todo el cuerpo de descomposición de $f$ está metido en $E$. Por lo tanto, todas las raíces de $f$ están en $E$. Es decir, todas las raíces de cualquier polinomio están en $E$ y esto implica que es algebraicamente cerrado.
+
+Ahora, si $k$ no es perfecto, en particular tenemos que $\car k = p>0$. Consideremos el conjunto $P = \{x\in E : \exists\, n\in\NN \text{ tal que } x^{p^n}\in k\}$. Es fácil ver que $P$ es un cuerpo (pues si $x,y\in P$, tomo el máximo de los $n_x,n_y$ y lo llamo $m$ y tengo que $(x+y)^{p^m} = x^{p^m}+y^{p^m}\in k$ y análogamente todas las otras verificaciones). Además, es claro por la definición de $P$ que $k\subseteq P\subseteq E$. Veamos que $P$ es perfecto. Sea $\alpha\in P$ y $n\in\NN$ tal que $\alpha^{p^n}\in k$. Consideremos entonces el polinomio $f(x)=x^{p^{n+1}}-\alpha^{p^n}\in k[x]$. Como todo polinomio $f\in k[x]$ tiene alguna raíz en $E$, existe $y\in E$ tal que $f(y)=0$ y así $y^{p^{n+1}}-\alpha^{p^n}=0$. Pero esto es $(y^p - \alpha)^{p^n} = 0$. Como $y^{p^{n+1}} = \alpha^{p^n}\in k$, tenemos que $y\in P$ y después tenemos que $y^p = \alpha$. Entonces, $P^p = P$ y así $P$ es perfecto. Notemos que esto implica que $E$ también es perfecto.
+
+Veamos que $E/P$ tiene la propiedad de que todo polinomio irreducible tiene alguna raíz en $E$. Sea $f\in P[x]$ un polinomio irreducible con $f(x) = a_n x^n + \ldots + a_1x+a_0$. Como $a_i\in P$ para cada $0\leq i\leq n$, existen $n_i\in\NN$ tales que $a_i^{p^{n_i}}\in P$. Sea $N = \max_{0\leq i\leq n} n_i$. Entonces, si $g(x) = a_n^{p^N} x^n +\ldots + a_1^{p^N}x + a_0^{p^N}\in k[x]$. Por hipótesis, tenemos alguna raíz $\alpha\in E$ de este polinomio. Como $E$ es perfecto, existe $\beta\in E$ tal que $\beta^{p^N}=\alpha$. Es decir, $0=a_n^{p^N} \alpha^n + \ldots + a_1^{p^N} \alpha + a_0^{p^N} = a_n^{p^N}(\beta^n)^{p^N} + \ldots + a_1^{p^N} \beta^{p^N} + a_0^{p^N} = (a_n \beta^n + \ldots + a_1\beta + a_0)^{p^N}$. Por lo tanto, $f(\beta)=0$ y así $f$ tiene una raíz en $E$ como queríamos.
+
+Como $E/P$ cumple la condición del enunciado y $P$ es perfecto, ya vimos que $E$ debe ser algebraicamente cerrado. Como queríamos probar.
+\end{proof}
+\end{teo}
+
+
 \begin{lem}
 Sea $E/k$ separable. Si existe $n\in\NN_0$ tal que $[k(\alpha):k]\leq n$ para todo $\alpha\in E$, entonces $[E:k]\leq n$. En particular, la extensión es finita.
 \begin{proof}
@@ -1023,6 +1037,58 @@ Calcular el grupo de Galois de $\QQ(\sqrt[3]{2},\xi_3)/\QQ$ donde $\xi_3$ es una
 
 Esta extensión es de Galois pues es algebraica (sus elementos son algebraicos), es separable (pues $\car \QQ=0$) y es normal pues es el cuerpo de descomposición de $x^3 - 2$. Ahora, es fácil ver que $[\QQ(\sqrt[3]{2},\xi_3):\QQ]=6$ (¡ejercicio!). Esto quiere decir que el grupo de Galois $\Gal(\QQ(\sqrt[3]{2},\xi_3)/\QQ)$ tiene $6$ elementos y así sabemos que debe ser $S_3$ o $\ZZ_6$. Pero si fuera $\ZZ_6$, sería abeliano y así sabemos que todos sus subgrupos son normales y así todas las subextensiones lo serían. Pero $\QQ(\sqrt[3]{2})/\QQ$ no es normal. Entonces, el grupo de Galois debe ser $S_3$.
 \end{ex}
+
+\begin{defn}
+Una extensión $E/k$ finita se dice \textbf{abeliana} (resp. cíclica) si es Galois y su grupo de Galois $\Gal(E/k)$ es abeliano (resp. cíclico).
+\end{defn}
+
+\begin{obs}
+Si $E/k$ es abeliana (resp. cíclica) entonces toda subextensión $F/k$ es abeliana (resp. cíclica).
+\begin{proof}
+En efecto, toda extensión $F/k$ es normal pues todo subgrupo de un grupo abeliano (si es cíclico es, en particular, abeliano) es normal. Entonces, toda subextensión es Galois y como $\Gal(F/k)$ es un cociente de $\Gal(E/k)$, debe ser abeliano (resp. cíclico).
+\end{proof}
+\end{obs}
+
+\begin{ex}
+Calculemos $\Gal(\QQ(\sqrt{2},\xi_3)/\QQ)$ y todos los cuerpos intermedios de esa subextensión. En efecto, $m(\sqrt{2},\QQ)=x^2 - 2$ y $m(\xi_3,\QQ)=x^2 + x + 1$. Como $\car \QQ=0$, la extensión es separable y es normal pues es el cuerpo de descomposición de esos dos minimales (pues ambos tienen grado 2). Es fácil ver que $[\QQ(\sqrt{2},\xi_3):\QQ]=4$ (en efecto, $\xi_3\notin \QQ(\sqrt{2})$ por ser complejo). Esto quiere decir que $\Gal(\QQ(\sqrt{2},\xi_3)/\QQ)$ es un grupo de orden $4$. Por lo tanto, o bien es $\ZZ_4$ o $\ZZ_2\oplus\ZZ_2$. Pero si el grupo de Galois es $\{\sigma_1,\sigma_2,\sigma_3,\sigma_4\}$ como los morfismos quedan determinados por su acción en los generadores tenemos \begin{align*} \sigma_1(\sqrt{2})=\sqrt{2} &\text{ y } \sigma_1(\xi_3)=\xi_3 \\ \sigma_2(\sqrt{2})=-\sqrt{2} &\text{ y } \sigma_2(\xi_3)=\xi_3 \\ \sigma_3(\sqrt{2})=\sqrt{2} &\text{ y } \sigma_3(\xi_3)=\xi_3^2 \\ \sigma_4(\sqrt{2})=-\sqrt{2} &\text{ y } \sigma_4(\xi_3)=\xi_3^2 \end{align*} Es fácil ver que $\sigma_i^2 =\id$ para cada $i$, es decir, no hay ningún elemento de orden 4, lo que implica que el grupo de Galois era $\ZZ_2\oplus\ZZ_2$. Para calcular los cuerpos intermedios, simplemente debemos ver los elementos dejados fijos por cada subgrupo del grupo de Galois, y en este caso esto es por cada uno de esos morfismos. Es fácil ver qué es lo dejado fijo por $\sigma_1=\id$ es todo $\QQ(\sqrt{2},\xi_3)$, que lo dejado fijo por todo el grupo de Galois es $\QQ$, que lo dejado fijo por $\{\id,\sigma_2\}$ es $\QQ(\xi_3)$ y lo dejado fijo por $\{\id,\sigma_3\}$ es $\QQ(\sqrt{2})$. Sólo falta ver lo dejado fijo por $\{\id,\sigma_4\}$, es decir, lo dejado fijo por $\sigma_4$.
+
+Sea $\alpha\in\QQ(\sqrt{2},\xi_3) = (\QQ(\xi_3))(\sqrt{2})$. Si queda fijo por $\sigma_4$ entonces $$\alpha = (a+b\xi_3) + (c+d\xi_3)\sqrt{2} = \sigma_4(\alpha) = (a + b\xi_3^2) - (c+d\xi_3^2)\sqrt{2}$$ Por la unicidad del desarrollo en base, como $\{1,\sqrt{2}\}$ es base de $\QQ(\xi_3)(\sqrt{2})$ como $\QQ(\xi_3)$-espacio vectorial, tenemos que $a+b\xi_3^2 = a+b\xi_3$ y $-c-d\xi_3^2 = c+d\xi_3$. Como $\xi_3^2 + \xi_3 + 1=0$, podemos reemplazar eso y ver que $2c=d$, y de la primera ecuación que $a=b=0$.  Entonces, los $\alpha$ que quedan fijos son los de la forma $c(1+2\xi_3)\sqrt{2}$. Entonces, $\QQ((1+2\xi_3)\sqrt{2})/\QQ$ es la extensión algebraica que nos faltaba.
+\end{ex}
+
+\begin{ex}
+Si $\xi_p$ es una raíz $p$-ésima de la unidad, con $p$ primo, calculemos entonces $\Gal(\QQ(\xi_p),\QQ)$. Notemos que $f(x)=x^{p-1} + \ldots + x+1 = \dfrac{x^p - 1}{x-1}$ anula a $\xi_p$. Si vemos que es irreducible, deberá ser el minimal. Notemos que $f(x)$ es irreducible si y sólo si $f(x+1)$ lo es. Pero $f(x+1) = \dfrac{(x+1)^p - 1}{x} = x^p + \binom{p}{1}x^{p-1}+\ldots + \dfrac{p}{2}x + p$. Por el criterio de Eisenstein es irreducible y así $f(x)$ lo es. Entonces, $[\QQ(\xi_p):\QQ]=p-1$, y así $\Gal(\QQ(\xi_p)/\QQ)$ tiene orden $p-1$. Por otra parte, si $\sigma\in\Gal(\QQ(\xi_p)/\QQ)$, queda determinado por su valor $\sigma(\xi_p)$. Como esto tiene que dar otra raíz del polinomio minimal de $\xi_p$, debemos tener que $\sigma(\xi_p)=\xi_p^i$ para algún $1\leq i \leq p-1$. Esto determina un monomorfismo $\Gal(\QQ(\xi_p)/\QQ)\to (\FF_p)^\times$ por $\sigma\mapsto i$ si $\sigma(\xi_p)=\xi_p^i$. Como estos grupos finitos tienen el mismo orden, ese monomorfismo en realidad es un isomorfismo y así el grupo de Galois es isomorfo a $\FF_p^\times \simeq \ZZ_{p-1}$.
+\end{ex}
+
+\begin{defn}
+Sea $k$ un cuerpo y $f\in k[x]$ un polinomio no constante y separable. Sea $E/k$ el cuerpo de descomposición de $f$ sobre $k$. Como $E/k$ es Galois y finita, podemos considerar el \textbf{grupo de Galois de} $f$ sobre $k$ como $G_f = \Gal(E/k)$.
+\end{defn}
+
+\begin{obs}
+Si $\gr f=n$, dado $\sigma\in G_f$, tenemos que $\sigma$ queda determinada por su valor en las raíces y determina una permutación de las raíces de $f$. Se tiene entonces un monomorfismo $G_f\hookrightarrow S_n$, $\sigma\mapsto \{\text{permutación de las raíces correspondientes}\}$. Esto es, $G_f$ es isomorfo a un subgrupo de $S_n$ y así $|G_f|\simeq |S_n| = n!$ por Lagrange. Esto es, $[E:k]\mid n!$.
+\end{obs}
+
+\begin{ex}
+Calculemos $G_f$ para $f=x^5 - 2\in\QQ[x]$. Notemos que $E=\QQ(\sqrt[5]{2},\xi_5)$ es el cuerpo de descomposición de $f$ sobre $\QQ$. Tenemos el siguiente diamante: 
+\begin{center}
+\begin{tikzcd}[row sep=1.3em,column sep=1.3em,minimum width=2em]
+ & \QQ(\sqrt[5]{2},\xi_5)\arrow[dash]{rd} &  \\
+\QQ(\sqrt[5]{2}) \arrow[dash]{ur}\arrow[dash]{dr} & & \QQ(\xi_5) \\
+& \QQ\arrow[dash]{ur} &
+\end{tikzcd}
+\end{center}
+Entonces, $[E:\QQ]=5\cdot 4 = 20$ y así $|G_f|=20$. Como $\QQ(\xi_5)/\QQ$ es normal, tenemos que $T=\Gal(\QQ(\sqrt[5],\xi_5)/\QQ(\xi_5))$ es un subgrupo normal del grupo de Galois y tiene orden $5$. Además, $H=\Gal(\QQ(\sqrt[5]{2},\xi_5)/\QQ(\sqrt[5]{2})$ tiene orden $4$ y así es $\ZZ_4$ o $\ZZ_2\oplus\ZZ_2$. Como $T\cap H = \{1\}$, tenemos que el grupo de Galois es el producto semidirecto $T\rtimes H$. Esto es $H\simeq \Gal(\QQ(\sqrt[5]{2},\xi_5)/\QQ)/T$, que el lado derecho es precisamente el grupo de Galois $\Gal(\QQ(\xi_5)/\QQ)$. Esto implica que $H$ es cíclico y así $H\simeq \ZZ_4$. Es fácil ver entonces que la presentación del grupo $\Gal(\QQ(\sqrt[5]{2},\xi_5)/\QQ)$ es $\langle \sigma,\tau | \sigma^5, \tau^4, \tau\sigma\tau^{-1}\sigma^{-2} \rangle$.
+\end{ex}
+
+\begin{prop}
+Sea $f\in\QQ[x]$ irreducible de grado $p$ primo. Si $f$ tiene exactamente dos raíces no reales en $\CC$, entonces $G_f\simeq S_p$.
+\begin{proof}
+Sabemos que $S_n = \langle (1,2,\ldots , n),(1,2)\rangle$. Es decir, está generado por un $n$-ciclo y una trasposición en particular. Notemos que si $p$ es primo, $S_p$ está generado por cualquier $p$-ciclo y cualquier trasposición. 
+
+Como $f\in\QQ[x]$, si $\beta\in\CC$ es raíz de $f$ y $\beta\notin\RR$ entonces $\overline{\beta}$ también es raíz. Las raíces de $f$ son $\{\alpha_1,\ldots ,\alpha_{p-2}\}$ las reales y $\{\beta,\overline{\beta}\}$ las complejas. Sea $E\subseteq\CC$ el cuerpo de descomposición de $f$ y sea $\tau:E\to E$, $\tau(x)=\overline{x}$. Es claro que $\tau\in G_f$ es una trasposición (pues sólo cambia $\beta$ con $\overline{\beta}$ y las otras quedan fijas). Como $[\QQ(\alpha_i):\QQ]=p$, tenemos que $p\mid |G_f|$. Por Cauchy, existe algún elemento $\sigma\in G_f$ de orden $p$. Entonces, $\langle \sigma\rangle$ tiene orden $p$. Me conseguí un $p$-ciclo y una trasposición en $G_f$, y así puedo generar todo $S_p$. Y listo.
+\end{proof}
+\end{prop}
+
+
 
 \end{document}
 
