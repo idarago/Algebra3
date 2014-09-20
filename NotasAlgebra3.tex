@@ -1088,6 +1088,22 @@ Como $f\in\QQ[x]$, si $\beta\in\CC$ es raíz de $f$ y $\beta\notin\RR$ entonces 
 \end{proof}
 \end{prop}
 
+\begin{teo}[Teorema Fundamental del Álgebra]
+$\CC$ es algebraicamente cerrado.
+\begin{proof}
+
+Sabemos que si $\alpha\in\RR$ y $\alpha\geq 0$, entonces existe $\beta\in\RR$ tal que $\beta^2 =\alpha$ y que todo polinomio $f\in\RR[x]$ de grado impar tiene alguna raíz en $\RR$ (ambos son consecuencia del Teorema de los Valores Intermedios). Veamos que todo $\alpha\in\CC$ tiene alguna raíz cuadrada en $\CC$. En efecto, si $\alpha = a+bi$, tomemos $c\in\RR$ tal que $c^2 = \dfrac{a+\sqrt{a^2+b^2}}{2}$ y $d\in\RR$ tal que $d^2 = \dfrac{-a+\sqrt{a^2+b^2}}{2}$ (hay que chequear que todas las cosas a las que le vemos la raíz sea positiva, y que siempre que miramos raíz miramos la raíz positiva). Es fácil chequear que $c^2 - d^2 = a$ y que $(2cd)^2 = b^2$. Esto implica que $2cd=\pm b$. Elegimos los signos de $c,d$ de manera que $2cd = b$. Entonces, $(c+di)^2 = a + bi$.
+
+Algebraicamente, este hecho se traduce como que $\CC$ no tiene extensiones cuadráticas. En efecto, si $k/\CC$ fuera una extensión cuadrática (como $\car \CC = 0\neq 2$), $k=\CC(\alpha)$ con $\alpha^2\in\CC$. Pero entonces $\alpha\in\CC$ y así $k=\CC$. Absurdo.
+
+Por otra parte, que todo polinomio de grado impar con coeficientes reales tenga alguna raíz real implica que no existen extensiones de grado impar de $\RR$. En efecto, sea $k/\RR$ es una extensión de grado impar. Como $\RR$ es perfecto, por el Teorema del Elemento Primitivo, $k=\RR(\alpha)$ para algún $\alpha$. Pero $m(\alpha,\RR)$ tiene grado $[k:\RR]$, que es impar y así tiene una raíz en $\RR$. Absurdo, pues no sería irreducible.
+
+Para ver que $\CC$ es algebraicamente cerrado, veamos que no tiene extensiones finitas propias. En efecto, sea $F/\CC$ una extensión finita. Como $\CC/\RR$ es finita y $[\CC:\RR]=2$, entonces $F/\RR$ es una extensión finita. Como $\car\RR=0$, tenemos que $F/\RR$ es separable. Sea $E/\RR$ la clausura normal de $F/\RR$. Esto implica que $E/\RR$ es Galois.
+Además, sabemos que $|\Gal(E/\RR)| = [E:\RR] = 2^h n$ con $h\geq 1$ y $n$ impar. Por el Teorema de Sylow, existe $H\subseteq \Gal(E/\RR)$ con $|H|=2^h$. Por el Teorema Fundamental de la Teoría de Galois, tenemos que $[E^H:\RR]=n$. Pero como $n$ es impar, ya vimos que esto implica que $E^H = \RR$. Por lo tanto, $[E:\RR]=2^h$. Como $[\CC:\RR]=2$, tenemos que $[E:\CC]=2^{h-1}$. Si $h>1$,  como $E/\CC$ es Galois, tenemos que $|\Gal(E/\CC)| = 2^{h-1}$. Luego, (por un lema de $p$-grupos) existe un subgrupo $T\triangleleft \Gal(E/\CC)$ tal que $|T| = 2^{h-2}$. Pero entonces, $[E^T : \CC]=2$. Absurdo, porque no hay extensiones cuadráticas propias de $\CC$. Es decir, $h=1$. Pero esto es $[E:\CC] = 1$ y así no hay extensiones finitas propias de $\CC$. Como queríamos probar.
+
+\end{proof}
+\end{teo}
+
 
 
 \end{document}
