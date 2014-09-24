@@ -1104,7 +1104,109 @@ Además, sabemos que $|\Gal(E/\RR)| = [E:\RR] = 2^h n$ con $h\geq 1$ y $n$ impar
 \end{proof}
 \end{teo}
 
+\section{Teoría de Galois Infinita}
 
+En la sección anterior enunciamos el Teorema Fundamental de la Teoría de Galois. En la primera parte no necesitamos en ningún momento la finitud de la extensión, pero para la segunda parte sí. ¿Se podrá probar el teorema sin esa condición? Veamos un contraejemplo:
+
+\begin{ex}
+Sea $S=\{\sqrt{p} : \,p\text{ primo}\}$. Consideremos la extensión $\QQ(S)/\QQ$. Es claro que $\QQ(S)/\QQ$ es infinita y es Galois (es separable por ser $\QQ$ perfecto y es normal pues la extensión generada por cada $s\in S$ es normal por ser cuadrática). Ahora bien, notemos que $\Gal(E/k)\simeq \displaystyle\prod_{p\text{ primo}} \ZZ_2$ pues queda determinado por dónde mando a cada $\sqrt{p}$ y cada uno puede ir a $\pm\sqrt{p}$. Entonces, $V=\Gal(\QQ(S)/\QQ)$ es un $\ZZ_2$-espacio vectorial con base no numerable. Luego, el espacio dual $V^*=\Gal(\QQ(S)/\QQ)^*=\{\varphi:\Gal(\QQ(S)/\QQ)\to\ZZ_2 \text{ lineales}\}$ es no numerable. Pero notemos además que cada $\varphi\in V^*$ queda unívocamente determinado por $\ker\varphi$ (pues si sabemos en qué valores va al $0$, en el resto debe ir al $1$). Ahora bien, si $\varphi\neq 0$, por el Teorema de Isomorfismo tenemos que $V/\ker\varphi \simeq \ZZ_2$. Esto quiere decir que $\Gal(\QQ(S)/\QQ)$ tiene no numerables subgrupos de índice $2$, es decir, los $\ker\varphi$ para $\varphi\in V^*$. Si valiera la correspondencia, tendríamos no numerables extensiones cuadráticas de $\QQ$. Pero estas son de la forma $\QQ(\sqrt{\alpha})$ con $\alpha^2\in\QQ$. Esto nos dice que son numerables. Absurdo.
+\end{ex}
+
+\begin{defn}
+Un \textbf{conjunto dirigido} $(I,\leq)$ es un conjunto parcialmente ordenado tal que $\forall i,j\in I$ existe $k\in I$ tal que $i,j\leq k$.
+\end{defn}
+
+\begin{defn}
+Sea $\mathscr{C}$ una categoría. Un \textbf{sistema inverso} en $\mathscr{C}$ indexado por un conjunto dirigido $(I,\leq)$ consiste de una familia de objetos $\{A_i\}_{i\in I}$ y una familia de morfismos $\{\varphi_{ij}\}_{i\leq j}$, $\varphi_{ij}:A_j\to A_i$ tales que: \begin{itemize}\item $\varphi_{ii} = 1_{A_i}$ para todo $i\in I$\item $\varphi_{ik} = \varphi_{ij}\circ\varphi_{jk}$ para todos $i\leq j\leq k$. Es decir, el siguiente diagrama conmuta:
+\begin{center}
+\begin{tikzcd}[row sep=1.3em,column sep=1.3em,minimum width=2em]
+ & A_k \arrow[]{rd}[font=\normalsize]{\varphi_{ik}}\arrow[]{ld}[left, font=\normalsize]{\varphi_{jk}} &  \\
+A_j \arrow[]{rr}[font=\normalsize]{\varphi_{ji}} & & A_i
+\end{tikzcd}
+\end{center}\end{itemize}
+Notaremos por $\{A_i,\varphi_{ij}\}_{I}$ al sistema inverso con objetos $\{A_i\}_{i\in I}$ y morfismos $\{\varphi_{ij}\}_{i\leq j}$.
+\end{defn}
+
+\begin{defn}
+Sea $\{A_i,\varphi_{ij}\}_{I}$ un sistema inverso. El \textbf{límite inverso} (proyectivo) del sistema es un objeto $A=\varprojlim A_i$ junto con morfismos $p_i:A\to A_i$ tal que $p_i = \varphi_{ij}\circ p_j$ para todo $i\leq j$ y que es minimal respecto de esta propiedad. Es decir, para todo objeto $B$ y morfismos $q_i:B\to A_i$ tal que si $q_i=\varphi_{ij}\circ q_j$ para todo $i\leq j$, entonces existe un único morfismo $q:B\to A$ tal que el siguiente diagrama conmuta:
+\begin{center}
+\begin{tikzcd}[row sep=1.3em,column sep=1.3em,minimum width=2em]
+ & B\arrow[dashed]{d}[font=\normalsize]{\exists ! q}\arrow[bend right]{ddl}[left, font=\normalsize]{q_j}\arrow[bend left]{ddr}[right, font=\normalsize]{p_i} & \\
+ & A \arrow[]{rd}[right, font=\normalsize]{p_i}\arrow[]{ld}[left, font=\normalsize]{p_j} &  \\
+A_j \arrow[]{rr}[font=\normalsize]{\varphi_{ji}} & & A_i
+\end{tikzcd}
+\end{center}
+\end{defn}
+
+\begin{obs}
+Por el argumento clásico de las propiedades universales, si este objeto existe, es único. En efecto, cambiamos $A$ y $B$ de lugar y componemos los morfismos que obtenemos entre $A$ y $B$ para obtener morfismos de $A$ en $A$ y $B$ en $B$ que hacen conmutar el diagrama. Como $1:A\to A$ y $1:B\to B$ hacen conmutar al diagrama, deben ser que esas composiciones daban la identidad.
+
+Ahora bien, para la existencia, en las categorías $\mathrm{Sets}, \mathrm{Group}$ y $\mathrm{Top}$, simplemente debemos considerar $$\varprojlim A_i = \left\{(x_i)_{i\in I}\in\displaystyle\prod_{i\in I}A_i : \varphi_{ij}(x_j)=x_i\;\forall i\leq j\right\}$$ que tautológicamente cumplirá. En categorías arbitrarias, podría no existir el límite inverso.
+\end{obs}
+
+\begin{prop}
+Si $\{X_i,\varphi_{ij}\}_I$ es un sistema inverso de espacios topológicos $\mathrm{T}_2$, entonces $\varprojlim X_i\subseteq\displaystyle\prod_{i\in I} X_i$ es un subespacio cerrado.
+\begin{proof}
+Veamos que $(\varprojlim X_i)^c$ es abierto en $\displaystyle\prod_{i\in I} X_i$. Si $(x_i)_{i\in I}\in (\varprojlim X_i)^c$, entonces existen $i\leq j$ tales que $\varphi_{ij}(x_j)\neq x_i$. Como $X_i$ es $\mathrm{T}_2$, tengo abiertos disjuntos $U,V\subseteq X_i$ tales que $x_i\in U$ y $\varphi_{ij}(x_j)\in V$. Consideremos $W$ el abierto del producto que en el $i$-ésimo jugar tiene a $U$, en el $j$-ésimo tiene a $\varphi_{ij}^{-1}(V)$ y en el $k\neq i,j$ tiene a $X_k$. Es trivialmente un abierto de la topología producto. Por contrucción, tenemos que $(x_i)_{i\in I}\in W$. Pero además, es claro que $W\subseteq (\varprojlim X_i)^c$ pues $U,V$ son disjuntos. La proposición sigue.
+\end{proof}
+\end{prop}
+
+\begin{defn}
+Un grupo $G$ se dice \textbf{profinito} si $G\simeq\varprojlim G_i$ donde $\{G_i,\varphi_{ij}\}_I$ es un sistema inverso de grupos finitos.
+\end{defn}
+
+\begin{defn}
+Un \textbf{grupo topológico} es un grupo $G$ que tiene una topología y tal que $\mu:G\times G\to G$, $\mu(a,b)=ab$ y $\nu:G\to G$, $\nu(a)=a^{-1}$ son continuas.
+\end{defn}
+
+\begin{obs}
+Si $G$ es un grupo topológico y $a\in G$, entonces $\ell_a:G\to G$, $\ell_a(g)=ag$ y $r_a:G\to G$, $r_a(g)=ga$ son homeomorfismos. En efecto, son trivialmente biyectivas y continuas y sus inversas son $\ell_{a^{-1}}$ y $r_{a^{-1}}$ respectivamente.
+
+En consecuencia, si $H\subseteq G$ es un subgrupo abierto de $G$, para cualquier $a\in G$, las coclases $aH$ resultan abiertas. Además, $H$ resulta cerrado, pues $G$ es la unión disjunta de las coclases, $G=\displaystyle\bigsqcup aH = H \sqcup \bigsqcup_{aH\neq H} aH$ y así $H$ es el complemento de una unión de abiertos.
+
+Si $H\subseteq G$ es un subgrupo cerrado de $G$, podemos concluir que las coclases $aH$ son cerradas. Si además el índice $(G:H)<+\infty$, entonces tendremos que $G=H\sqcup \displaystyle\bigsqcup_{aH\neq H}aH$ y así $H$ es el complemento de una unión finita de cerrados, y así abierto.
+
+Si $\mathscr{B}$ es una base de entornos de $1\in G$ (es decir, para todo $U\subseteq G$ tal que $U$ es abierto y $1\in U$, existe $V\in\mathscr{B}$ tal que $1\in V\subseteq U$) entonces, para todo $a\in G$ tenemos que $a\mathscr{B} = \{aV : V\in\mathscr{B}\}$ es una base de entornos de $a$.
+\end{obs}
+
+\begin{obs}
+Sea $G=\varprojlim G_i$ un grupo profinito. Si además vemos a $\{G_i\}_{i\in I}$ como espacios topológicos discretos, en particular las $\varphi_{ij}:G_j\to G_i$ resultan continuas (¡porque toda función resulta continua!). Entonces, $G$ como $\varprojlim G_i$ en el contexto de espacios topológicos nos da un espacio topológico. Pero esta topología se comporta bien con la estructura de grupo subyacente de $G$. Es decir, un grupo profinito es un grupo topológico. Esto es pues la multiplicación y la inversión es componente a componente y por la propiedad universal de la topología producto, como cada componente resulta continua, toda la función es continua.
+\end{obs}
+
+\begin{prop}
+Sea $G$ un grupo profinito. Entonces, $G$ es $\mathrm{T}_2$, compacto y totalmente disconexo.
+\begin{proof}
+Para ver que es $\mathrm{T}_2$, notemos que $G\subseteq\displaystyle\prod_{i\in I} G_i$. Como $G_i$ es finito y discreto, es $\mathrm{T}_2$, y como productos y subespacios de espacios $\mathrm{T}_2$ son $\mathrm{T}_2$, debemos tener que $G$ es $\mathrm{T}_2$.
+
+Para ver la compacidad, como cada $G_i$ es compacto (es finito), por Tychonoff, $\displaystyle\prod_{i\in I}G_i$ es compacto. Por una proposición anterior $G$ es un subespacio cerrado del producto. Entonces, $G$ es cerrado en un compacto y así compacto.
+
+Ver que es totalmente disconexo es análogo: producto de espacios totalmente disconexos es totalmente disconexo y subespacio también. La proposición sigue.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+En realidad, vale la recíproca. Es decir, si $G$ es un grupo topológico $\mathrm{T}_2$, compacto y totalmente disconexo, entonces $G$ es profinito.
+\begin{proof}[Idea de la demostración]
+Como $G$ es localmente compacto y totalmente disconexo, se puede probar que $\mathscr{B}=\{H\subseteq G : H\text{ subgrupo abierto de }G\}$ forman una base de entornos de $1$. Además, como es localmente compacto, si $H\subseteq G$ es un subgrupo abierto, el índice $(G:H)<+\infty$. Por lo tanto, $N_H = \displaystyle\bigcap_{g\in G} gHg^{-1}$ es un subgrupo normal abierto de $G$. Luego, $\{N_H : H\in\mathscr{B}\}$ resulta una base de entornos abiertos y normales de $1$. Finalmente, se tiene que $G\simeq \varprojlim G/N_H$, lo que concluiría la demostración.
+\end{proof}
+\end{obs}
+
+\begin{obs}
+Volvamos a la Teoría de Galois. Sea $E/k$ una extensión Galois infinita (en realidad, la misma construcción funciona para extensiones finitas, pero no tiene mucha gracia). Sea $I=\{F : k\subseteq F\subseteq E, \; F/k\text{ Galois finita}\}$, ordenado por $F_1\leq F_2$ si $F_1\subseteq F_2$. Notemos que queda dirigido pues $F_1,F_2\leq F_1F_2$, que sigue siendo Galois y finita.
+
+Sean $a_1,\ldots , a_r\in E$. Luego, existe $F\in I$ tal que $a_i\in F$ para todo $1\leq i\leq r$. Esto simplmente es agregarle a $k$ todos los $a_i$ y las raíces de sus minimales.
+
+Consideremos el siguiente sistema inverso de grupos finitos: $\{\Gal(F/k),\varphi_{F_1F_2}\}_{F\in I}$ con $\varphi_{F_1F_2}:\Gal(F_2/k)\to \Gal(F_1/k)$ dado por la restricción $\varphi_{F_1F_2}(\sigma) = \left.\sigma\right|_{F_1}$ si $F_1\leq F_2$. Esto está bien definido por la normalidad de la extensión. Es fácil ver que esto resulta un sistema inverso.
+\end{obs}
+
+\begin{teo}
+Las restricciones $\rho_F:\Gal(E/k)\to \Gal(F/k)$ dadas por $\rho_F(\sigma) = \left.\sigma\right|_{F}$, con $F\in I$, inducen un isomorfismo $\rho:\Gal(E/k)\to\varprojlim_{F\in I} \Gal(F/k)$ que está dado por $\rho(\sigma) = (\rho_F(\sigma))_{F\in I}$.
+\begin{proof}
+Para ver que $\rho$ es monomorfismo, sea $\sigma\in\Gal(E/k)$ tal que $\rho(\sigma)=1$. Es decir, $\left.\sigma\right|_{F}=1$ para todo $F\in I$. Pero dado $x\in E$, existen algún $F\in I$ con $x\in F$. Entonces, $\sigma(x) = \left.\sigma\right|_F(x) = x$ y así $\sigma=1$.
+
+Para ver que $\rho$ es epimorfismo, dado $(\tau_F)_{F\in I}\in\varprojlim_{F\in I}\Gal(F/k)$, podemos considerar $\tau\in\Gal(E/k)$ definido por $\tau(x)=\tau_F(x)$ si $x\in F$. Esto está bien definido pues para cualquier $x\in E$, existe $F\in I$ tal que $x\in F$ y además si $x\in F_1,F_2$, como $F_1,F_2\in I$, tenemos que $\left.\tau_{F_1}\right|_{F_1\cap F_2} = \left.\tau_{F_2}\right|_{F_1\cap F_2}$. Esto implica que $\tau_{F_1}(x)=\tau_{F_2}(x)$ y listo.
+\end{proof}
+\end{teo}
 
 \end{document}
 
