@@ -1208,6 +1208,55 @@ Para ver que $\rho$ es epimorfismo, dado $(\tau_F)_{F\in I}\in\varprojlim_{F\in 
 \end{proof}
 \end{teo}
 
+\begin{obs}
+Si $E/k$ es Galois finita, como $\Gal(E/k)$ es el máximo en el conjunto dirigido, salen flechas hacia todas las otras subextensiones Galoisianas (trivialmente finitas) y así cumple la Propiedad Universal del límite directo. Entonces, $\Gal(E/k)=\varprojlim_{F\in I} \Gal(F/k)$ tanto en el caso finito como infinito.
+\end{obs}
+
+\begin{defn}
+Sea $E/k$ una extensión Galois. Consideremos: $$\mathscr{B}=\{\sigma\tau : \sigma\in\Gal(E/k),\tau\in\Gal(E/F), F\in I\} = \{\sigma\Gal(E/F):\sigma\in\Gal(E/k),F\in I\}$$ Entonces $\mathscr{B}$ es una base para una topología, que llamaremos la \textbf{topología de Krull}.
+\end{defn}
+
+\begin{obs}
+Veamos que de hecho $\mathscr{B}$ es la base de una topología. En efecto, es obvio que para todo $x\in\Gal(E/k)$ existe $B\in\mathscr{B}$ pues tomo $B=\id\Gal(E/k)\in\mathscr{B}$. Ahora, para ver que si $\eta\in\sigma_1\Gal(E/F_1)\cap\sigma_2\Gal(E/F_2)$, entonces hay algún $B\in \mathscr{B}$ tal que $\eta\in B\subseteq \sigma_1\Gal(E/F_1)\cap\sigma_2\Gal(E/F_2)$, simplemente notemos que $B=\eta\Gal(E/F_1F_2)$ nos sirve. Esto es pues si $\eta\in \sigma_1\Gal(E/F_1)$, entonces $\sigma_1\Gal(E/F_1) = \eta\Gal(E/F_1)$ y lo mismo vale para $\sigma_2\Gal(E/F_2)=\eta\Gal(E/F_2)$. Luego, sólo debemos notar que $$\sigma_1\Gal(E/F_1)\cap\sigma_2\Gal(E/F_2) = \eta (\Gal(E/F_1)\cap\Gal(E/F_2)) = \eta \Gal(E/F_1F_2)$$
+\end{obs}
+
+\begin{prop}
+Sea $E/k$ Galois y consideremos $\Gal(E/k)$ con la topología de Krull. Entonces, $\rho:\Gal(E/k)\to \varprojlim_{F\in I}\Gal(F/k)$ dado por $\rho(\sigma) = (\left.\sigma\right|_{F})_{F\in I}$ es un homeomorfismo.
+\begin{proof}
+En el teorema anterior vimos que, a nivel de conjuntos, es una biyección. Veamos que $\rho$ es continua y abierta. Para ver la continuidad de $\rho$, basta ver que $\rho_F:\Gal(E/k)\to \Gal(F/k)$, $\rho_F(\sigma)=\left.\sigma\right|_F$ es continua para todo $F\in I$. Como $\Gal(F/k)$ es finito, tiene topología discreta, y así para ver que $\rho_F$ es continua bastará ver que la preimagen de cada punto es abierta. Es decir, si $\sigma\in\Gal(F/k)$, quiero ver que $\rho_F^{-1}(\sigma)\subseteq\Gal(E/k)$ es abierto. Pero notemos que $\rho_F^{-1}(\sigma) = \{\tau\in\Gal(E/k) : \left.\tau\right|_F = \sigma\} = \displaystyle\bigcup_{\tau\in\Gal(E/k), \left.\tau\right|_F=\sigma} \tau\Gal(E/F)$, que es abierto por ser una unión de abiertos (son abiertos porque son abiertos de la base).
+
+Resta ver que $\rho$ es abierta. Basta verlo para los abiertos de la base $\mathscr{B}$. Notemos que \begin{align*}\rho(\sigma\Gal(E/F)) &= \{(\left.\sigma\tau\right|_L)_{L\in I} : \left.\tau\right|_{L\cap F} = \left.\sigma\right|_{L\cap F}\; \forall L\in I\} \\ &= \{(\left.\tilde{\tau}\right|_{L})_{L\in I} : \left.\sigma^{-1}\tilde{\tau}\right|_{L\cap F} = \id_{L\cap F} \;\forall L\in I\} \\ &= \{(\left.\tilde{\tau}\right|_{F\in I} : \left.\tilde{\tau}\right|_{L\cap F} = \left.\sigma\right|_{L\cap F} \;\forall L\in I\} \\ &= \pi_F^{-1}(\left.\sigma\right|_F)\end{align*} Pero como $\left.\sigma\right|_F \in\Gal(E/F)$ es abierto (pues tiene la topología discreta), la preimagen por la proyección es abierta en el producto y así en el limite por ser subespacio del producto. Y estamos.
+\end{proof}
+\end{prop}
+
+\begin{cor}
+Sea $E/k$ una extensión Galois. Entonces $\Gal(E/k)$ con la topología de Krull resulta un grupo topológico, Hausdorff, compacto y totalmente disconexo.
+\begin{proof}
+Es obvio pues el límite directo de grupos finitos cumplía eso y es homeomorfo a un límite directo de grupos finitos.
+\end{proof}
+\end{cor}
+
+\begin{prop}
+Sea $E/k$ Galois y consideremos $\Gal(E/k)$ con la topología de Krull. Si $H\subseteq \Gal(E/k)$ es un subgrupo, entonces $\Gal(E/E^H) = \overline{H}$ la clausura de $H$.
+\begin{proof}
+Es obvio que $H\subseteq\Gal(E/E^H)$ por definición. Veamos que $\Gal(E/E^H)$ es cerrado, pues esto implicará que $\overline{H}\subseteq\Gal(E/E^H)$. Para eso, veamos que el complemento $\Gal(E/k)-\Gal(E/E^H)$ es abierto. Sea $\sigma\in\Gal(E/k)-\Gal(E/E^H)$. Entonces, existe $x\in E^H$ tal que $\sigma(x)\neq x$. Sabemos que existe $F/k$ Galois y finita tal que $x\in F$. Luego, considero $\sigma\Gal(E/F)\in\mathscr{B}$. Veamos que $\sigma\Gal(E/F)\subseteq \Gal(E/k)-\Gal(E/E^H)$. Pero esto es obvio, pues si $\sigma\tau\in\sigma\Gal(E/F)$, entonces $\sigma\tau(x)=\sigma(x) \neq x$ y así $\sigma\tau\notin \Gal(E/E^H)$. 
+
+Veamos la otra contención. Es decir, $\Gal(E/E^H)\subseteq \overline{H}$. Sea $\sigma\in\Gal(E/E^H)$. Debo ver que $\sigma\in\overline{H}$. Es decir, para cualquier $\tau\Gal(E/F)\in\mathscr{B}$ tal que $\sigma\in\tau\Gal(E/F)$ se tiene que $\tau\Gal(E/F)\cap H\neq \emptyset$. En efecto, si $\sigma\in\tau\Gal(E/F)$, entonces $\tau\Gal(E/F)=\sigma\Gal(E/F)$. Ahora bien, si $\rho_F:\Gal(E/k)\to\Gal(F/k)$, dada por la restricción $\rho_F(\eta)=\left.\eta\right|_F$, tenemos que $H_0=\rho_F(H)\subseteq \Gal(F/k)$. Pero esta extensión $F/k$ es Galois y finita, y así podemos aplicar el Teorema Fundamental de la Teoría de Galois. Es decir, $\Gal(F/F^{H_0})=H_0$. Entonces, como $\sigma\in\Gal(E/E^H)$ y me estoy restringiendo, tengo que $\sigma\in\Gal(F/F^{H_0})=H_0$. Esto es $\rho_F(\sigma)\in\rho_F(H)=H_0$, y así $\left.\sigma\right|_F = \left.\mu\right|_F$ para algún $\mu\in H$. Esto implica que $\left.\sigma^{-1}\mu\right|_F = \id_F$ y así $\sigma^{-1}\mu\in\Gal(E/F)$. Esto es, $\mu = \sigma(\sigma^{-1}\mu)\in\sigma\Gal(E/F)$ y como $\mu \in H$, la intersección contiene a $\mu$ y así es no vacía. Como queríamos probar.
+\end{proof}
+\end{prop}
+
+\begin{teo}[Teorema de Fundalmental de la Teoría de Galois III]
+Sea $E/k$ Galois y consideremos $\Gal(E/k)$ provisto de la topología de Krull. Entonces, existe una correspondencia biunívoca $$\varphi:\{\text{Cuerpos intermedios}\}\longleftrightarrow\{\text{Subgrupos cerrados de } \Gal(E/F)\}$$ dada por $\varphi(F)=\Gal(E/F)$ y $\varphi^{-1}(H)=E^H$. 
+
+Además, si $F$ es un cuerpo intermedio, son equivalentes:
+\begin{enumerate}
+\item $[F:k]<+\infty$.
+\item $(\Gal(E/k):\Gal(E/F))<+\infty$.
+\item $\Gal(E/F)$ es abierto en $\Gal(E/k)$.
+\end{enumerate}
+Finalmente, si $H\subseteq \Gal(E/k)$ es un subgrupo cerrado, entonces $H\triangleleft G$ si y sólo si $F/k$ es Galois.
+\end{teo}
+
 \end{document}
 
 
