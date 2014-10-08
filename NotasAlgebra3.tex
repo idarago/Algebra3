@@ -1056,7 +1056,7 @@ Sea $\alpha\in\QQ(\sqrt{2},\xi_3) = (\QQ(\xi_3))(\sqrt{2})$. Si queda fijo por $
 \end{ex}
 
 \begin{ex}
-Si $\xi_p$ es una raíz $p$-ésima de la unidad, con $p$ primo, calculemos entonces $\Gal(\QQ(\xi_p),\QQ)$. Notemos que $f(x)=x^{p-1} + \ldots + x+1 = \dfrac{x^p - 1}{x-1}$ anula a $\xi_p$. Si vemos que es irreducible, deberá ser el minimal. Notemos que $f(x)$ es irreducible si y sólo si $f(x+1)$ lo es. Pero $f(x+1) = \dfrac{(x+1)^p - 1}{x} = x^p + \binom{p}{1}x^{p-1}+\ldots + \dfrac{p}{2}x + p$. Por el criterio de Eisenstein es irreducible y así $f(x)$ lo es. Entonces, $[\QQ(\xi_p):\QQ]=p-1$, y así $\Gal(\QQ(\xi_p)/\QQ)$ tiene orden $p-1$. Por otra parte, si $\sigma\in\Gal(\QQ(\xi_p)/\QQ)$, queda determinado por su valor $\sigma(\xi_p)$. Como esto tiene que dar otra raíz del polinomio minimal de $\xi_p$, debemos tener que $\sigma(\xi_p)=\xi_p^i$ para algún $1\leq i \leq p-1$. Esto determina un monomorfismo $\Gal(\QQ(\xi_p)/\QQ)\to (\FF_p)^\times$ por $\sigma\mapsto i$ si $\sigma(\xi_p)=\xi_p^i$. Como estos grupos finitos tienen el mismo orden, ese monomorfismo en realidad es un isomorfismo y así el grupo de Galois es isomorfo a $\FF_p^\times \simeq \ZZ_{p-1}$.
+Si $\xi_p$ es una raíz $p$-ésima de la unidad, con $p$ primo, calculemos entonces $\Gal(\QQ(\xi_p)/\QQ)$. Notemos que $f(x)=x^{p-1} + \ldots + x+1 = \dfrac{x^p - 1}{x-1}$ anula a $\xi_p$. Si vemos que es irreducible, deberá ser el minimal. Notemos que $f(x)$ es irreducible si y sólo si $f(x+1)$ lo es. Pero $f(x+1) = \dfrac{(x+1)^p - 1}{x} = x^p + \binom{p}{1}x^{p-1}+\ldots + \binom{p}{2}x + p$. Por el criterio de Eisenstein es irreducible y así $f(x)$ lo es. Entonces, $[\QQ(\xi_p):\QQ]=p-1$, y así $\Gal(\QQ(\xi_p)/\QQ)$ tiene orden $p-1$. Por otra parte, si $\sigma\in\Gal(\QQ(\xi_p)/\QQ)$, queda determinado por su valor $\sigma(\xi_p)$. Como esto tiene que dar otra raíz del polinomio minimal de $\xi_p$, debemos tener que $\sigma(\xi_p)=\xi_p^i$ para algún $1\leq i \leq p-1$. Esto determina un monomorfismo $\Gal(\QQ(\xi_p)/\QQ)\to (\FF_p)^\times$ por $\sigma\mapsto i$ si $\sigma(\xi_p)=\xi_p^i$. Como estos grupos finitos tienen el mismo orden, ese monomorfismo en realidad es un isomorfismo y así el grupo de Galois es isomorfo a $\FF_p^\times \simeq \ZZ_{p-1}$.
 \end{ex}
 
 \begin{defn}
@@ -1064,7 +1064,7 @@ Sea $k$ un cuerpo y $f\in k[x]$ un polinomio no constante y separable. Sea $E/k$
 \end{defn}
 
 \begin{obs}
-Si $\gr f=n$, dado $\sigma\in G_f$, tenemos que $\sigma$ queda determinada por su valor en las raíces y determina una permutación de las raíces de $f$. Se tiene entonces un monomorfismo $G_f\hookrightarrow S_n$, $\sigma\mapsto \{\text{permutación de las raíces correspondientes}\}$. Esto es, $G_f$ es isomorfo a un subgrupo de $S_n$ y así $|G_f|\simeq |S_n| = n!$ por Lagrange. Esto es, $[E:k]\mid n!$.
+Si $\gr f=n$, dado $\sigma\in G_f$, tenemos que $\sigma$ queda determinada por su valor en las raíces y determina una permutación de las raíces de $f$. Se tiene entonces un monomorfismo $G_f\hookrightarrow S_n$, $\sigma\mapsto \{\text{permutación de las raíces correspondientes}\}$. Esto es, $G_f$ es isomorfo a un subgrupo de $S_n$ y así $|G_f|\mid |S_n| = n!$ por Lagrange. Esto es, $[E:k]\mid n!$.
 \end{obs}
 
 \begin{ex}
@@ -1076,7 +1076,7 @@ Calculemos $G_f$ para $f=x^5 - 2\in\QQ[x]$. Notemos que $E=\QQ(\sqrt[5]{2},\xi_5
 & \QQ\arrow[dash]{ur} &
 \end{tikzcd}
 \end{center}
-Entonces, $[E:\QQ]=5\cdot 4 = 20$ y así $|G_f|=20$. Como $\QQ(\xi_5)/\QQ$ es normal, tenemos que $T=\Gal(\QQ(\sqrt[5],\xi_5)/\QQ(\xi_5))$ es un subgrupo normal del grupo de Galois y tiene orden $5$. Además, $H=\Gal(\QQ(\sqrt[5]{2},\xi_5)/\QQ(\sqrt[5]{2})$ tiene orden $4$ y así es $\ZZ_4$ o $\ZZ_2\oplus\ZZ_2$. Como $T\cap H = \{1\}$, tenemos que el grupo de Galois es el producto semidirecto $T\rtimes H$. Esto es $H\simeq \Gal(\QQ(\sqrt[5]{2},\xi_5)/\QQ)/T$, que el lado derecho es precisamente el grupo de Galois $\Gal(\QQ(\xi_5)/\QQ)$. Esto implica que $H$ es cíclico y así $H\simeq \ZZ_4$. Es fácil ver entonces que la presentación del grupo $\Gal(\QQ(\sqrt[5]{2},\xi_5)/\QQ)$ es $\langle \sigma,\tau | \sigma^5, \tau^4, \tau\sigma\tau^{-1}\sigma^{-2} \rangle$.
+Entonces, $[E:\QQ]=5\cdot 4 = 20$ y así $|G_f|=20$. Como $\QQ(\xi_5)/\QQ$ es normal, tenemos que $T=\Gal(\QQ(\sqrt[5]{2},\xi_5)/\QQ(\xi_5))$ es un subgrupo normal del grupo de Galois y tiene orden $5$. Además, $H=\Gal(\QQ(\sqrt[5]{2},\xi_5)/\QQ(\sqrt[5]{2})$ tiene orden $4$ y así es $\ZZ_4$ o $\ZZ_2\oplus\ZZ_2$. Como $T\cap H = \{1\}$, tenemos que el grupo de Galois es el producto semidirecto $T\rtimes H$. Esto es $H\simeq \Gal(\QQ(\sqrt[5]{2},\xi_5)/\QQ)/T$, que el lado derecho es precisamente el grupo de Galois $\Gal(\QQ(\xi_5)/\QQ)$. Esto implica que $H$ es cíclico y así $H\simeq \ZZ_4$. Es fácil ver entonces que la presentación del grupo $\Gal(\QQ(\sqrt[5]{2},\xi_5)/\QQ)$ es $\langle \sigma,\tau | \sigma^5, \tau^4, \tau\sigma\tau^{-1}\sigma^{-2} \rangle$.
 \end{ex}
 
 \begin{prop}
@@ -1255,6 +1255,86 @@ Además, si $F$ es un cuerpo intermedio, son equivalentes:
 \item $\Gal(E/F)$ es abierto en $\Gal(E/k)$.
 \end{enumerate}
 Finalmente, si $H\subseteq \Gal(E/k)$ es un subgrupo cerrado, entonces $H\triangleleft G$ si y sólo si $F/k$ es Galois.
+\end{teo}
+
+\section{Cuerpos Finitos}
+
+\begin{defn}
+Un cuerpo finito es un cuerpo cuyo cardinal es finito.
+\end{defn}
+
+\begin{obs}
+Sea $k$ un cuerpo finito. Entonces, su cuerpo primo debe ser $\mathbb{F}_p$, pues si fuera $\QQ$ entonces sería infinito. Además, como $k$ es finito, la extensión $k/\FF_p$ resulta finita y si $[k:\FF_p]=n$, tendremos que $k$ es un $\FF_p$-espacio vectorial con dimensión $n$ y así $p^n$ elementos.
+
+Sea $k$ un cuerpo con $q=p^n$ elementos. Entonces, $k^\times$ es un grupo multiplicativo de $q-1$ elementos. Esto implica que para todo $\alpha\in k^\times$ tenemos que $\alpha^{q-1}=1$. Luego, $\alpha^q = \alpha$ para todo $\alpha\in k$, y así $\alpha$ es raíz de $x^q -x$. Pero notemos que $x^q - x$ tiene como máximo $q$ raíces en $\overline{\FF}_p$, así que ya debo tener todas las raíces. Es decir, $x^q - x = \displaystyle\prod_{\alpha\in k}(x - \alpha)$, que implica que $k$ es el cuerpo de descomposición de $x^q - x$ sobre $\FF_p$. Entonces, $k$ es único a menos de isomorfismo (si existe) por ser cuerpo de descomposición.
+
+Ahora, veamos que dado $p$ primo y $n\in\NN$, existe un cuerpo de $q=p^n$ elementos. Sea $k=\{\text{raíces de }x^q - x \text{ en }\overline{\FF_p}\}$. Afirmo que $k$ es un cuerpo. En efecto, simplemente es notar que $0,1\in k$ y que si $\alpha,\beta\in k$, la suma está (es aplicar el Frobenius) y el producto y los inversos. Además, como la derivada de $x^q - x$ es $-1\neq 0$, tenemos que $x^q - x$ es coprimo con su derivada y así separable. Entonces, tiene todas sus raíces distintas, lo que implica que hay $q$ elementos en $k$. Es decir, hemos probado el siguiente teorema:
+\end{obs}
+
+\begin{teo}
+Dado $p$ primo y $n\in\NN$, entonces existe un cuerpo de $q=p^n$ elementos y este cuerpo es el cuerpo de descomposición de $f=x^q - x\in\FF_p[x]$. Por lo tanto, es único a menos de isomorfismo y se lo denota $\FF_q$.
+\end{teo}
+
+\begin{prop}
+Sea $\FF_q$ el cuerpo finito con $q$ elementos y $n\in\NN$. Entonces, existe una única extensión $E/\FF_q$ de grado $n$ de $\FF_q$. Más aún, $E=\FF_{q^n}$.
+\begin{proof}
+Sabemos que $q=p^r$ para algún $r\in\NN$. Entonces, $q^n = p^{rn}$. Luego, $E=\FF_{p^{rn}}$ es el único cuerpo de $q^n$ elementos y es claro que $\FF_q\subseteq \FF_{q^n}$ (pues si $x^q = x$ entonces $x^{q^n} = x$). Y listo.
+\end{proof}
+\end{prop}
+
+\begin{teo}
+Sea $q=p^n$. Entonces, $\FF_q/\FF_p$ es Galois y $\Gal(\FF_q/\FF_p)\simeq \ZZ_n$.
+\begin{proof}
+Notemos que $\FF_q/\FF_p$ es Galois pues es el cuerpo de descomposición de $x^q - x$, que es separable. Ahora, consideremos el Frobenius $\sigma:\FF_q\to\FF_q$, $\sigma(x)=x^p$. Esto está bien definido por la normalidad de $\FF_q/\FF_p$ (o bien porque si $x^q = x$ entonces $(x^p)^q = (x^q)^p = x^p$ y así si $x\in\FF_q$, $x^p$ también está). Como $\FF_q$ es finito y $\sigma$ es inyectivo, entonces $\sigma$ resulta un isomorfismo. Pero además $\left.\sigma\right|_{\FF_p}=\id$. Luego, $\sigma\in\Gal(\FF_q/\FF_p)$. Es claro también que $\sigma^n(x) = x^{p^n} = x$ y así $\sigma^n = \id$. Por otra parte, si $d<n$, existe $x\in\FF_q$ tal que $\sigma^d(x) = x^{p^d} \neq x$ (si no, tendría $p^n$ elementos en $\FF_{p^d}$).  Entonces, $\langle \sigma\rangle \simeq \ZZ_n$. Como $[\FF_q:\FF_p]=n = |\Gal(\FF_q/\FF_p)|$, por ser Galois la extensión, tenemos que $\langle\sigma \rangle = \Gal(\FF_q/\FF_p)$. Y estamos.
+\end{proof}
+\end{teo}
+
+\begin{lem}
+Sea $G$ un grupo cíclico, $G\simeq\langle \sigma\rangle$ de orden $n$. Entonces, para todo $m$ tal que $m\mid n$ existe un único subgrupo $H_m\subseteq G$ de orden $\frac{n}{m}$ y $H_m = \langle \sigma^m\rangle$. En particular, $H_m$ es cíclico.
+\begin{proof}
+Es claro que $H_m = \langle \sigma^m \rangle$ son cíclicos de orden $\frac{n}{m}$. Ahora, dado $H\subseteq G$, veamos que $H=H_m$ para algún $m\mid n$. Sea $m=\min\{r\in\NN : \sigma^r \in H\}$. Veamos que $H=H_m = \langle \sigma^m\rangle$. En efecto, $\langle\sigma^m\rangle\subseteq H$ pues $\sigma^m\in H$ y si $\tau\in H$, entonces $\tau = \sigma^s$ para algún $s\in\NN$, así que escribiéndo $s=mq+r$, tenemos que $\tau=(\sigma^m)^q\sigma^r$. Esto implica que $\sigma^r \in H$, y así por la minimalidad de $m$ y como $r<m$ tenemos que $r=0$ y así $\tau = \sigma^{mq}\in\langle\sigma^m\rangle$. Con una cuenta similar se ve que $m\mid n$.
+\end{proof}
+\end{lem}
+
+\begin{cor}
+Sea $E=\FF_q$ y $q=p^n$. Entonces, los subcuerpos de $\FF_q$ son de la forma $\FF_{p^m}$ con $m\mid n$.
+\begin{proof}
+Por el Teorema Fundamental de la Teoría de Galois, los subcuerpos de $\FF_{p^n}/\FF_p$ están en correspondencia con los subgrupos de $\langle\sigma\rangle\simeq\ZZ_n$, y estos a su vez son $\langle\sigma^m\rangle\simeq\ZZ_m$ y así $\FF_q^{\langle \sigma^m\rangle} = \FF_{p^m}$. Y listo.
+\end{proof}
+\end{cor}
+
+\begin{obs}
+Como consecuencia del corolario anterior, se ve que $\FF_{p^m}\subseteq \FF_{p^n}$ si y sólo si $m\mid n$.
+\end{obs}
+
+\begin{obs}
+Sea $f\in\FF_p[x]$ un polinomio mónico e irreducible de grado $d$. Sea $\alpha\in\overline{\FF_p}$ una raíz de $f$. Entonces, $[\FF_p(\alpha):\FF_p] = \gr f = d$. Como existe una única extensión de grado $d$, tenemos que $\FF_p(\alpha) = \FF_{p^d} = \{\text{raíces de }x^{p^d}-x\}$. Esto implica que $f\mid x^{p^d}-x$, pues $x^{p^d}-x$ anula a $\alpha$ y $f$ es su minimal. Ahora bien, como $x^{p^d}-x$ se factoriza linealmente en $\FF_p(\alpha)$, entonces $f$ también. Entonces, $\FF_p(\alpha)/\FF_p$ es el cuerpo de descomposición de $f$. Es decir, $\FF_{p^d}$ es el cuerpo de descomposición de cualquier polinomio irreducible de grado $d$ de $\FF_p[x]$. Sea $n\in\NN$ con $d\mid n$ y $f\in\FF_p[x]$ irreducible mónico de grado $d$. Entonces, $f\mid x^{p^d}-x \mid x^{p^n}-x$ por ser $\FF_{p^d}\subseteq \FF_{p^n}$. Entonces, todos los irreducibles de grado $d$ son factores de $x^{p^n}-x$ y como $x^{p^n}-x$ es separable, son factores simples. Luego, esto es $x^{p^n} - x = \displaystyle\prod_{d\mid n}\displaystyle\prod_{\stackrel{f\text{ irreducible}}{\text{mónico de grado }d}}f$. Además, si $\psi(d)$ es la cantidad de polinomios mónicos e irreducibles de grado $d$ sobre $\FF_p[x]$, tenemos que (contando los grados en la fórmula anterior), $p^n = \displaystyle\sum_{d\mid n}d\psi(d)$. Usando la Fórmula de Inversión de Möbius, conseguimos la fórmula $\psi(n) = \dfrac{1}{n}\displaystyle\sum_{d\mid n}\mu(d)p^{n/d}$. Si queremos los irreducibles (no sólo mónicos) simplemente multiplicamos esa fórmula por $p-1$.
+\end{obs}
+
+\section{Extensiones Ciclotómicas}
+
+\begin{defn}
+Sea $n\in\NN$. Una raíz $n$-ésima de la unidad es un elemento $\xi\in k$ tal que $\xi^n =1$. Por convención, si $\car k = p > 0$ pediremos que $p\nmid n$ (esto es porque si $p\mid n$ no tendremos raíces \textit{primitivas}).
+
+Considero el polinomio $f=x^n - 1 \in k[x]$, y como $f'=nx^{n-1}\neq 0$ y no tiene raíces en común con $f$, entonces $f$ debe ser separable. En $\overline{k}$, $f$ tiene $n$ raíces distintas. Las raíces de $f$ en $\overline{k}$ forman un subgrupo finito de $\overline{k}^\times$, que denotaremos $U_n$. Luego, $U_n$ es cíclico y llamamos una \textbf{raíz primitiva $n$-ésima de $1$}.
+\end{defn}
+
+\begin{teo}
+Sea $\xi_n$ una raíz primitiva $n$-ésima de la unidad. Entonces $k(\xi_n)/k$ es Galois con grupo de Galois $\Gal(k(\xi_n)/k)\subseteq\ZZ_n^\times$. Por lo tanto, la extensión es abeliana y $|\Gal(k(\xi_n)/k)|\mid \varphi(n)$.
+\begin{proof}
+Primero veamos que $k(\xi_n)/k$ es normal. En efecto, sea $\sigma:k(\xi_n)/k\to\overline{k}/k$ un morfismo de extensiones. Como tenemos que $\sigma(\xi_n)^n = \sigma(\xi_n^n) = \sigma(1)=1$, debe ser que $\sigma(\xi_n)$ es una raíz $n$-ésima de la unidad. Como $\xi_n$ genera a las raíces $n$-ésimas de la unidad, tenemos que $\sigma(\xi_n)=\xi_n^i$ para algún $i$. Entonces, $\sigma$ se correstringe bien y así la extensión es normal. Por otra parte, $k(\xi_n)/k$ resulta separable pues $\xi_n$ es raíz de $x^n - 1$ que es separable. Entonces la extensión es Galois como queríamos.
+
+Además, si $\sigma\in\Gal(k(\xi_n)/k)$, en realidad $\sigma(\xi_n)$ debe ser una raíz $n$-ésima primitiva, pues si $\sigma(\xi_n)^d =1$ para $d<n$, tendremos que $\sigma(\xi_n^d) = 1$ y así como $\sigma$ es monomorfismo, $\xi_n^d = 1$. Absurdo por ser $d<n$. Entonces, si $\sigma(\xi_n)=\xi_n^i$ debemos tener que $i$ es coprimo con $n$, o equivalentemente $i\in\ZZ_n^\times$. Consideremos la función $\gamma:\Gal(k(\xi_n)/k)\to \ZZ_n^\times$ dada por $\gamma(\sigma) = i$ donde $\sigma(\xi_n)=\xi_n^i$. Esta función es de hecho un morfismo de grupos, pues si tomo $\sigma,\tau\in\Gal(k(\xi_n)/k)$ tenemos que $(\sigma\tau)(\xi_n) = \xi_n^{\gamma(\sigma\tau)}$ y a su vez también tenemos que $(\sigma\tau)(\xi_n) = \sigma(\xi_n^{\gamma(\tau)}) = \xi_n^{\gamma(\sigma)\gamma(\tau)}$ de donde $\gamma(\sigma\tau)=\gamma(\sigma)\gamma(\tau)$. Pero además $\gamma$ claramente es monomorfismo. El teorema sigue.
+\end{proof}
+\end{teo}
+
+\begin{teo}
+Si consideramos $\QQ(\xi_n)/\QQ$, entonces $[\QQ(\xi_n):\QQ]=\varphi(n)$ y por lo tanto, $\Gal(\QQ(\xi_n)/\QQ)\simeq\ZZ_n^\times$.
+\begin{proof}
+Sea $f=m(\xi_n,\QQ)$. Sabemos que $f\mid x^n - 1$ y que $\gr f \leq \varphi(n)$ pues, por el teorema anterior, $|\Gal(\QQ(\xi_n)/\QQ)|\mid \varphi(n)$ y $\gr f = [\QQ(\xi_n):\QQ] = |\Gal(\QQ(\xi_n)/\QQ)|$. Veamos que toda raíz $n$-ésima primitiva de $1$ en $\overline{Q}$ es raíz de $f$. Luego, tendremos al menos $\varphi(n)$ raíces y así $\gr f \geq \varphi(n)$ y listo.
+
+Para probar esto, basta ver que para cada primo con $(p:n)=1$ tenemos que $\xi_n^p$ es raíz de $f$. Sea $p$ primo coprimo con $n$ y supongamos que $\xi_n^p$ no es raíz de $f$. Como tenemos que $x^n -1 = f(x)h(x)$. Como $x^n - 1$ es mónico y $f$ también, entonces $h$ resulta mónico y por Lema de Gauss, resulta que $f,h\in\ZZ[x]$. Como $\xi_n^p$ no es raíz de $f$, debe ser raíz de $h$ (pues es raíz de $x^n - 1$). Luego, $\xi_n$ resulta raíz de $h(x^p)$. Escribo entonces $h(x^p) = f(x)g(x)$, y resulta $g$ mónico. Nuevamente por Lema de Gauss, tenemos que $g\in\ZZ[x]$. Pero notemos que por Fermat, $h(x^p)\equiv (h(x))^p \pmod{p}$. Consideremos la proyección canónica $\ZZ[x]\to\ZZ_p[x]$. Esto implica que $\overline{f}\overline{g} = \overline{h}^p$ y así $\overline{f}$ y $\overline{h}$ no son coprimos. Como $x^n -1 = f(x)h(x)$, resulta que $x^n - \overline{1} = \overline{f}\overline{h}$. Pero entonces $x^n - \overline{1}$ no puede ser separable, pues $\overline{f}$ y $\overline{h}$ no son coprimos. Esto es absurdo, y el teorema sigue.
+\end{proof}
 \end{teo}
 
 \end{document}
