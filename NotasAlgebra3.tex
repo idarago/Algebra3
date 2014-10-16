@@ -1337,6 +1337,247 @@ Para probar esto, basta ver que para cada primo con $(p:n)=1$ tenemos que $\xi_n
 \end{proof}
 \end{teo}
 
+\begin{defn}
+Definimos el $n$-ésimo \textbf{polinomio ciclotómico} como $\Phi_n = m(\xi_n,\QQ)$, donde $\xi_n$ es una raíz $n$-ésima primitiva de la unidad.
+\end{defn}
+
+\begin{obs}
+Notemos que $x^n - 1  = \displaystyle\prod_{d\mid n}\Phi_d$, pues ambos polinomios tienen exactamente las mismas raíces y son mónicos. Con esta fórmula, podemos calcular a $\Phi_n$ recursivamente. Además, si $p$ es primo, es fácil ver que $x^p - 1 = \Phi_1 \Phi_p = (x-1)\Phi_p$ y así $\Phi_p = 1 + x + \ldots + x^{p-1}$. 
+\end{obs}
+
+\begin{ex}
+Supongamos que queremos calcular $\Phi_{10}$. Simplemente debemos notar que $x^{10} - 1 = \Phi_1\Phi_2\Phi_5\Phi_{10} = (x-1)(x+1)(x^4 + x^3 + x^2 + x + 1)\Phi_{10}$. Ahora hacemos división de polinomios y resulta que $\Phi_{10} = x^4 - x^3 + x^2 - x + 1$.
+\end{ex}
+
+\begin{obs}
+Por la fórmula $x^n - 1 = \displaystyle\prod_{d\mid n}\Phi_d$, como $x^n - 1 \in\ZZ[x]$ es mónico y cada $\Phi_d$ es mónico, tenemos que $\Phi_d\in\ZZ[x]$. Ahora bien, si $k$ es un cuerpo de característica $0$, se tiene que $\QQ\subseteq k$ y así $\Phi_n\in\QQ[x]\subseteq k[x]$. Sin embargo, $\Phi_n$ no necesariamente sigue siendo irreducible en $k[x]$. Por otra parte, si $k$ tiene característica $p$ (con $p\nmid n$), como tenemos que $\Phi_n\in\ZZ[x]$ podemos considerar $\overline{\Phi_n}\in\FF_p[x]\subseteq k[x]$. Luego, tenemos que $x^n - \overline{1} = \displaystyle\prod_{d\mid n}\overline{\Phi_d}$. Por inducción, es fácil ver que $\overline{\Phi_n} = \displaystyle\prod_{\xi \text{ raíz primitiva}} (x-\xi)$. Ahora bien, $\overline{\Phi_n}$ no necesariamente es irreducible en $\FF_p[x]$.
+\end{obs}
+
+\begin{ex}
+Sea $\xi$ una raíz $20$-ésima primitiva de la unidad y sea $k=\QQ(\sqrt[3]{2})$. Queremos hallar $\Gal(k(\xi)/k)$.
+
+Para ello, notemos que $[\QQ(\xi):\QQ]=\varphi(20)=8$ y $[\QQ(\sqrt[3]{2}):\QQ]=3$. Como sno coprimos, resulta que $[k(\xi):\QQ]=3\cdot 8 = 24$. Entonces, sigue que $[k(\xi):k]=8$ y así $\Phi_{20}$ sigue siendo irreducible en $k[x]$. Entonces, tenemos $|\Gal(k(\xi)/k)| = [k(\xi):k] = 8$ y $\Gal(k(\xi)/k)) \subseteq \ZZ_{20}^\times$. Por lo tanto, $\Gal(k(\xi)/k)=\ZZ_{20}^\times$ y por Teorema Chino del Resto,  $\ZZ_{20}^\times \simeq \ZZ_4^\times \times \ZZ_5^\times \simeq \ZZ_2\times \ZZ_4$.
+\end{ex}
+
+\section{Independencia Lineal de Caracteres}
+
+\begin{defn}
+Sea $(G,\cdot)$ un monoide y $k$ un cuerpo. Un \textbf{caracter} $\chi$ de $G$ en $k$ es un morfismo de monoides $\chi:G\to k^\times$.
+\end{defn}
+
+\begin{teo}
+Sea $G$ un monoide, $k$ un cuerpo y $\chi_1,\ldots , \chi_m:G\to k^\times$ caracteres tales que $\chi_i \neq \chi_j$ si $i\neq j$. Si $a_1,\ldots ,a_m\in k$ son tales que $a_1\chi_1 + \ldots + a_m\chi_m = 0$, entonces $a_1=\ldots = a_m = 0$.
+\begin{proof}
+Vamos a proceder por inducción en la cantidad de caracteres. Si $m=1$, entonces $a_1\chi_1 = 0$ y para cualquier $g\in G$, tenemos $a_1\chi_1(g)=0$. Como $\chi_1(g)\neq 0$, tenemos que $a_1=0$ y listo.
+
+Supongamos que vale para $m-1$ caracteres y veamoslo para $m$. Como $\chi_1\neq \chi_2$, existe $g\in G$ tal que $\chi_1(g)\neq\chi_2(g)$. Fijando ese $g$ tenemos que $a_1\chi_1(gx)+\ldots + a_m\chi_m(gx) = 0$ y $a_1\chi_1(x) + \ldots + a_m\chi_m(x)=0$. Multiplicando la segunda por $\chi_1(g)$ y restando ambas, tenemos que $a_2(\chi_1(g)\chi_2(x) - \chi_2(g)\chi_2(x)) + \ldots + a_m(\chi_1(g)\chi_m(x) - \chi_m(g)\chi_m(x)) = 0$. Si llamamos $a_i' = a_i(\chi_1(g)-\chi_i(g))$, tenemos que $a_2'\chi_2 + \ldots + a_m'\chi_m = 0$ y por hipótesis inductiva $a_i'=0$ para todo $i$. En particular, $a_2' = a_2 (\chi_1(g) - \chi_2(g))=0$, que implica que $a_2=0$. Luego, $a_1\chi_1 + a_3\chi_3 + \ldots + a_m\chi_m=0$ y por hipótesis inductiva ya estamos.
+\end{proof}
+\end{teo}
+
+\begin{cor}
+Sean $E/k$ y  $F/k$ extensiones y sean $\{\sigma_1,\ldots , \sigma_m\}\subseteq \hom(E/k,F/k)$, con $\sigma_i\neq\sigma_j$ si $i\neq j$. Luego, $\{\sigma_1,\ldots , \sigma_m\}$ son $F$-linealmente independientes.
+\begin{proof}
+Es inmediato del teorema anterior, pues para cada $\sigma:E/k\to F/k$ morfismo de extensiones, sabemos que se restringe y correstringe bien a $\left.\sigma\right|_{E^\times}:E^\times \to F^\times$.
+\end{proof}
+\end{cor}
+
+\section{Norma y Traza}
+
+\begin{defn}
+Sea $E/k$ una extensión finita. Sea $r=[E:k]_s$ y $p^n = [E:k]_{\text{ins}}$ con $n\geq 0$ (en el caso que $\car k = p>0$, si $\car k = 0$ tendremos que $[E:k]_{\text{ins}}=0$). Sea $\{\sigma_1,\ldots ,\sigma_r\} = \hom(E/k,\overline{k}/k)$. Dado $\alpha\in E$, definimos la norma y la traza como: \begin{align*}\mathrm{N}_{E/k}(\alpha) &= \left(\displaystyle\prod_{i=1}^r \sigma_i(\alpha)\right)^{[E:k]_{\text{ins}}} \\ \mathrm{Tr}_{E/k}(\alpha) &= \left(\displaystyle\sum_{i=1}^r \sigma_i(\alpha)\right)[E:k]_{\text{ins}}\end{align*}
+\end{defn}
+
+\begin{obs}
+Si $E/k$ no es separable, entonces $\mathrm{Tr}_{E/k}(\alpha)=0$. En efecto, sabemos que $[E:k]_{\text{ins}}\neq 1$ y así $[E:k]_{\text{ins}}=p^n$ con $n\geq 1$. Entonces, $\mathrm{Tr}_{E/k}(\alpha) = \left(\displaystyle\sum_{i=1}^r \sigma_i(\alpha)\right) p^n = 0$ pues estamos en característica $p$.
+\end{obs}
+
+\begin{obs}
+Si $\alpha\in k$, entonces $\mathrm{N}_{E/k}(\alpha) = \alpha^{[E:k]}$ y $\mathrm{Tr}_{E/k}(\alpha) = \alpha [E:k]$. Esto es claro ya que $\sigma_i(\alpha) = \alpha$ para todo $i$ y como $r=[E:k]_s$, tenemos $\mathrm{N}_{E/k}(\alpha) = \alpha^{r [E:k]_{\text{ins}}} = \alpha^{[E:k]}$ y $\mathrm{Tr}_{E/k}(\alpha) = \alpha r [E:k]_{\text{ins}} = \alpha [E:k]$.
+\end{obs}
+
+\begin{prop}
+Para todo $\alpha\in E$ se tiene que $\mathrm{N}_{E/k}(\alpha), \mathrm{Tr}(\alpha)\in k$.
+\begin{proof}
+Veamoslo para la norma (la traza es totalmente análoga). Sea $p^n = [E:k]_{\text{ins}}$ y $\{\sigma_1,\ldots,\sigma_r\} = \hom(E/k,\overline{k}/k)$. Entonces, $\mathrm{N}_{E/k}(\alpha) = \left(\displaystyle\prod_{i=1}^r \sigma_i(\alpha)\right)^{p^n} = \displaystyle\prod_{i=1}^r \sigma_i(\alpha^{p^n})$. Como $\alpha^{p^n}$ es separable sobre $k$ (pues al elevarlo al grado de inseparabilidad lo hago caer en la clausura separable) tenemos que $\sigma_i(\alpha^{p^n})$ resulta separable (pues lo manda a otra raíz de su minimal, que es separable). Por lo tanto, $\mathrm{N}_{E/k}(\alpha)$ es separable sobre $k$. Luego, para ver que $\mathrm{N}_{E/k}(\alpha)\in k$, bastará ver entonces que es la única raíz de su minimal, por ser separable. Para eso, veamos que para cualquier $\tau\in\hom(\overline{k}/k,\overline{k}/k)$ tenemos que $\tau(\mathrm{N}_{E/k}(\alpha)) = \mathrm{N}_{E/k}(\alpha)$. Pero, como $\tau\sigma_j = \sigma_{j}$ para algún $j$ y al ser $\tau$ biyectiva, $\{\tau\sigma_1,\ldots,\tau\sigma_r\}$ es una permutación de $\{\sigma_1,\ldots, \sigma_r\}$. Luego, $$\tau(\mathrm{N}_{E/k}(\alpha)) = \tau\left(\displaystyle\prod_{i=1}^r \sigma_i(\alpha)\right)^{p^n} = \left(\prod_{i=1}^r \tau\sigma_i(\alpha)\right)^{p^n} = \left(\prod_{i=1}^r \sigma_i(\alpha)\right)^{p^n} = \mathrm{N}_{E/k}(\alpha)$$ Y listo.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+La norma y la traza inducen $\mathrm{N}_{E/k}:E^\times\to k^\times$, $\mathrm{Tr}_{E/k}:E\to k$, donde el primero es un morfismo de grupos multiplicativos y el segundo aditivo y también $k$-lineal.
+\begin{proof}
+Es simplemente usar la proposición anterior para ver que se correstringen bien y escribir la cuenta.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $k\subseteq F\subseteq E$ una torre de extensiones. Entonces, se tiene que $\mathrm{N}_{E/k} = \mathrm{N}_{F/k}\circ\mathrm{N}_{E/F}$ y $\mathrm{Tr}_{E/k} = \mathrm{Tr}_{F/k}\circ\mathrm{Tr}_{E/F}$.
+\begin{proof}
+Ejercicio.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+Sea $k$ un cuerpo y $\alpha\in \overline{k}$. Entonces, si $\mathcal{O}_\alpha$ es el conjunto de raíces distintas de $m(\alpha,k)$. Entonces, $m(\alpha,k) = \displaystyle\prod_{\alpha_i\in\mathcal{O}_\alpha} (x-\alpha_i)^{[k(\alpha):k]_{\text{ins}}}$ pues todas las raíces deben aparecer con un mismo exponente, $\gr m(\alpha,k)/\sharp\mathcal{O}_\alpha = [k(\alpha):k]/[k(\alpha):k]_s  =[k(\alpha):k]_{\text{ins}}$.
+\end{obs}
+
+\begin{prop}
+Sea $E/k$ una extensión de grado $n$ y sea $\alpha\in E$. Si tenemos que $m(\alpha,k)=x^m + a_{m-1}x^{m-1}+\ldots + a_1x+a_0$, entonces $\mathrm{N}_{E/k}(\alpha) = ((-1)^m a_0)^{\frac{n}{m}}$.
+\begin{proof}
+Como $m(\alpha,k) = \displaystyle\prod_{\alpha_i\in\mathcal{O}_\alpha} (x-\alpha_i)^{[k(\alpha):k]_{\text{ins}}}$, tenemos que $(-1)^{m}a_0 = \displaystyle\prod_{i=1}^r \alpha_i^{[k(\alpha):k]_{\text{ins}}}$. Como $r=\sharp\mathcal{O}_\alpha = [k(\alpha):k]_s$, tenemos que $\alpha_i = \sigma_i(\alpha)$ con $\{\sigma_1,\ldots , \sigma_r\} = \hom(k(\alpha)/k,\overline{k}/k)$. Luego, $(-1)^m a_0 = \left(\displaystyle\prod_{i=1}^r \sigma_i(\alpha)\right)^{[k(\alpha):k]_{\text{ins}}} = \mathrm{N}_{k(\alpha)/k}(\alpha)$. Pero por otra parte, usando la composición de la norma en torres, $\mathrm{N}_{E/k}(\alpha)=\mathrm{N}_{k(\alpha)/k}\circ\mathrm{N}_{E/k(\alpha)}(\alpha) = \mathrm{N}_{k(\alpha)/k}(\alpha^{[E:k(\alpha)]})$ por ser $\alpha\in k(\alpha)$. Por lo tanto, $\mathrm{N}_{E/k}(\alpha) = (\mathrm{N}_{k(\alpha)/k}(\alpha))^{[E:k(\alpha)]} = ((-1)^m a_0)^{\frac{n}{m}}$. Y estamos. 
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $E/k$ una extensión de grado $n$ y sea $\alpha\in E$. Si tenemos que $m(\alpha,k)=x^m + a_{m-1}x^{m-1}+\ldots + a_1x+a_0$, entonces $\mathrm{Tr}_{E/k}(\alpha) = -\frac{n}{m}a_{m-1}$.
+\begin{proof}
+Es análoga a la demostración anterior.
+\end{proof}
+\end{prop}
+
+\begin{ex}
+Calculemos $\mathrm{N}_{\QQ(\sqrt[3]{2})/\QQ}(1+\sqrt[3]{2})$. Sea $\alpha = 1 + \sqrt[3]{2}$, entonces $(\alpha-1)^3 = 2$. Luego, $f(x) = (x-1)^3 - 2$ es un polinomio que anula a $\alpha$. Pero como $\QQ(\sqrt[3]{2})=\QQ(1+\sqrt[3]{2})$, la extensión tiene grado $3$ y así el minimal de $\alpha$ tiene grado $3$. Entonces $f$ es el minimal que queríamos y así $\mathrm{N}_{\QQ(\sqrt[3]{2})/\QQ}(1+\sqrt[3]{2}) = ((-1)^3(-3))^1 = 3$.
+\end{ex}
+
+\begin{prop}
+Si $E/k$ es finita y separable, entonces $\mathrm{Tr}_{E/k}:E\to k$ no es el morfismo nulo. Además, $\psi:E\times E\to k$ dada por $\psi(x,y)=\mathrm{Tr}_{E/k}(xy)$ es una forma bilineal no degenerada. Equivalentemente, $\overline{\psi}:E\to E^*$, $\overline{\psi}(x)=\mathrm{Tr}_x$ con $\mathrm{Tr}_x(y)=\mathrm{Tr}_{E/k}(xy)$ es un monomorfismo de $k$-espacios vectoriales (donde $E^*$ es el espacio dual de $E$). Más aún, como se trata de espacios vectoriales de dimensión finita con igual dimensión, resulta un isomorfismo.
+
+Notaremos $\langle x,y\rangle =\overline{\psi}(x,y) = \mathrm{Tr}_{E/k}(xy)$.
+\begin{proof}
+Sea $E/k$ finita y separable de grado $n$. Sea $\{\sigma_1,\ldots ,\sigma_n\}=\hom(E/k,\overline{k}/k)$. Entonces, $\mathrm{Tr}_{E/k}(x) = \sigma_1(x)+\ldots + \sigma_n(x)$. Si $\mathrm{Tr}_{E/k}(x)=0$ para todo $x\in E$, entonces $\sigma_1+\ldots+\sigma_n=0$. Pero esto es absurdo por la independencia lineal de caracteres. Entonces, $\mathrm{Tr}_{E/k}$ no es el morfismo nulo.
+
+Ahora bien, para la segunda parte, es muy fácil ver que $\psi$ es bilineal pues se tiene que $\psi(x+y,z)= \mathrm{Tr}_{E/k}((x+y)z)=\mathrm{Tr}_{E/k}(xz)+\mathrm{Tr}_{E/k}(yz)=\psi(x,z)+\psi(y,z)$ y las otras verificaciones. Veamos que $\overline{\psi}$ es monomorfismo. En efecto, supongamos que $\overline{\psi}(x)=\mathrm{Tr}_x=0$. Entonces, $\mathrm{Tr}_{E/k}(xy)=0$ para todo $y\in E$. Pero si $x\neq 0$, entonces tomando $y=x^{-1}z$, tenemos que $\mathrm{Tr}_{E/k}(z)=0$ para todo $z\in E$, y así $\mathrm{Tr}_{E/k}$ debería ser el morfismo trivial. Luego $x=0$ y así resulta un monomorfismo como queríamos. 
+\end{proof}
+\end{prop}
+
+\begin{cor}
+Si $E/k$ es finita y separable con $\{v_1,\ldots , v_n\}$ una base de $E$ como $k$-espacio vectorial, entonces existe $\{w_1,\ldots , w_n\}$ base de $E$ como $k$-espacio vectorial tal que $\mathrm{Tr}_{E/k}(v_iw_j)=\delta_{ij}$.
+\begin{proof}
+Sea $\{\varphi_1,\ldots , \varphi_n\}$ la base dual de $\{v_1,\ldots ,v_n\}$ y sea $\{w_1,\ldots , w_n\}$ base de $E$ tal que $\overline{\psi}(w_i)=\varphi_i$ (existe ya que $\overline{\varphi}$ resulta isomorfismo). Por lo tanto, tenemos que $\mathrm{Tr}_{E/k}(v_iw_j)=\mathrm{Tr}_{w_j}(v_i) = \varphi_{j}(v_i)=\delta_{ij}$.
+\end{proof}
+\end{cor}
+
+\begin{teo}
+Sea $E/k$ finita y sea $\alpha\in E$. Defino $\mu_\alpha:E\to E$ por $\mu_\alpha(x)=\alpha x$. Entonces, $\mathrm{Tr}(\mu_\alpha)=\mathrm{Tr}_{E/k}(\alpha)$ y $\det\mu_\alpha = \mathrm{N}_{E/k}(\alpha)$.
+\begin{proof}
+Sea $[E:k]=n$ y $m(\alpha,k) = x^m + a_{m-1}x^{m-1}+\ldots + a_1 x + a_0$. Sea $r=n/m$ (es decir, $[E:k(\alpha)]=r$). Sea $\{v_1,\ldots , v_r\}$ una base de $E$ como $k(\alpha)$-espacio vectorial y sabemos que $\{1,\alpha,\ldots , \alpha^{m-1}\}$ es una base de $k(\alpha)$ como $k$-espacio vectorial. Por lo tanto, tenemos que $\mathscr{B}=\{v_1,v_1\alpha,\ldots , v_1\alpha^{m-1},\ldots , v_r,v_r\alpha,\ldots, v_r\alpha^{m-1}\}$ es una base de $E$ como $k$-espacio vectorial. Notemos que la matriz de $\mu_\alpha$ en base $\mathscr{B}$ es $[\mu_\alpha]_{\mathscr{B}}$ simplemente consiste de $r$ bloques en la diagonal donde cada bloque es la matriz compañera de $m(\alpha,k)$. El teorema sigue.
+\end{proof}
+\end{teo}
+
+\begin{defn}
+Sea $E/k$ una extensión finita y separable de grado $n$. Se define el \textbf{discriminante} como $\Delta_{E/k}:E^n\to k$ por $\Delta_{E/k}(\alpha_1,\ldots , \alpha_n) = \det(\langle \alpha_i,\alpha_j\rangle)_{i,j}$.
+\end{defn}
+
+\begin{obs}
+Si $E/k$ es una extensión finita y separable de grado $n$, y sean $(\alpha_1,\ldots , \alpha_n)\in E^n$ y $\{\sigma_1,\ldots,\sigma_n\}=\hom(E/k,\overline{k}/k)$. Definimos la matriz $$ M(\alpha_1,\ldots ,\alpha_n) = \begin{pmatrix}\sigma_1(\alpha_1) & \cdots & \sigma_1(\alpha_n) \\ \vdots & \ddots & \vdots \\ \sigma_n(\alpha_1) & \cdots & \sigma_n(\alpha_n)\end{pmatrix}$$ Entonces $(M(\alpha_1,\ldots,\alpha_n)^t M(\alpha_1,\ldots ,\alpha_n)) = \displaystyle\sum_{k=1}^n \sigma_k(\alpha_i)\sigma_k(\alpha_j) = \mathrm{Tr}_{E/k}(\alpha_i\alpha_j) = \langle \alpha_i\alpha_j\rangle$. Hemos probado entonces que $\Delta_{E/k}(\alpha_1,\ldots ,\alpha_n) = \det(\langle \alpha_i,\alpha_j\rangle)_{ij}=\det(M(\alpha_1,\ldots,\alpha_n))^2$.
+\end{obs}
+
+\begin{cor}
+Sea $E/k$ separable de grado $n$ y sean $\alpha_1,\ldots , \alpha_n\in E$. Son equivalentes:
+\begin{itemize}
+\item $\{\alpha_1,\ldots,\alpha_n\}$ es una base de $E$ como $k$-espacio vectorial.
+\item $\det M(\alpha_1,\ldots ,\alpha_n)\neq 0$.
+\item $\Delta_{E/k}(\alpha_1,\ldots, \alpha_n)\neq 0$.
+\end{itemize}
+\begin{proof}
+$(2)\Longleftarrow(3)$ Es la observación anterior.
+
+$(1)\Longrightarrow (2)$ Sea $\{\sigma_1,\ldots, \sigma_n\} = \hom(E/k,\overline{k}/k)$. Para ver que $\det(M(\alpha_1,\ldots , \alpha_n))\neq 0$ basta ver que las filas son linealmente independientes sobre $\overline{k}$. Supongamos que tenemos dicha combinación lineal. Luego, mirando coordenada a coordenada, tenemos que $\displaystyle\sum_{i=1}^n a_i \sigma_i(\alpha_j)=0$ para todo $j=1,\ldots , n$. Pero como $\{\alpha_1,\ldots , \alpha_n\}$ es una base, resulta que $\displaystyle\sum_{i=1}^n a_i \sigma_i = 0$ y así por la independencia lineal de caracteres debemos tener que $a_i=0$ para todo $i=1,\ldots , n$.
+
+$(2)\Longrightarrow (1)$ Debo ver que $\{\alpha_1,\ldots , \alpha_n\}$ son linealmente independientes. Si no, tomo una combinación lineal sobre $k$ tal que $\displaystyle\sum_{i=1}^n a_i \alpha_i = 0$. Por la $k$-linealidad de $\sigma_j$, tenemos que $\displaystyle\sum_{i=1}^n a_i\sigma_j(\alpha_i)=0$ para todo $j=1,\ldots, n$. Por lo tanto, esto es una combinación lineal de las columnas de $M(\alpha_1,\ldots , \alpha_n)$, lo que implica que $a_i=0$ para todo $i=1,\ldots, n$. Y estamos.
+\end{proof}
+\end{cor}
+
+\begin{obs}
+Sean $\mathscr{B}=\{\alpha_1,\ldots , \alpha_n\}$ y $\mathscr{B}' = \{\alpha_1',\ldots ,\alpha_n'\}$ bases de $E$ como $k$-espacio vectorial. Sea $C$ la matriz de cambio de base con $\alpha_j' = \displaystyle\sum_{i=1}^n C_{ij}\alpha_i$. Luego, tenemos que $\langle \alpha_i',\alpha_j'\rangle_{ij} = C^t \langle \alpha_i,\alpha_j\rangle_{ij} C$. Por lo tanto, simplemente tomando determinante, obtenemos que $\Delta_{E/k}(\alpha_1',\ldots , \alpha_n') = \Delta_{E/k}(\alpha_1,\ldots , \alpha_n) (\det C)^2$. Esto nos dice que el hecho de que el discriminante sea o no un cuadrado en $k$ no depende de la base elegida, y a su vez, en virtud de una observación anterior, el discriminante es un cuadrado si y sólo si $\det(M(\alpha_1,\ldots , \alpha_n)) \in k$.
+\end{obs}
+
+\begin{obs}
+Sea $E/k$ separable de grado $n$. Por el Teorema del Elemento Primitivo, tenemos que $E=k(\alpha)$ para algún $\alpha\in E$. Sean $\{\alpha_1=\alpha,\alpha_2,\ldots , \alpha_n\}$ las raíces de $m(\alpha,k)$ en $\overline{k}$. Sabemos que $\{\sigma_1,\ldots,\sigma_n\}=\hom(E/k,\overline{k}/k)$ con $\sigma_i(\alpha)=\alpha_i$. Como $\mathscr{B} = \{1,\alpha,\ldots , \alpha^{n-1}\}$ es base de $E$ como $k$-espacio vectorial, tenemos que $M(1,\alpha,\ldots , \alpha^{n-1})$ es la matriz de Vandermonde $M(1,\alpha,\alpha^2, \ldots , \alpha^{n-1}) =\begin{pmatrix}1 & \alpha_1 & \cdots & \alpha_1^{n-1} \\ 1 & \alpha_2 & \cdots & \alpha_2^{n-1} \\ \vdots & \vdots & \ddots & \vdots \\ 1 & \alpha_n & \cdots & \alpha_n^{n-1}\end{pmatrix}$ Por lo tanto, si $\delta = \det(M(1,\alpha,\ldots , \alpha^{n-1})) = \displaystyle\prod_{i<j}(\alpha_j - \alpha_i)$, tenemos que $\Delta = \Delta(1,\alpha,\ldots,\alpha^{n-1}) = \delta^2$.
+\end{obs}
+
+\section{Reciprocidad cuadrática}
+
+Ya vimos que $\Gal(\QQ(\xi_n)/\QQ)\simeq \ZZ/n\ZZ^\times$. Sabemos que si $p$ es un primo, tenemos que $\ZZ/p\ZZ^\times$ es cíclico de orden $p-1$. Si $d\mid p-1$, entonces existe un único subgrupo de orden $d$. Si $p$ es un primo impar, entonces existe un único subgrupo de índice $2$. Por el Teorema Fundamental de la Teoría de Galois, resulta que $\QQ(\xi_p)/\QQ$ tiene una única subextensión cuadrática, que llamaremos $k_p$. Como sabemos que las extensiones cuadráticas son de la forma $\QQ(\sqrt{m})$, queremos averiguar qué es $m$.
+
+Sea $\varphi:(\ZZ/p\ZZ)^\times \to (\ZZ/p\ZZ)^\times$, dado por $\varphi(x)=x^2$. Es morfismo de grupos por ser $(\ZZ/p\ZZ)^\times$ abeliano. Notemos que $\ker\varphi = \{-1,1\}$ y así $\im\varphi$ es un subgrupo de $(\ZZ/p\ZZ)^\times$ de índice $2$. Es decir, el único subgrupo de $(\ZZ/p\ZZ)^\times$ de índice $2$ consiste de los \textbf{residuos cuadráticos}:
+
+\begin{defn}
+Sea $p$ primo impar, $a\in(\ZZ/p\ZZ)^\times$. Se dice que $a$ es un \textbf{residuo cuadrático} módulo $p$ si existe $b\in(\ZZ/p\ZZ)^\times$ tal que $b^2 = a$.
+\end{defn}
+
+\begin{prop}[Criterio de Euler]
+Sea $p$ primo impar y $a\in(\ZZ/p\ZZ)^\times$. Entonces $a$ es un residuo cuadrático módulo $p$ si y sólo si $a^{\frac{p-1}{2}}\equiv 1 \pmod{p}$.
+\begin{proof}
+Notemos que $x^{p-1}-1$ tiene como raíces a todos los elementos de $(\ZZ/p\ZZ)^\times$, por el Pequeño Teorema de Fermat. Pero además, tenemos que $x^{p-1}-1 = (x^{\frac{p-1}{2}}-1)(x^{\frac{p-1}{2}}+1)$. Notemos que cualquier residuo cuadrático es raíz de $x^{\frac{p-1}{2}}-1$, pues si $a=b^2$, tenemos que $a^{\frac{p-1}{2}}-1 = b^{p-1}-1 = 0$. Además, como hay exactamente $\frac{p-1}{2}$ residuos cuadráticos, estos deben ser todas las raíces de ese polinomio y la proposición sigue.
+\end{proof}
+\end{prop}
+
+\begin{cor}
+Sea $p$ primo impar. Entonces $-1$ es un residuo cuadrático módulo $p$ si y sólo si $p\equiv 1 \pmod{4}$.
+\begin{proof}
+Es claro pues por la proposición anterior, $-1$ es residuo cuadrático módulo $p$ si y sólo si $(-1)^{\frac{p-1}{2}}=1$, es decir, si $\frac{p-1}{2}$ es par, que a su vez, es equivalente a que $p-1$ sea múltiplo de $4$. Y listo.
+\end{proof}
+\end{cor}
+
+\begin{defn}
+Sea $a\in\ZZ/p\ZZ$. Se define el \textbf{símbolo de Legendre} como $$\left(\dfrac{a}{p}\right) = a^{\frac{p-1}{2}} = \begin{cases}0 \text{ si } a=0\\ 1 \text{ si }a \text{ es residuo cuadrático} \\ -1 \text{ si no}\end{cases}$$
+\end{defn}
+
+\begin{obs}
+El símbolo de Legendre es multiplicativo. Es decir, tenemos que $\left(\dfrac{a}{p}\right)\left(\dfrac{b}{p}\right) = \left(\dfrac{ab}{p}\right)$. Luego, $\chi: (\ZZ/p\ZZ)^\times \to \{-1,1\}$ dado por $\chi(a) = \left(\dfrac{a}{p}\right)$ es un caracter.
+\end{obs}
+
+Ahora bien, nosotros queremos estudiar el cuerpo fijo del único subgrupo de $\Gal(\QQ(\xi_p)/\QQ)$ de índice $2$, que vimos que se identifica con los cuadrados de $(\ZZ/p\ZZ)^\times$. Este subgrupo es el que está dado por los $\sigma\in\Gal(\QQ(\xi_p)/\QQ)$ que están definidos por $\sigma(\xi_p) = \xi_p^b$ donde $b$ es un residuo cuadrático módulo $p$. Luego, como queremos algún elemento que quede fijo pero que no esté en $\QQ$, vamos a buscar la suma de aplicar todos estos morfismos (eso suele funcionar). En efecto, $\displaystyle\sum_{a\text{ residuo cuadrático}} \xi_p^a$ queda fijo pues $\displaystyle\sum_{a\text{ RC}} \xi_p^a = \displaystyle\sum_{a\text{ RC}}\sigma_a(\xi_p)$ y aplicar cualquier $\sigma_b$ con $b$ residuo cuadrático simplemente es permutar los factores. De forma similar $\displaystyle\sum_{a \text{ no RC}}\xi_p^a$ también queda fijo. El problema con estas sumas es que no tenemos ninguna forma sencilla de saber si están o no en $\QQ$. Podemos considerar la suma y la resta entonces. La suma nos da $-1$ pues es la suma de todas las raíces $p$-ésimas salvo $1$. La resta es $\gamma = \displaystyle\sum_{a=0}^{p-1} \left(\dfrac{a}{p}\right)\xi_p^a$ (y se denomina una \textit{suma de Gauss}). Claramente $\gamma$ queda fijo por el único subgrupo de índice $2$, pues es la resta de dos cosas que quedan fijas. Calculemos $\gamma^2$. Pero antes, vamos a probar un lema que nos va a facilitar la cuenta.
+
+\begin{lem}
+Sea $p$ un primo impar. Si $\left(\dfrac{a}{p}\right)$ es el símbolo de Legendre, $p\nmid a$, $p\nmid b^2 - 4ac$ entonces $\displaystyle\sum_{t\in \mathbb{Z}_p} \left(\dfrac{at^2 +bt+c}{p}\right) = -\left(\dfrac{a}{p}\right)$.
+\begin{proof}
+Evaluemos a la suma en $\mathbb{Z}_p$ primero. Por el criterio de Euler tenemos que $\left(\dfrac{a}{p}\right)\equiv a^{\frac{p-1}{2}}\pmod{p}$. Notemos además que $\displaystyle\sum_{t\in \mathbb{Z}_p} t^k = 0$ para todo $0\leq k < p-1$ pues si $g$ es una raíz primitiva módulo $p$, tenemos que $\{g,g^2,\ldots , g^{p-1}\}$ es una permutación de los restos módulo $p$ y después simplemente tenemos una suma geométrica. Consideremos entonces el polinomio $(ax^2+bx+c)^{\frac{p-1}{2}} = \displaystyle\sum_{k=0}^{p-1} a_k x^k$. Es claro que el coeficiente principal $a_{p-1} = a^{\frac{p-1}{2}}$, así que mirando esta suma módulo $p$ tenemos que $a_{p-1} \equiv \left(\dfrac{a}{p}\right)\pmod{p}$. 
+
+Entonces tenemos que \begin{align*}\displaystyle\sum_{t\in\mathbb{Z}_p} \left(\dfrac{at^2 +bt+c}{p}\right) \equiv \displaystyle\sum_{t\in\mathbb{Z}_p}\sum_{k=0}^{p-1}a_k t^k = \sum_{k=0}^{p-1} a_k \sum_{t\in \mathbb{Z}_p} t^k &\equiv a_{p-1}\sum_{t\in \mathbb{Z}_p}t^{p-1}\\ &\equiv -\left(\dfrac{a}{p}\right) \pmod{p}\end{align*}
+Ahora, notemos que como la suma tiene valor absoluto menor o igual a $p$ sólo debemos descartar el caso en el que la suma da $(p-1)\left(\dfrac{a}{p}\right)$. Esto implicaría que hay un único $r\in\mathbb{Z}_p$ tal que $ar^2 + br + c \equiv 0 \pmod{p}$ pues todos los valores deben ser $1$ o $-1$ salvo exactamente uno. Pero esto quiere decir que $ax^2 +bx + c$ se factoriza como $a(x-r)^2$ en $\mathbb{Z}_p[x]$, lo que implicaría que el discriminante se anula en $\mathbb{Z}_p$. Absurdo. 
+\end{proof}
+\end{lem}
+
+Ahora sí, estamos en condiciones de poder calcular $\gamma^2$. En efecto, $$\gamma^2 = \left(\displaystyle\sum_{a=0}^{p-1}\left(\dfrac{a}{p}\right)\xi_p^a\right)\left(\displaystyle\sum_{b=0}^{p-1} \left(\dfrac{b}{p}\right) \xi_p^b\right) = \displaystyle\sum_{a,b}\left(\dfrac{ab}{p}\right) \xi_p^{a+b} = \displaystyle\sum_{c=0}^{p-1} \left(\displaystyle\sum_{a+b\equiv c\pmod{p}}\left(\dfrac{ab}{p}\right)\right) \xi_p^c$$
+Ahora bien, queremos evaluar para cada $c$ la suma $\displaystyle\sum_{a+b\equiv c\pmod{p}}\left(\dfrac{ab}{p}\right) = \displaystyle\sum_{a=0}^{p-1} \left(\dfrac{a(c-a)}{p}\right)$. Si $c=0$, entonces eso es $\displaystyle\sum_{a=0}^{p-1} \left(\dfrac{-a^2}{p}\right) = \sum_{a=1}^{p-1} \left(\dfrac{-1}{p}\right) \left(\dfrac{a^2}{p}\right) = (p-1)\left(\dfrac{-1}{p}\right)$. Por otra parte, si $c\neq 0$, podemos aplicar el lema y resulta que $\displaystyle\sum_{a=0}^{p-1} \left(\dfrac{a(c-a)}{p}\right) = -\left(\dfrac{-1}{p}\right)$. Luego, \begin{align*} \gamma^2 = \displaystyle\sum_{c=0}^{p-1} \left(\sum_{a=0}^{p-1}\left(\dfrac{a(c-a)}{p}\right)\right)\xi_p^c &= (p-1)\left(\dfrac{-1}{p}\right) -  \left(\dfrac{-1}{p}\right)\displaystyle\sum_{c\neq 0}\xi_p^c\\ &= (p-1)\left(\dfrac{-1}{p}\right) -  \left(\dfrac{-1}{p}\right)(-1) = p\left(\dfrac{-1}{p}\right)\end{align*}
+
+En definitiva, $\gamma^2 = p\left(\dfrac{-1}{p}\right)\in\QQ$ y eso no es un cuadrado en $\QQ$, así que $\gamma\notin\QQ$. En definitiva, $$k_p = \begin{cases} \QQ(\sqrt{p}) \text{ si }p\equiv 1\pmod{4} \\ \QQ(\sqrt{-p}) \text{ si }p\equiv 3 \pmod{4}\end{cases}$$
+
+Con las técnicas que hemos desarrollado, no sólo pudimos contestar la pregunta inicial sino que podemos probar el siguiente teorema:
+
+\begin{teo}[Ley de Reciprocidad Cuadrática de Gauss] Sean $p,q$ primos impares distintos. Entonces, $$ \left(\dfrac{p}{q}\right)\left(\dfrac{q}{p}\right) = (-1)^{\frac{p-1}{2}\frac{q-1}{2}}$$
+\begin{proof}
+Sea $\omega\in\overline{\FF_q}$ una raíz $p$-ésima primitiva de la unidad (existe pues $p$ y $q$ son coprimos). Como antes, definimos la suma de Gauss, $\gamma = \displaystyle\sum_{a=0}^{p-1}\left(\dfrac{a}{p}\right)\omega^a$ y haciendo la misma cuenta de antes podemos ver que $\gamma^2 = \left(\dfrac{-1}{p}\right) p$. Vamos a calcular ahora $\gamma^q$. Esto es \begin{align*}\gamma^q = \left(\displaystyle\sum_{a=0}^{p-1}\left(\dfrac{a}{p}\right)\omega^a\right)^q &= \displaystyle\sum_{a=0}^{p-1}\left(\dfrac{a}{p}\right)^q \omega^{aq} = \displaystyle\sum_{a=0}^{p-1} \left(\dfrac{a}{p}\right) \omega^{aq} \\&=  \displaystyle\sum_{a=0}^{p-1} \left(\dfrac{aq^2}{p}\right) \omega^{aq} = \left(\dfrac{q}{p}\right)\displaystyle\sum_{a=0}^{p-1} \left(\dfrac{aq}{p}\right) \omega^{aq}\\ &= \left(\dfrac{q}{p}\right)\displaystyle\sum_{t=0}^{p-1} \left(\dfrac{t}{p}\right) \omega^{t} = \left(\dfrac{q}{p}\right) \gamma \end{align*} Por lo tanto $\gamma^{q-1} = \left(\dfrac{q}{p}\right)$ ya que $\gamma\neq 0$ porque $\gamma^2 \neq 0$. Entonces, $$\left(\dfrac{q}{p}\right) = \gamma^{q-1} = (\gamma^2)^{\frac{q-1}{2}} = \left( \left(\dfrac{-1}{p}\right)p\right)^{\frac{q-1}{2}} = (-1)^{\frac{p-1}{2}\frac{q-1}{2}} \left(\dfrac{p}{q}\right)$$ Multiplicando a ambos lados por $\left(\dfrac{p}{q}\right)$ el teorema sigue.
+\end{proof}
+\end{teo}
+
+\section{Teorema 90 de Hilbert}
+
+\begin{defn}
+Sea $G$ un grupo. Un \textbf{$G$-módulo} (a izquierda) $M$ es un grupo abeliano $(M,+)$ que tiene una acción de $G$ (a izquierda) que respeta la suma. Es decir, $\mu:G\times M\to M$, $\mu(g,m)=g\cdot m$ con \begin{itemize}\item $1x = x\; \forall x\in M$. \item $(\sigma\tau) x = \sigma(\tau x) \; \forall \sigma,\tau\in G, \, x\in M$. \item $\sigma(x+y) = \sigma x + \sigma y\; \forall \sigma\in G,\, x,y\in M$. \end{itemize} Es decir, $M$ es un $\ZZ[G]$-módulo.
+\end{defn}
+
+\begin{defn}
+Sea $G$ un grupo y $M$ un $G$-módulo. Una \textbf{derivación} (también llamado homomorfismo cruzado) es una función $f:G\to M$ que cumple que $f(\sigma\tau) = f(\sigma) + \sigma f(\tau)$ para todos $\sigma,\tau\in G$. Se define $\mathrm{Der}(G,M)=\{f:G\to M \text{ derivación}\}$. Es fácil ver que si $f,g\in\mathrm{Der}(G,M)$ entonces $f+g:G\to M$ dada por $(f+g)(\sigma) = f(\sigma) + g(\sigma)$ es una derivación. Luego, $(\mathrm{Der}(G,M),+)$ es un grupo abeliano.
+\end{defn}
+
+\begin{defn}
+Sea $G$ un grupo y $M$ un $G$-módulo. Sea $x\in M$. Definimos $f_x:G\to M$ por $f_x(\sigma) = \sigma x - x$. Decimos que $f_x$ es una \textbf{derivación principal} y es fácil ver que el conjunto $\mathscr{P}(G,M) = \{f_x :G\to M | x\in M\}\subseteq \mathrm{Der}(G,M)$ resulta ser un subgrupo.
+\end{defn}
+
+\begin{defn}
+Se define el \textbf{primer Grupo de Cohomología de $G$ con coeficientes en $M$} por $H^1(G,M) = \mathrm{Der}(G,M)/\mathscr{P}(G,M)$.
+\end{defn}
+
+\begin{obs}
+Supongamos que $E/k$ es una extensión de Galois y finita con grupo de Galois $G$. Entonces, $(E,+)$ y $(E^\times,\cdot)$ son $G$-módulos vía $\sigma\cdot x = \sigma(x)$.
+\end{obs}
+
+\begin{teo}[Noether] Sea $E/k$ una extensión de Galois y finita con grupo de Galois $G$. Entonces, $H^1(G,E^\times)=0$. Es decir, toda derivación es principal. Más concretamente, si $f:G\to E^\times$ es una derivación (ie $f(\sigma\tau) = f(\sigma)\sigma(f(\tau))$) entonces existe $x\in E^\times$ tal que $f(\tau) = \tau(x)/x$ para todo $\tau\in G$.
+
+\end{teo}
+
 \end{document}
 
 
