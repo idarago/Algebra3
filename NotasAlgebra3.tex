@@ -1575,7 +1575,64 @@ Supongamos que $E/k$ es una extensión de Galois y finita con grupo de Galois $G
 \end{obs}
 
 \begin{teo}[Noether] Sea $E/k$ una extensión de Galois y finita con grupo de Galois $G$. Entonces, $H^1(G,E^\times)=0$. Es decir, toda derivación es principal. Más concretamente, si $f:G\to E^\times$ es una derivación (ie $f(\sigma\tau) = f(\sigma)\sigma(f(\tau))$) entonces existe $x\in E^\times$ tal que $f(\tau) = \tau(x)/x$ para todo $\tau\in G$.
+\begin{proof}
+Sea $f:G\to E^\times$ tal que $f(\sigma\tau)=f(\sigma)\sigma(f(\tau))$ para todos $\sigma,\tau\in G$. Consideremos $\displaystyle\sum_{\sigma\in G}f(\sigma)\sigma:E\to E$. Como $f(\sigma)\neq 0$ pues $f(\sigma)\in E^\times$, resulta que $\displaystyle\sum_{\sigma\in G}f(\sigma)\sigma\neq 0$ por la independencia lineal de caracteres. Entonces, existe $y\in E$ con $z=\displaystyle\sum_{\sigma\in G}f(\sigma)\sigma(y)\neq 0$. Sea $\tau\in G$. Entonces, $\tau(z)=\displaystyle\sum_{\sigma\in G}\tau(f(\sigma)) \tau(\sigma(y))$. Como $f$ es una derivación, tenemos que $f(\tau\sigma) = f(\tau)\tau(f(\sigma))$ y así $\tau(f(\sigma)) = f(\tau)^{-1}f(\tau\sigma)$. Pero notemos que esto implica que $\tau(z)=\displaystyle\sum_{\sigma\in G}f(\tau)^{-1}f(\tau\sigma)\tau(\sigma(y)) = f(\tau)^{-1}\displaystyle\sum_{\sigma\in G}f(\tau\sigma)\tau(\sigma(y))$. Ahora bien, notemos que en la última sumatoria, $\tau\sigma$ simplemente es una permutación de los $\sigma$. Por lo tanto, hemos obtenido que $\tau(z) = f(\tau)^{-1} z$, que implica $f(\tau) = z/\tau(z)$. Tomando $x = z^{-1}$ obtenemos lo deseado.
+\end{proof}
+\end{teo}
 
+\begin{obs}
+Sea $M$ un $G$-módulo y $f:G\to M$ una derivación. Es fácil ver, por inducción, que $f(\sigma^n) = f(\sigma) + \sigma f(\sigma) + \ldots + \sigma^{n-1}f(\sigma)$. Ahora si $M$ es un $G$-módulo con $G = \langle\sigma\rangle$ cíclico de orden $n$, esto implica que una derivación queda determinada por su valor en $\sigma$. Como es una derivación, se ve que $f(1)=0$ y así $f(\sigma) + \sigma f(\sigma) + \ldots + \sigma^{n-1} f(\sigma) = 0$. Ahora bien, si $x\in M$ cumple la ecuación $x + \sigma x + \ldots + \sigma^{n-1} x =0$, induce una derivación $f$ vía $f(\sigma^i) = x + \sigma x + \ldots + \sigma^{i-1} x$. Hemos probado entonces:
+\end{obs}
+
+\begin{cor}
+Sea $M$ un $G$-módulo con $G=\langle \sigma\rangle$ de orden $n$. Entonces, $\mathrm{Der}(G,M)$ está en biyección con el conjunto de los $x\in M$ tales que $x+\sigma x + \ldots + \sigma^{n-1}x = 0$.
+\end{cor}
+
+\begin{teo}[Teorema 90 de Hilbert]
+Sea $E/k$ cíclica de grado $n$ con grupo de Galois $G=\langle\sigma\rangle$. Si $x\in E$ cumple que $\mathrm{N}_{E/k}(x)=1$, entonces existe $z\in E$ tal que $x=\sigma(z)/z$.
+\begin{proof}
+Notemos que $E^\times$ es un $G$-módulo y  $\mathrm{N}_{E/k}(x)=x\sigma(x)\sigma^2(x)\ldots \sigma^{n-1}(x)=1$. Por la observación anterior, $x$ induce una derivación $f\in\mathrm{Der}(G,M)$ vía $f(\sigma)=x$. Por el teorema anterior, esta derivación debe ser principal, y así existe $z\in E$ tal que $f=f_z$. Es decir, $x=f(\sigma) = f_z(\sigma) = \sigma(z)/z$. Como queríamos probar.
+\end{proof}
+\end{teo}
+
+\begin{obs}
+La recíproca del teorema 90 es claramente verdadera. En efecto, si $x=\sigma(z)/z$ para algún $z\in E$, entonces $\mathrm{N}_{E/k}(x)=1$ pues $\mathrm{N}_{E/k}(\sigma(z)) = \mathrm{N}_{E/k}(z)$ ya que $z$ y $\sigma(z)$ son raíces el mismo polinomio minimal.
+\end{obs}
+
+\begin{cor}
+Sea $E/k$ una extensión cíclica de grado $n$ con grupo de Galois $G=\langle \sigma\rangle$. Se tiene la sucesión exacta de grupos abelianos: $$ 0\longrightarrow k^\times \stackrel{\mathrm{inc}}{\hookrightarrow} E^\times\stackrel{\varphi}{\longrightarrow} E^\times \stackrel{\mathrm{N}_{E/k}}{\longrightarrow}k^\times$$ donde $\varphi(x)=\sigma(x)/x$.
+\begin{proof}
+La inyectividad de la inclusión de $k^\times$ en $E^\times$ es obvia. Con respecto a la exactitud en el primer $E^\times$, debemos ver que $\ker\varphi = k^\times$. Para ver esto, simplemente debemos notar que $\ker\varphi = \{x\in E^\times : \varphi(x)=1\} = \{x\in E^\times : \sigma(x)=x\}$. Pero eso es lo dejado fijo por todo $G$ por ser cíclico con generador $\sigma$. Luego, por el Teorema de Artin, $E^G=k$ y sigue lo deseado. Ahora, respecto de la exactitud en el segundo $E^\times$, sólo debemos notar que $\ker\mathrm{N}_{E/k} = \{z\in E^\times : \mathrm{N}_{E/k}(z)=1\} = \im \varphi$ en virtud del Teorema 90 de Hilbert. Y listo.
+\end{proof}
+\end{cor}
+
+\begin{prop}
+Si $k$ es un cuerpo finito, entonces $\mathrm{N}_{E/k}:E^\times\to k^\times$ resulta un epimorfismo y tenemos la sucesión exacta:$$ 0\longrightarrow k^\times \stackrel{\mathrm{inc}}{\hookrightarrow} E^\times\stackrel{\varphi}{\longrightarrow} E^\times \stackrel{\mathrm{N}_{E/k}}{\longrightarrow}k^\times\longrightarrow 0$$ donde $\varphi(x)=\sigma(x)/x$.
+\end{prop}
+
+\begin{teo}[Clasificación de extensiones cíclicas de grado $n$ sobre un cuerpo $k$ que tiene una raíz $n$-ésima primitiva de la unidad]
+Sea $k$ un cuerpo y sea $n\in\NN$ tal que existe $\xi\in k$ una raíz $n$-ésima primitiva de la unidad (y por lo tanto $\car k=0$ o $\car k =p>0$ y $p\nmid n$). Entonces, \begin{itemize}\item Si $E/k$ es cíclica de grado $n$ existe $\alpha\in E$ tal que $E=k(\alpha)$ con $m(\alpha,k)=x^n - a\in k[x]$. \item Recíprocamente, si $\alpha\in\overline{k}$ con $\alpha^n\in k$ ($n$ no necesariamente es el mínimo $r$ tal que $\alpha^r\in k$), entonces $k(\alpha)/k$ resulta cíclica de grado $d\mid n$ y $m(\alpha,k)=x^d - b$.\end{itemize}
+\begin{proof}
+Para ver la primera parte del teorema, supongamos que $E/k$ es cíclica de grado $n$ y $G=\langle\sigma\rangle$. Como $\xi\in k$, tenemos $\mathrm{N}_{E/k}(\xi) = \xi^{[E:k]} = \xi^n = 1$. Entonces, por el Teorema 90 de Hilbert, existe $\alpha\in E$ tal que $\xi = \sigma(\alpha)/\alpha$. Luego, $\sigma(\alpha)=\alpha\xi$ y así tenemos $\sigma(\alpha^n) = (\alpha\xi)^n = \alpha^n \xi^n = \alpha^n$. Es decir, $\sigma$ deja fijo a $\alpha^n$ y así todo $G$ lo deja fijo. Por lo tanto, por el Teorema de Artin, debemos tener que $\alpha^n\in k$. Por lo tanto, si $a=\alpha^n\in k$, tenemos que $f=x^n - a\in k[x]$ anula a $\alpha$. Afirmo que $m(\alpha,k) = x^n - a$. Para ver esto, probemos que $m(\alpha,k)$ tiene al menos $n$ raíces distintas y así como $f$ de grado $n$ anula a $\alpha$, deberá ser su minimal. Pero como $\sigma(\alpha)=\alpha\xi$, se puede ver por inducción que $\sigma^i(\alpha)=\alpha\xi^i$. Como $\sigma^i(\alpha)\neq\sigma^j(\alpha)$ si $1\leq i < j \leq n$, tenemos que $\alpha,\sigma(\alpha),\ldots , \sigma^{n-1}(\alpha)$ son $n$ raíces distintas de $m(\alpha,k)$. Con esto, por una cuestión de grados de extensiones, tenemos que $E=k(\alpha)$ y $m(\alpha,k)=x^n - a\in k[x]$.
+
+Para ver la segunda parte del teorema, supongamos que $\alpha^n = a\in k$. Por lo tanto, $x^n - a\in k[x]$ anula a $\alpha$. Si $a=0$ no hay nada que probar. Si $a\neq 0$, entonces $(f:f') = 1$ pues $0$ no es raíz de $f$. Es decir, $f$ es separable sobre $k$ y así $\alpha$ es separable sobre $k$. Además, las raíces de $x^n - a$ son de la forma $\alpha\xi^i$. Como $\xi \in k$, tenemos que $\alpha\xi^i\in k(\alpha)$. Entonces, todas las raíces de $m(\alpha,k)$ están en $k(\alpha)$, lo que implica que la extensión $k(\alpha)/k$ es normal. Como es normal y separable, es de Galois. Veamos que $\Gal(k(\alpha)/k)$ es cíclico de orden $d\mid n$. Si $\sigma\in \Gal(k(\alpha)/k)$, entonces $\sigma$ queda determinado por $\sigma(\alpha)=\alpha\xi^{i(\sigma)}$. Por lo tanto, tenemos un monomorfismo $\Gal(k(\alpha)/k)\to \ZZ_n$ por $\sigma\mapsto i(\sigma)$. Por lo tanto $\Gal(k(\alpha)/k)$ es subgrupo de un grupo cíclico y así es isomorfo a un $\ZZ_d$ con $d\mid n$. Como esta extensión resulta cíclica de orden $d$, por la primera parte del teorema tenemos que $m(\alpha,k) = x^d - b\in k[x]$. Y estamos.
+\end{proof}
+\end{teo}
+
+\begin{teo}[Teorema 90 de Hilbert - Versión aditiva]
+Sea $E/k$ cíclica de grado $n$ con grupo de Galois $G=\langle\sigma\rangle$. Sea $x$ tal que $\mathrm{Tr}_{E/k}(x)=0$. Entonces, existe $z\in E$ con $x=\sigma(z)-z$.
+\begin{proof}
+Como $E/k$ es separable, $\mathrm{Tr}_{E/k}:E\to k$ no es el morfismo nulo (por independencia lineal de caracteres). Luego, existe algún $y\in E$ con $\mathrm{Tr}_{E/k}(y)\neq 0$. Consideremos entonces $$ z = -\dfrac{1}{\mathrm{Tr}_{E/k}(y)}(x\sigma(y) + (x+\sigma(x))\sigma^2(y) +  \ldots + (x+\sigma(x)+\ldots + \sigma^{n-2}(x))\sigma^{n-1}(x))$$ Si usamos que $x + \sigma(x) + \ldots + \sigma^{n-1}(x)=\mathrm{Tr}_{E/k}(x)$, es fácil ver que $\sigma(z)-z=x$, que es lo que queríamos.
+\end{proof}
+\end{teo}
+
+\begin{teo}[Teorema de Artin-Schreier]
+Sea $k$ un cuerpo con $\car k=p>0$. Si $E/k$ es cíclica de grado $p$, entonces \begin{itemize}\item $E=k(\alpha)$ para algún $\alpha\in E$ con $m(\alpha,k)=x^p -x -a$. \item Recíprocamente, el polinomio $f=x^p - x - a\in k[x]$ o bien tiene todas sus raíces en $k$ o es irreducible. Si es irreducible en $k[x]$ y $\alpha\in\overline{k}$ es una raíz de $f$, entonces $k(\alpha)/k$ es cíclica de grado $p$.\end{itemize}
+\begin{proof}
+Sea $E/k$ cíclica de grado $p$, $\Gal(E/k)=\langle\sigma\rangle$. Notar que $\mathrm{Tr}_{E/k}(1)=p=0$ (pues $1\in k$). Por el Teorema 90 de Hilbert en su versión aditiva, existe $\alpha\in E$ tal que $1=\sigma(\alpha)-\alpha$. Es decir, $\sigma(\alpha)=\alpha+1$, y así iterando obtenemos que $\sigma^i(\alpha)= \alpha+i$ para todo $1\leq i\leq p$. Tengo $p$ raíces distintas $[k(\alpha):k]\geq p$. Pero $[E:k]=p$ y $k(\alpha)\subseteq E$. Esto implica que $E=k(\alpha)$. Ahora, notemos que $\sigma(\alpha^p -\alpha)=\sigma(\alpha)^p - \sigma(\alpha) = (\alpha+1)^p - (\alpha+1) = \alpha^p - \alpha$. Luego, $\alpha^p - \alpha$ queda fijo por $\sigma$ y así por todo el grupo de Galois. Por el Teorema de Artin, debe ser que $\alpha^p -\alpha\in k$. Pero entonces, $x^p - x - (\alpha^p - \alpha)\in k[x]$ anula a $\alpha$ y así debe ser su minimal.
+
+Para ver la segunda parte del teorema, supongamos que $f(x)=x^p - x - a\in k[x]$ se factoriza por irreducibles como $f(x)=g_1(x)\ldots g_r(x)$ con $g_i\in k[x]$ irreducible para cada $1\leq i\leq r$. Notemos que $f(x+1) = (x+1)^p - (x+1) - a = x^p - x - a = f(x)$. Luego, $f(x+1) = g_1(x+1)\ldots g_r(x+1) = f(x)$. Como cada $g_i(x+1)$ es irreducible (pues cada $g_i$ lo es), por la unicidad de la factorización en $k[x]$ tenemos una acción $\ZZ_p\acts \{1,\ldots , r\}$ dada por $g_i(x+\ell) = g_{\ell\cdot i}(x)$. Ahora bien, si $f$ no fuera irreducible, tendríamos que $\gr g_i < \gr f = p$ para cada $1\leq i\leq r$. Consideremos el estabilizador $G_j = \{\ell\in\ZZ_p : \ell\cdot j = j\}$. Es decir, los $\ell$ tales que $g_j(x+\ell) = g_j(x)$. Si $G_j\neq 1$, como $\{\ell,2\ell,\ldots , p\ell\}$ es una permutación de los restos módulo $p$, resulta que $g_j(x)=g_j(x+1)=\ldots = g_j(x + (p-1))$. Luego, si $\gamma$ es una raíz de $g_j$ en $\overline{k}$, $\gamma, \gamma-1,\ldots , \gamma-(p-1)$ serían raíces y así $\gr g_j\geq p$. Absurdo. Luego, $G_j=1$ y así la acción es transitiva. Esto implica que $r=p$ y así $f$ se debe factorizar linealmente en $k[x]$. Es decir, $f$ o bien es irreducible o tiene todas sus raíces en $k$. Ahora, si $f$ fuera irreducible y $\alpha\in\overline{k}$ una raíz de $f$, como $f(x+1)=f(x)$ resulta que $\{\alpha,\alpha+1,\ldots , \alpha+(p-1)\}$ son todas las raíces de $f$. Entonces, el cuerpo de descomposición de $f$ sobre $k$ simplemente es $k(\alpha)$. Luego, como $f$ es irreducible, $[k(\alpha):k]=\gr f = p$. Como $f$ es separable (pues es irreducible y su derivada es $-1\neq 0$) resulta que $k(\alpha)/k$ es Galois. Los automorfismos quedan determinados por su valor en $\alpha$ y lo deben mandar a alguna raíz de $m(\alpha,k)=f$. Entonces, los posibles automorfismos están determinados por $\sigma_j(\alpha)=\alpha+j$ con $0\leq j\leq p-1$. Pero como $|\Gal(k(\alpha)/k)| = [k(\alpha):k]=p$, estos deben ser todos los automorfismos. Ahora bien, $\sigma_i\circ\sigma_j(\alpha) = \sigma_i(\alpha+j)=\sigma_i(\alpha)+\sigma_i(j) = \alpha + i+j = \sigma_{i+j}(\alpha)$. Tenemos entonces un monomorfismo de grupos $\varphi:\Gal(k(\alpha)/k)\to \ZZ_p$, $\varphi(\sigma_i)=i$ entre dos grupos del mismo cardinal. Por lo tanto, deben ser isomorfos y el teorema sigue.
+\end{proof}
 \end{teo}
 
 \end{document}
