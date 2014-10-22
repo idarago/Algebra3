@@ -1635,6 +1635,123 @@ Para ver la segunda parte del teorema, supongamos que $f(x)=x^p - x - a\in k[x]$
 \end{proof}
 \end{teo}
 
+\section{Resolubilidad por Radicales}
+
+\begin{defn}
+Sea $G$ un grupo. Una \textbf{cadena normal} (sin repeticiones) de $G$ es una sucesión de subgrupos $G=G_0\supset G_1\supset\ldots\supset G_m=\{1\}$ tales que $G_{i+1}\triangleleft G_i$. Una cadena normal se dice \textbf{abeliana} si cada grupo cociente $G_i/G_{i+1}$  es abeliano para cada $i$. Una cadena normal se dice \textbf{cíclica} si cada grupo cociente $G_i/G_{i+1}$ es cíclico.
+\end{defn}
+
+\begin{defn}
+Sea $G=G_0\supset\ldots\supset G_m=\{1\}$ una cadena normal de $G$. Un \textbf{refinamiento} de esta cadena es una cadena normal $G=H_0\supset H_1\supset\ldots \supset H_n = \{1\}$ tal que para cada $1\leq i\leq m$ existe un $j$ con $G_i=H_j$. Es decir, a la cadena que teníamos le agregamos más términos (preservando que sea una cadena lo que conseguimos).
+\end{defn}
+
+\begin{prop}
+Sea $G$ grupo finito. Entonces, toda cadena abeliana de $G$ se puede refinar a una cadena cíclica.
+\begin{proof}
+Sea $G=G_0\supset G_1\supset\ldots\supset G_m=\{1\}$ una cadena abeliana. Basta ver que todo grupo abeliano finito $H$ admite una cadena cíclica. En efecto, en ese caso para cada $i$ tendríamos $G_i/G_{i+1}=H_0\supset H_1\supset\ldots\supset H_j=\{1\}$. Por el Teorema de Correspondencia, tendríamos que $G_i = \widetilde{H_0}\supset\ldots \supset\widetilde{H_j}=G_{i+1}$ con $\widetilde{H_i}/\widetilde{H_{i+1}} \simeq H_i/H_{i+1}$ cíclico. Probemos entonces que todo $H$ abeliano finito admite una cadena cíclica. Procederemos por inducción en $n=|H|$. Si $n=1$ no hay nada que probar. Si $n>1$, tomo $x\in H$, $x\neq 1$. Como $H$ es abeliano, $\langle x\rangle\triangleleft H$ y así $H/\langle x\rangle$ es abeliano finito de orden menor a $n$. Entonces usamos la hipótesis inductiva y el Teorema de Correspondencia y la proposición sigue.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $G$ grupo finito. Entonces, toda cadena abeliana de $G$ se puede refinar a una cadena normal tal que cada $G_i/G_{i+1}$ es abeliano simple.
+\begin{proof}
+Es usar el Teorema de Cauchy y el Teorema de Correspondencia, de manera muy similar a la proposición anterior.
+\end{proof}
+\end{prop}
+
+\begin{obs}
+Sea $G=G_0\supset G_1\supset \ldots \supset G_m = \{1\}$ una cadena normal. Entonces, podemos recuperar información de $G$ conociendo los cocientes $G_{i}/G_{i+1}$. Es decir, si tenemos una sucesión exacta corta de grupos $1\longrightarrow P\longrightarrow Q\longrightarrow R\longrightarrow 1$ y sabemos información de $P$ y $R$, a menos de la extensión, conocemos alguna información de $Q$ (por ejemplo, sabemos que es un producto semidirecto).  En nuestro caso, veamos qué información podemos obtener a partir de la cadena normal. Tenemos que $1\longrightarrow 1=G_m\hookrightarrow G_{m-1}\longrightarrow G_{m-1}/G_m \longrightarrow 1$. Por lo tanto, a menos de extensiones, conozco a $G_{m-1}$. Ahora, hacemos lo mismo con sucesión $1\longrightarrow G_{m-1}\hookrightarrow G_{m-2}\longrightarrow G_{m-2}/G_{m-1} \longrightarrow 1$. Procediendo inductivamente, sigo así hasta que llego a la sucesión $1\longrightarrow G_1\hookrightarrow G\longrightarrow G/G_1\longrightarrow 1$ y así obtengo información de $G$.
+\end{obs}
+
+\begin{defn}
+Sea $G$ un grupo. Supongamos que $G=G_0\supset\ldots\supset G_m = \{1\}$ y $G=H_0\supset\ldots\supset H_n=\{1\}$ son dos cadenas normales de $G$. Decimos que son \textbf{equivalentes} si $n=m$ y existe alguna permutación $\sigma$ tal que $G_{i}/G_{i+1}\simeq H_{\sigma(i)}/H_{\sigma(i)+1}$ para todo $i$.
+\end{defn}
+
+\begin{lem}[Lema de la Mariposa]
+Sean $U,V\subseteq T$ subgrupos y sean $\widetilde{U}\triangleleft U$, $\widetilde{V}\triangleleft V$ subgrupos normales. Entonces, tenemos que $\widetilde{U}(U\cap\widetilde{V})\triangleleft \widetilde{U}(U\cap V)$ y $(\widetilde{U}\cap V)\widetilde{V}\triangleleft (U\cap V)\widetilde{V}$.
+\end{lem}
+
+\begin{teo}
+Sea $G$ un grupo. Supongamos que tenemos $G=G_0\supset\ldots\supset G_n = \{1\}$ y $G=H_0\supset\ldots\supset H_m=\{1\}$ dos cadenas normales de $G$. Entonces, existen refinamientos de ambas cadenas que resultan equivalentes.
+\begin{proof}
+Primero, refino $G=G_0\supset G_1\supset\ldots\supset G_n=\{1\}$ teniendo en cuenta a la otra cadena: para cada $i=0,\ldots , n-1$ y $j=0,\ldots , m$ considero $G_{ij}=G_{i+1}(H_j\cap G_i)$. Notemos que $G_{i0}=G_i$, $G_{im}=G_{i+1}$ y que $G_{ij}\supseteq G_{i(j+1)}$ es un subgrupo normal. Entonces, $G=G_0=G_{00}\supset G_{01}\supset\ldots\supset G_{0m}=G_1 = G_{10}\supset \ldots\supset G_{(n-1)m}=\{1\}$ es una cadena normal, pero podría tener repeticiones. Ahora, para $j=1,\ldots , m-1$, $i=0,\ldots ,n$, considero $H_{ji}=H_{j+1}(G_i\cap H_j)$ que refina a la cadena $G=H_0\supset\ldots \supset H_m=\{1\}$ (aunque también puede tener repeticiones). Por el Lema de la Mariposa, tenemos que $G_{ij}/G_{i(j+1)}\simeq H_{ji}/H_{j(i+1)}$ y simplemente sacamos los repetidos de ambos refinamientos para obtener lo deseado.
+\end{proof}
+\end{teo}
+
+\begin{defn}
+Una \textbf{serie de descomposición} de $G$ es una cadena normal $G=G_0\supset\ldots\supset G_n=\{1\}$ que no admite refinamientos propios. Equivalentemente, es una cadena normal tal que los cocientes $G_i/G_{i+1}$ son simples para todo $i$. Si $G=G_0\supset\ldots \supset G_n=\{1\}$ es una serie de descomposición, decimos que tiene \textbf{longitud} $n$.
+\end{defn}
+
+\begin{teo}[Jordan-Hölder]
+Sea $G$ un grupo que admite una serie de descomposición. Entonces, toda cadena normal en $G$ admite un refinamiento que es una serie de descomposición. Más aún, dos series de descomposición cualesquiera de $G$ son equivalentes y en particular tienen la misma longitud.
+\begin{proof}
+Consideremos una cadena normal $G=G_0\supset\ldots\supset G_n=\{1\}$ y una serie de descomposición $G=H_0\supset\ldots\supset H_m=\{1\}$. Por el Teorema anterior, existen refinamientos de ambas cadenas que resultan equivalentes. Pero como $G=H_0\supset\ldots\supset H_m=\{1\}$ es una serie de descomposición, el refinamiento debe ser la cadena misma (pues no admite refinamientos propios). Entonces, el refinamiento de $G=G_0\supset\ldots\supset G_n=\{1\}$ debe ser equivalente a una serie de descomposición y así todos los cocientes son simples, lo que implica que es una serie de descomposición. Para ver que dos series de descomposición son equivalentes, simplemente usamos el teorema anterior para conseguir un refinamiento de ambas que sea equivalente y notamos que ambos refinamientos no hacen nada por ser series de descomposición. Y listo.
+\end{proof}
+\end{teo}
+
+\begin{defn}
+Sea $G$ un grupo. Se define la \textbf{longitud} de $G$ como $\ell(G) = n$ si $G$ tiene una serie de descomposición de largo $n$ o bien $\ell(G)=\infty$ si no admite serie de descomposición.
+\end{defn}
+
+\begin{prop}
+Sea $G$ un grupo y $H\triangleleft G$ un subgrupo normal. Entonces $G$ admite serie de descomposición si y sólo si $H$ y $G/H$ admiten serie de descomposición. En ese caso, tenemos que $\ell(G)=\ell(H) + \ell(G/H)$.
+\begin{proof}
+$(\Longrightarrow)$ Considero la cadena normal $G\supset H\supset 1$. Como $G$ admite cadena de descomposición, por Jordan-Hölder existe un refinamiento que es serie de descomposición $G=G_0\supset\ldots\supset G_r = H \supset G_{r+1}\supset\ldots\supset G_n = \{1\}$ y así $H=G_r\supset\ldots\supset G_n=\{1\}$ es una serie de descomposición de $H$ y $G/H = G_0/H\supset\ldots\supset G_r/H=\{1\}$ es una serie de descomposición de $G/H$. Es claro entonces que $\ell(G) = n = r + (n-r) = \ell(H) + \ell(G/H)$.
+
+$(\Longleftarrow)$ Si $H$ y $G/H$ admiten series de descomposición, simplemente tenemos que levantar la serie de descomposición de $G/H$ a una cadena normal entre $G$ y $H$ con el Teorema de Correspondencia y pegarla con la serie de descomposición de $H$.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $G$ un grupo, y sean $H,L\subseteq G$ subgrupos normales. Entonces, $\ell(H),\ell(L)<+\infty$ si y sólo si $\ell(HL),\ell(H\cap L)<+\infty$. En ese caso además tenemos que $\ell(H)+\ell(L) = \ell(HL)+\ell(H\cap L)$.
+\end{prop}
+
+\begin{defn}
+Un grupo $G$ se dice \textbf{resoluble} si admite una serie de descomposición $G=G_0\supset\ldots\supset G_m=1$ tal que los cocientes $G_i/G_{i+1}$ son abelianos.
+\end{defn}
+
+\begin{obs}
+Vimos que si $G$ es un grupo finito y admite una cadena abeliana entonces tiene un refinamiento que es una cadena cíclica con cada $G_i/G_{i+1}$ simple. Entonces, si $G$ es un grupo finito y admite una cadena abeliana es resoluble. Pero la vuelta es trivialmente cierta, porque la serie de descomposición que admite por ser resoluble debe ser una cadena abeliana. Entonces, para grupos finitos, la condición de ser resoluble se relaja a tener una cadena abeliana en vez de una serie de descomposición abeliana.
+\end{obs}
+
+\begin{prop}
+Si $G$ es un grupo, $H\triangleleft G$ subgrupo normal, entonces $G$ es resoluble si y sólo si $H$ y $G/H$ lo son.
+\begin{proof}
+Es usar Teorema de Correspondencia como venimos haciendo.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $G$ resoluble y $H\subseteq G$ un subgrupo (no necesariamente normal). Entonces $H$ es resoluble.
+\begin{proof}
+Sea $G=G_0\supset\ldots\supset G_n=\{1\}$ una serie de descomposición abeliana. Entonces, $G_{i+1}\cap H\triangleleft G_i\cap H$ y además, tenemos un monomorfismo $G_i\cap H/G_{i+1}\cap H\hookrightarrow G_i/G_{i+1}$ (es el morfismo inducido por el la proyección canónica $G_i\cap H\to G_i/G_{i+1}$ y usar el primer teorema de isomorfismo). Por lo tanto $G_i\cap H/G_{i+1}\cap H$ es abeliano y se mete en un grupo simple. Por lo tanto, $H=G_0\cap H \supset\ldots \cap G_n\cap H = \{1\}$ será una serie de descomposición abeliana una vez que saquemos los posibles términos repetidos que aparezcan. Y listo.
+\end{proof}
+\end{prop}
+
+\begin{defn}
+Sea $G$ un grupo finito. Sea $G'=[G,G]$ el conmutador o \textbf{primer grupo derivado de $G$}. Se define inductivamente el \textbf{$k$-ésimo grupo derivado de $G$} como $G^{(k)} = (G^{(k-1)})' = [G^{(k-1)},G^{(k-1)}]$.
+\end{defn}
+
+\begin{obs}
+Recordemos que $G'\triangleleft G$ y que $G/G'$ es abeliano. Además, si $H\triangleleft G$ y $G/H$ es abeliano tenemos que $[G,G]\subseteq H$.
+\end{obs}
+
+\begin{prop}
+Sea $G$ un grupo finito. $G$ es resoluble si y sólo si $G^{(k)}=1$ para algún $k\in\NN$.
+\begin{proof}
+$(\Longleftarrow)$ Supongamos que $G^{(k)}=1$. Tomo $G\supset G' \supset G''\supset\ldots\supset G^{(k)}=\{1\}$ y $G^{(i+1)}\triangleleft G^{(i)}$ con $G^{(i)}/G^{(i+1)}$ abeliano. Esto es una cadena normal abeliana y listo.
+
+$(\Longrightarrow)$ Sea $G=G_0\supset\ldots\supset G_s = \{1\}$ una serie de descomposición con $G_i/G_{i+1}$ abeliano para cada $i$. Vamos a ver que $G^{(i)}\subseteq G_i$ para cada $i$ y así resultará que $G^(s)=1$. Como $G_1\triangleleft G$ y $G/G_1$ es abeliano, debemos tener que $G'\subseteq G_1$ y como $G'\triangleleft G$, debemos tener que $G'\triangleleft G_1$. Además, $G_2\triangleleft G_1$ es un subgrupo normal y así $G'G_2\subseteq G_1$ es un subgrupo. Por el Tercer Teorema de Isomorfismo tenemos que $G'/G'\cap G_2\simeq G'G_2/G_2 \subseteq G_1/G_2$. Por lo tanto, $G'/G'\cap G_2$ es abeliano y así $G''\subseteq G'\cap G_2\subseteq G_2$. Continuando de esta forma obtenemos lo deseado.
+\end{proof}
+\end{prop}
+
+\begin{cor}
+Para $n\geq 5$ el grupo simétrico $S_n$ no es resoluble.
+\begin{proof}
+Para $n\geq 3$ tenemos que $[S_n,S_n]=A_n$. Ahora, $S_n'' = [A_n,A_n] = A_n$ cuando $n\geq 5$. Por lo tanto, $S^{(k)}=A_n$ para todo $k\geq 2$ y así no puede ser nunca el grupo trivial. Y estamos.
+\end{proof}
+\end{cor}
+
 \end{document}
 
 
