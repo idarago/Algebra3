@@ -1660,7 +1660,7 @@ Es usar el Teorema de Cauchy y el Teorema de Correspondencia, de manera muy simi
 \end{prop}
 
 \begin{obs}
-Sea $G=G_0\supset G_1\supset \ldots \supset G_m = \{1\}$ una cadena normal. Entonces, podemos recuperar información de $G$ conociendo los cocientes $G_{i}/G_{i+1}$. Es decir, si tenemos una sucesión exacta corta de grupos $1\longrightarrow P\longrightarrow Q\longrightarrow R\longrightarrow 1$ y sabemos información de $P$ y $R$, a menos de la extensión, conocemos alguna información de $Q$ (por ejemplo, sabemos que es un producto semidirecto).  En nuestro caso, veamos qué información podemos obtener a partir de la cadena normal. Tenemos que $1\longrightarrow 1=G_m\hookrightarrow G_{m-1}\longrightarrow G_{m-1}/G_m \longrightarrow 1$. Por lo tanto, a menos de extensiones, conozco a $G_{m-1}$. Ahora, hacemos lo mismo con sucesión $1\longrightarrow G_{m-1}\hookrightarrow G_{m-2}\longrightarrow G_{m-2}/G_{m-1} \longrightarrow 1$. Procediendo inductivamente, sigo así hasta que llego a la sucesión $1\longrightarrow G_1\hookrightarrow G\longrightarrow G/G_1\longrightarrow 1$ y así obtengo información de $G$.
+Sea $G=G_0\supset G_1\supset \ldots \supset G_m = \{1\}$ una cadena normal. Entonces, podemos recuperar información de $G$ conociendo los cocientes $G_{i}/G_{i+1}$. Es decir, si tenemos una sucesión exacta corta de grupos $1\longrightarrow P\longrightarrow Q\longrightarrow R\longrightarrow 1$ y sabemos información de $P$ y $R$, a menos de la extensión, conocemos alguna información de $Q$ (por ejemplo, si se parte es un producto semidirecto).  En nuestro caso, veamos qué información podemos obtener a partir de la cadena normal. Tenemos que $1\longrightarrow 1=G_m\hookrightarrow G_{m-1}\longrightarrow G_{m-1}/G_m \longrightarrow 1$. Por lo tanto, a menos de extensiones, conozco a $G_{m-1}$. Ahora, hacemos lo mismo con sucesión $1\longrightarrow G_{m-1}\hookrightarrow G_{m-2}\longrightarrow G_{m-2}/G_{m-1} \longrightarrow 1$. Procediendo inductivamente, sigo así hasta que llego a la sucesión $1\longrightarrow G_1\hookrightarrow G\longrightarrow G/G_1\longrightarrow 1$ y así obtengo información de $G$.
 \end{obs}
 
 \begin{defn}
@@ -1751,6 +1751,76 @@ Para $n\geq 5$ el grupo simétrico $S_n$ no es resoluble.
 Para $n\geq 3$ tenemos que $[S_n,S_n]=A_n$. Ahora, $S_n'' = [A_n,A_n] = A_n$ cuando $n\geq 5$. Por lo tanto, $S^{(k)}=A_n$ para todo $k\geq 2$ y así no puede ser nunca el grupo trivial. Y estamos.
 \end{proof}
 \end{cor}
+
+\begin{defn}
+Una extensión $E/k$ finita y separable se dice \textbf{resoluble} si $\Gal(E'/k)$ es un grupo resoluble, donde $E'/k$ es la clausura normal de $E/k$.
+\end{defn}
+
+\begin{prop}
+Sea $E/k$ separable y finita y sea $E'/k$ la clausura normal de $E/k$. Son equivalentes:
+\begin{enumerate}
+\item $E/k$ es resoluble.
+\item Existe $E''/k$ Galois tal que $E\subseteq E''$ y $\Gal(E''/k)$ es resoluble.
+\end{enumerate}
+\begin{proof}
+$(1)\Longrightarrow (2)$: Simplmente es tomar $E''=E'$.
+
+$(2)\Longrightarrow (1)$: Sea $E\subseteq E''$ con $E''/k$ Galois. Entonces, $E'\subseteq E''$ por ser la clausura normal la extensión normal más chica que contiene a $E$. Como $E'/k$ es normal, tenemos que $\Gal(E''/E')\triangleleft \Gal(E''/k)$ y $\Gal(E'/k)\simeq \Gal(E''/k)/\Gal(E''/E')$. Como cociente de resoluble es resoluble, la proposición sigue.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sean $E/k$ y $F/k$ extensiones finitas y separables. Si $E/k$ es resoluble, entonces $EF/F$ también lo es.
+\begin{proof}
+Sea $E'/k$ la clausura normal de $E/k$. Si $E/k$ es resoluble, entonces $E'/k$ es resoluble. Entonces, $E'F/F$ es Galois y así $\Gal(E'F/F)\subseteq \Gal(E'/k)$. Como $\Gal(E'F/F)$ es resoluble, tenemos que $EF\subseteq E'F$ se mete en una extensión galoisiana con grupo de Galois resoluble y $EF/F$ resulta resoluble.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $k\subseteq F\subseteq E$ una torre de extensiones finitas y separables. Entonces, $E/k$ es resoluble si y sólo si $E/F$ y $F/k$ lo son.
+\begin{proof}
+$(\Longrightarrow)$ Sea $E'/k$ la clausura normal de $E/k$. Notemos que como $E/k$ es resoluble, $E'/k$ es Galois con grupo de Galois resoluble. Como $F\subseteq E\subseteq E'$, resulta que $F/k$ es resoluble (pues se mete en $E'/k$ que es resoluble). Además, $\Gal(E'/F)\subseteq \Gal(E'/k)$ y como subgrupo de resoluble es resoluble ya estamos.
+
+$(\Longleftarrow)$ Como $F/k$ es resoluble, existe $\widetilde{F}$ galoisiana con grupo de Galois resoluble y $F\subseteq\widetilde{F}$. Por la proposición anterior, como $E/F$ es resoluble se tiene que $E\widetilde{F}/\widetilde{F}$. Por lo tanto, existe $L/\widetilde{F}$ galoisiana tal que $\Gal(L/\widetilde{F})$ es resoluble y $E\widetilde{F}\subseteq L$.
+
+Sabemos que $L' = k\left(\displaystyle\bigcup_{\sigma\in\hom(L/k,\overline{L}/k)}\sigma(L)\right)$ es la clausura normal. Tenemos que $L'/k$ es galoisiana. Como $E/k\subseteq L'/k$, si fuera resoluble ya estaríamos. Sea $\sigma\in\Gal(L'/k)$. Es claro que $\sigma(\widetilde{F})=\widetilde{F}$ pues estamos restringiendo el morfismo a una extensión normal. Tenemos un isomorfismo $\widehat{\sigma}:\Gal(L/\widetilde{F})\to\Gal(\sigma(L)/\widetilde{F})$ dada por $\omega\mapsto \sigma\omega\sigma^{-1}$ (esto está bien definido pues $\sigma(\widetilde{F})=\widetilde{F}$). Como $\Gal(L/\widetilde{F})$ es resoluble, todos los $\Gal(\sigma(L)/\widetilde{F})$ son resolubles para todos $\sigma\in\Gal(L'/k)$.
+
+Ahora, notemos que el producto directo finito de grupos resolubles también lo es, pues $(G_1\times\ldots\times G_r)^{(k)} \simeq G_1^{(k)}\times\ldots\times G_r^{(k)}$ y para un $k$ suficientemente grande, todos dan $0$ pues son resolubles. Por lo tanto, $\displaystyle\prod_{\sigma}\Gal(\sigma(L)/\widetilde{F})$ es resoluble. Sea $\varphi:\Gal(L'/\widetilde{F})\to\displaystyle\prod_{\sigma} \Gal(\sigma(L)/\widetilde{F})$, $\eta\mapsto (\left.\eta\right|_{\sigma(L)})_{\sigma}$. Es trivial que $\varphi$ es monomorfismo pues si $\left.\eta\right|_{\sigma(L)}=\id$ para todo $\sigma$, entonces $\eta$ fija a todos los elementos de $L'$ y por el Teorema de Artin, tenemos que $\eta=\id$. Esto implica que $\Gal(L'/\widetilde{F})$ es resoluble por ser subgrupo de resoluble. Pero entonces, se tiene que $\Gal(\widetilde{F}/k)\simeq \Gal(L'/k)/\Gal(L'/\widetilde{F})$ y como $\Gal(\widetilde{F}/k)$ y $\Gal(L'/\widetilde{F})$ son resolubles ya estamos. 
+\end{proof}
+\end{prop}
+
+\begin{defn}
+Sea $E/k$ una extensión finita. Decimos que $E/k$ es \textbf{resoluble por radicales} si existe una torre de extensiones $k=E_0\subseteq E_1\subseteq \ldots \subseteq E_m=\widetilde{E}$ tal que $E\subseteq\widetilde{E}$ y $E_{i+1}=E_i(\alpha_i)$ con $\alpha_i$ raíz de $x^{n_i}-a_i\in E_i[x]$ con $n_i\in\NN$ (si $\car k=p$ pido $(n_i:p)=1$) o bien es raíz de $x^p - x - a_i\in E_i[x]$ si $\car k = p$ para todo $0\leq i\leq m-1$. Una torre de este tipo se denomina \textbf{extensión radical}.
+\end{defn}
+
+\begin{obs}
+Notemos que si $E/k$ es resoluble por radicales, entonces $E/k$ es separable, pues es claro que $\widetilde{E}/k$ es separable (agregamos raíces de polinomios separables) y $E/k$ es una subextensión.
+\end{obs}
+
+\begin{defn}
+Sea $f\in k[x]$. Decimos que $f$ es resoluble por radicales (o que la ecuación $f(x)=0$ es resoluble por radicales) si el cuerpo de descomposición de $f$ es una extensión resoluble por radicales.
+\end{defn}
+
+\begin{teo}
+Sea $E/k$ una extensión finita y separable. Entonces $E/k$ es resoluble si y sólo si es resoluble por radicales.
+\begin{proof}
+$(\Longrightarrow)$ Sea $E/k$ resoluble. Entonces, su clausura normal $E'/k$ es Galois con $\Gal(E'/k)$ resoluble. Sea $r=[E':k]$ y consideremos entonces $m$ como el producto de los primos que dividen a $r$ (salvo $p$ si $\car k= p$). En el caso que $\car k =p$, se tiene que $m$ y $p$ son coprimos. En cualquier caso, existe $\omega\in \overline{E'}$ raíz $m$-ésima primitiva de la unidad. Sea $G=\Gal(E'k(\omega)/k(\omega))$. Es resoluble pues $E'/k$ es Galois resoluble. Como $G$ es resoluble, existe una serie de descomposición $G=G_0\supset G_1\supset\ldots\supset G_n=\{1\}$ tal que $G_{i+1}\triangleleft G_i$ y $G_i/G_{i+1}\simeq \ZZ_{p_i}$ con $p_i$ primo. Consideremos entonces la torre de extensiones dada por $k(\omega)=F_0\subseteq F_1\subseteq\ldots\subseteq F_n=E'k(\omega)$ con $F_i=(E'k(\omega))^{G_i}$ por la correspondencia de Galois. Pero tenemos que $G_{i+1}\triangleleft G_i$ y así $\Gal(E'k(\omega)/F_{i+1})\triangleleft \Gal(E'k(\omega)/F_i)$ y así $F_{i+1}/F_i$ es normal (y trivialmente separable). Entonces $F_{i+1}/F_i$ es una extensión galoisiana y además $\Gal(F_{i+1}/F_i) = G_i/G_{i+1}\simeq\ZZ_{p_i}$. Es decir, $F_{i+1}/F_i$ es una extensión cíclica de grado $p_i$. Como $p_i = [F_{i+1}:F_i]\mid [E'k(\omega):k(\omega)]$ y a su vez $[E'k(\omega):k(\omega)]\mid [E:k]=r$, tenemos que $p_i\mid r$. Tenemos entonces dos casos.
+
+Si $p_i\neq p$, entonces $p_i\mid m$ y así $m=p_i s$. Esto implica que $\omega^s$ es una raíz $p_i$-ésima primitiva de la unidad y $\omega^s\in F_i$. entonces, $F_i$ tiene una raíz $p_i$-ésima primitiva de la unidad y $F_{i+1}/F_i$ es cíclica de grado $p_i$. Por el Teorema de Clasificación de Extensiones Cíclicas, tenemos que $F_{i+1} = F_i(\alpha_i)$ con $\alpha_i$ raíz de $x^{p_i}-a_i\in F_i[x]$.
+
+Si $p_i=p$, entonces, por el Teorema de Clasificación de Extensiones Cíclicas (en su versión aditiva), tenemos que $F_{i+1}/F_i$ es una extensión cíclica de grado $p$, que implica que $F_{i+1} = F_i(\alpha_i)$ con $\alpha_i$ raíz de $x^p - x - a\in F_i[x]$.
+
+Entonces, probamos que $k(\omega)\subseteq\ldots\subseteq E'k(\omega)$ es una extensión radical. Como $k(\omega)$ con $\omega$ es raíz de $x^m-1$, tenemos que $k\subseteq k(\omega)\subseteq\ldots\subseteq E'k(\omega)$ es una extensión radical y $E\subseteq E'\subseteq E'k(\omega)$. Y listo.
+
+$(\Longleftarrow)$ Sabemos que $E/k$ es resoluble por radicales. Existe una torre de extensiones radical $k=F_0\subseteq \ldots\subseteq F_t=\widetilde{E}$ con $E\subset\widetilde{E}$. Notar que al ser una extensión radical, $\widetilde{E}/k$ es separable. Sea $E'/k$ la clausura normal de $\widetilde{E}/k$. Es claro que $E'/k$ es Galois y finita. Existe entonces una torre de extensión radical $k=F_0\subseteq\ldots\subseteq F_s=E'$ (solo agregamos raíces de minimales que siguen siendo de la forma deseada). Como $E\subseteq\widetilde{E}\subseteq E'$, sabemos que $F_{i+1}=F_i(\alpha_i)$ con $\alpha_i$ raíz de $x^{n_i}-a_i\in F_i[x]$ o de $x^p - x - a_i\in F_i[x]$ si $\car k=p$. Sea $m=\displaystyle\prod_{i=1}^s n_i$. Como $n_i$ es coprimo con $p$ para todo $i$, tenemos que $m$ es coprimo con $p$. Por lo tanto, existe $\omega\in \overline{E'}$ raíz $m$-ésima primitiva de la unidad.
+
+Considero la torre de extensiones $k(\omega)=F_0(\omega)\subseteq F_1(\omega)\subseteq\ldots\subseteq F_s(\omega)=E'(\omega)$. Sea $G_i$ el grupo de Galois de $E'(\omega)/F_i(\omega)$. Por la correspondencia de Galois, tenemos una cadena $G=G_0\supset\ldots \supset G_s=\{1\}$. Notemos que $F_{i+1}(\omega)/F_i(\omega)=F_i(\omega)(\alpha_{i})/F_i(\omega)$ con $\alpha_i$ raíz de $x^{n_i}-a_i$ o de $x^p - x - a$. Si estamos en el primer caso, la extensión resulta normal pues tengo una raíz y una raíz de la unidad. En el segundo caso, resulta normal pues si tengo una raíz, tengo todas (pues si $\alpha$ es raíz, $\alpha+1$ también). Son trivialmente separables, y así tenemos que $F_{i+1}(\omega)/F_i(\omega)$ es Galois.
+
+Nuevamente, vamos a recurrir a la clasificación de extensiones cíclicas. En el primer caso, si $\alpha_i$ es raíz de $x^{n_i}-a_i$, entonces $m=n_i h$ y así $\omega^h$ es raíz $n_i$-ésima primitiva de $1$. Entonces, $F_{i+1}(\omega)/F_i(\omega)$ es Galois cíclica. En el segundo caso, si $\alpha_i$ es raíz de $x^p - x - a$, entonces $F_{i+1}(\omega)/F_i(\omega)$ es cíclica de orden $p$.
+
+Tenemos entonces que $F_{i+1}(\omega)/F_i(\omega)$ es normal y así $G_{i+1}\triangleleft G_i$. Pero también $F_{i+1}(\omega)/F_i(\omega)$ es cíclico, lo que implica que $G_i/G_{i+1}$ es cíclico. Por lo tanto, $\Gal(E'(\omega)/k(\omega))$ es resoluble. Entonces, $E'(\omega)/k(\omega)$ es resoluble. Pero por otra parte, $k(\omega)/k$ es resoluble pues es Galois y es una extensión ciclotómica con $\Gal(k(\omega)/k)\subseteq (\ZZ_m)^\times$. Entonces, su grupo de Galois es abeliano y así es resoluble. Por lo tanto $E'(\omega)/k$ es resoluble y así se mete en una extensión galoisiana resoluble. Pero como $E/k$ se mete en $E'/k$, esta extensión galoisiana resoluble nos sirve para $E$. Y estamos.
+\end{proof}
+\end{teo}
 
 \end{document}
 
