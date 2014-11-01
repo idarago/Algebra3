@@ -1812,15 +1812,162 @@ Si $p_i=p$, entonces, por el Teorema de Clasificación de Extensiones Cíclicas 
 
 Entonces, probamos que $k(\omega)\subseteq\ldots\subseteq E'k(\omega)$ es una extensión radical. Como $k(\omega)$ con $\omega$ es raíz de $x^m-1$, tenemos que $k\subseteq k(\omega)\subseteq\ldots\subseteq E'k(\omega)$ es una extensión radical y $E\subseteq E'\subseteq E'k(\omega)$. Y listo.
 
-$(\Longleftarrow)$ Sabemos que $E/k$ es resoluble por radicales. Existe una torre de extensiones radical $k=F_0\subseteq \ldots\subseteq F_t=\widetilde{E}$ con $E\subset\widetilde{E}$. Notar que al ser una extensión radical, $\widetilde{E}/k$ es separable. Sea $E'/k$ la clausura normal de $\widetilde{E}/k$. Es claro que $E'/k$ es Galois y finita. Existe entonces una torre de extensión radical $k=F_0\subseteq\ldots\subseteq F_s=E'$ (solo agregamos raíces de minimales que siguen siendo de la forma deseada). Como $E\subseteq\widetilde{E}\subseteq E'$, sabemos que $F_{i+1}=F_i(\alpha_i)$ con $\alpha_i$ raíz de $x^{n_i}-a_i\in F_i[x]$ o de $x^p - x - a_i\in F_i[x]$ si $\car k=p$. Sea $m=\displaystyle\prod_{i=1}^s n_i$. Como $n_i$ es coprimo con $p$ para todo $i$, tenemos que $m$ es coprimo con $p$. Por lo tanto, existe $\omega\in \overline{E'}$ raíz $m$-ésima primitiva de la unidad.
+$(\Longleftarrow)$ Sabemos que $E/k$ es resoluble por radicales. Es decir, existe una torre de extensiones radical $k=F_0\subseteq \ldots\subseteq F_n=\widetilde{E}$ con $E\subset\widetilde{E}$. Notar que al ser una extensión radical, $\widetilde{E}/k$ es separable. Sea $E'/k$ la clausura normal de $\widetilde{E}/k$. Es claro que $E'/k$ es Galois y finita. Veamos que existe entonces una torre de extensión radical $k=F_0\subseteq\ldots\subseteq F_s=E'$. Si tenemos que $\hom(\widetilde{E}/k,\overline{\widetilde{E}}/k) = \{\sigma_1,\ldots , \sigma_r\}$ entonces la clausura normal de $E$ simplemente es $E' = k(\{\sigma_j(\alpha_i) : 0\leq i\leq n-1, 1\leq j\leq r\})$.	Ahora, sea $F_{i+1}^j = F_i^j(\sigma_j(\alpha_i))$ con $F_i^1 = F_i$. Entonces tenemos una torre de extensiones $k=F_0^1 \subset \ldots \subset F_n^1 \subset F_0^2 \subset\ldots \subset F_n^r = E'$. Como $\alpha_i$ es raíz de $x^n - a_i\in F_i[x]$, tenemos que $\sigma_j(\alpha_i)$ es raíz de $x^n - \sigma_j(a_i)\in F_i^j[x]$, pues como $a_i\in k(\alpha_0,\ldots ,\alpha_{i-1})$ tenemos que $\sigma_j(a_i)\in k(\sigma_j(\alpha_0),\ldots , \sigma_j(\alpha_{i-1}))\subseteq F_i^j[x]$. Y listo.
+
+Como $E\subseteq\widetilde{E}\subseteq E'$, sabemos que $F_{i+1}=F_i(\alpha_i)$ con $\alpha_i$ raíz de $x^{n_i}-a_i\in F_i[x]$ o de $x^p - x - a_i\in F_i[x]$ si $\car k=p$. Sea $m=\displaystyle\prod_{i=1}^s n_i$. Como $n_i$ es coprimo con $p$ para todo $i$, tenemos que $m$ es coprimo con $p$. Por lo tanto, existe $\omega\in \overline{E'}$ raíz $m$-ésima primitiva de la unidad.
 
 Considero la torre de extensiones $k(\omega)=F_0(\omega)\subseteq F_1(\omega)\subseteq\ldots\subseteq F_s(\omega)=E'(\omega)$. Sea $G_i$ el grupo de Galois de $E'(\omega)/F_i(\omega)$. Por la correspondencia de Galois, tenemos una cadena $G=G_0\supset\ldots \supset G_s=\{1\}$. Notemos que $F_{i+1}(\omega)/F_i(\omega)=F_i(\omega)(\alpha_{i})/F_i(\omega)$ con $\alpha_i$ raíz de $x^{n_i}-a_i$ o de $x^p - x - a$. Si estamos en el primer caso, la extensión resulta normal pues tengo una raíz y una raíz de la unidad. En el segundo caso, resulta normal pues si tengo una raíz, tengo todas (pues si $\alpha$ es raíz, $\alpha+1$ también). Son trivialmente separables, y así tenemos que $F_{i+1}(\omega)/F_i(\omega)$ es Galois.
 
 Nuevamente, vamos a recurrir a la clasificación de extensiones cíclicas. En el primer caso, si $\alpha_i$ es raíz de $x^{n_i}-a_i$, entonces $m=n_i h$ y así $\omega^h$ es raíz $n_i$-ésima primitiva de $1$. Entonces, $F_{i+1}(\omega)/F_i(\omega)$ es Galois cíclica. En el segundo caso, si $\alpha_i$ es raíz de $x^p - x - a$, entonces $F_{i+1}(\omega)/F_i(\omega)$ es cíclica de orden $p$.
 
-Tenemos entonces que $F_{i+1}(\omega)/F_i(\omega)$ es normal y así $G_{i+1}\triangleleft G_i$. Pero también $F_{i+1}(\omega)/F_i(\omega)$ es cíclico, lo que implica que $G_i/G_{i+1}$ es cíclico. Por lo tanto, $\Gal(E'(\omega)/k(\omega))$ es resoluble. Entonces, $E'(\omega)/k(\omega)$ es resoluble. Pero por otra parte, $k(\omega)/k$ es resoluble pues es Galois y es una extensión ciclotómica con $\Gal(k(\omega)/k)\subseteq (\ZZ_m)^\times$. Entonces, su grupo de Galois es abeliano y así es resoluble. Por lo tanto $E'(\omega)/k$ es resoluble y así se mete en una extensión galoisiana resoluble. Pero como $E/k$ se mete en $E'/k$, esta extensión galoisiana resoluble nos sirve para $E$. Y estamos.
+Tenemos entonces que $F_{i+1}(\omega)/F_i(\omega)$ es normal y así $G_{i+1}\triangleleft G_i$. Pero también se tiene que $F_{i+1}(\omega)/F_i(\omega)$ es cíclico, lo que implica que $G_i/G_{i+1}$ es cíclico. Por lo tanto, $\Gal(E'(\omega)/k(\omega))$ es resoluble. Entonces, $E'(\omega)/k(\omega)$ es resoluble. Pero por otra parte, $k(\omega)/k$ es resoluble pues es Galois y es una extensión ciclotómica con $\Gal(k(\omega)/k)\subseteq (\ZZ_m)^\times$. Entonces, su grupo de Galois es abeliano y así es resoluble. Por lo tanto $E'(\omega)/k$ es resoluble y así se mete en una extensión galoisiana resoluble. Pero como $E/k$ se mete en $E'/k$, esta extensión galoisiana resoluble nos sirve para $E$. Y estamos.
 \end{proof}
 \end{teo}
+
+\begin{defn}
+Sea $E/k$ una extensión y $S\subseteq E$ un subconjunto. Decimos que $S$ es una \textbf{familia algebraicamente independiente} sobre $k$ si $\mathrm{ev}:k[x_s]_{s\in S}\to k[S]$, $x_s\mapsto s$ es un monomorfismo. Es decir, ningún polinomio no trivial en $s_{i_1},\ldots ,s_{i_r}$ se hace $0$. Más concretamente, si $\displaystyle\sum_{\text{finita}}a_{i_1\ldots i_r}s_{i_1}^{a_{i_1}}\cdots s_{i_r}^{a_{i_r}} = 0$ entonces debemos tener que $a_{i_1\ldots i_r}=0$.
+\end{defn}
+
+\begin{obs}
+Notemos que un subconjunto $S\subseteq E$ es una familia algebraicamente independiente si y sólo si para todo $T\subseteq S$ finito tenemos que $T$ es una familia algebraicamente independiente.
+\end{obs}
+
+\begin{prop}
+Sea $E/k$ una extensión, $S\subseteq E$ una familia algebraicamente independiente sobre $k$ y $t\in E$ trascendente sobre $k(S)$. Entonces, $S\cup\{t\}$ es una familia algebraicamente independiente sobre $k$.
+\begin{proof}
+En virtud de la observación anterior, basta ver que para todo $T\subseteq S\cup \{t\}$ finito, $T$ es una familia algebraicamente independiente. Si $t\notin T$, como $S$ es una familia algebraicamente independiente sobre $k$ y tenemos que $T\subseteq S$ debe ser que $T$ es una familia algebraicamente independiente. Si $t\in T$, entonces $T=\{s_1,\ldots , s_n,t\}$. Sea $f\in k[x_1,\ldots ,x_n,x]$ tal que $f(s_1,\ldots , s_n,t)=0$. Quiero ver que $f=0$. Pero notemos que $k[x_1,\ldots , x_n,x]=k[x_1,\ldots , x_n][x]$ y así $f=\displaystyle\sum_{i=0}^r f_ix^i$ con $f_i\in k[x_1,\ldots , x_n]$. Luego, $g = \displaystyle\sum_{i=0}^r f_i(s_1,\ldots , s_n) x^i\in k(s_1,\ldots s_n)[x]$. Como $t$ es algebraicamente independiente sobre $k(S)$, tenemos que $f_i(s_1,\ldots , s_n)=0$ para cada $0\leq i\leq r$. Por lo tanto, $f_i=0$ para cada $0\leq i\leq r$ por ser $S$ una familia algebraicamente independiente sobre $k$. Y estamos.
+\end{proof}
+\end{prop}
+
+\begin{defn}
+Una extensión $E/k$ se dice \textbf{puramente trascendente} si tenemos que $\{x\in E : x \text{ algebraico sobre }k \}=k$. Es decir, no hay elementos algebraicos en la extensión $E/k$ fuera de $k$.
+\end{defn}
+
+\begin{defn}
+Sea $E/k$ una extensión no algebraica. Una \textbf{base de trascendencia} de $E/k$ es una familia algebraicamente independiente $S\subseteq E$ maximal.
+\end{defn}
+
+\begin{prop}
+Si $E/k$ es una extensión no algebraica, entonces existe una base de trascendencia.
+\begin{proof}
+Es una fácil aplicación del Lema de Zorn.
+\end{proof}
+\end{prop}
+
+\begin{prop}
+Sea $E/k$ una extensión no algebraica y $S\subseteq E$ una base de trascendencia. Entonces $E/k(S)$ es algebraica y $k(S)/k$ es puramente trascendente.
+\end{prop}
+
+\begin{prop}
+Sea $E/k$ una extensión no algebraica y $\{x_1,\ldots , x_m\}$ una base de trascendencia finita. Si $\{\omega_1,\ldots , \omega_n\}$ es una familia algebraicamente independiente, entonces $n\leq m$. Además, toda base de trascendencia tiene el mismo cardinal.
+\end{prop}
+
+\begin{defn}
+Se define el \textbf{grado de trascendencia} de una extensión $E/k$ no algebraica como $\mathrm{grtr}(E/k)=\sharp S$ con $S\subseteq E$ alguna base de trascendencia.
+\end{defn}
+
+\begin{obs}
+Queremos estudiar la resolubilidad de una ecuación polinómica general. Tenemos un polinomio de la forma $f = x^n - s_1x^{n-1} + \ldots + (-1)^n s_n$ sobre un cuerpo $k$ y $\{s_1,\ldots ,s_n\}$ algebraicamente independientes sobre $k$. Es decir, los coeficientes del polinomio son símbolos, y la resolubilidad de la ecuación va a consistir en poder expresar a las raíces de ese polinomio en término de esos símbolos. Sean $t_1,\ldots , t_n$ las raíces de $f$ en $\overline{k(s_1,\ldots , s_n)}$.
+
+Notemos que $k(t_1,\ldots ,t_n)/k(s_1,\ldots ,s_n)$ es algebraica. $k(s_1,\ldots , s_n)/k$ es trascendente si y sólo si $\mathrm{grtr}(k(s_1,\ldots ,s_n)/k) = n$, que a su vez es equivalente a que $\mathrm{grtr}(k(t_1,\ldots , t_n)/k)=n$ (por ser $k(t_1,\ldots , t_n)/k(s_1,\ldots , s_n)$ algebraica). Pero esto por otra parte es equivalente a que $\{t_1,\ldots ,t_n\}$ sea una familia algebraicamente independiente sobre $k$.
+
+Vamos a trabajar con $\{t_1,\ldots , t_n\}$ una familia algebraicamente independiente sobre $k$. Consideremos entonces $k[t_1,\ldots, t_n]\simeq k[x_1,\ldots , x_n]$ el álgebra de polinomios. Se tiene una acción $S_n\acts k[t_1,\ldots , t_n]$ vía $\sigma \cdot f(t_1,\ldots , t_n) = f(t_{\sigma(1)},\ldots , t_{\sigma(n)})$ (es decir, permutar las variables).
+
+Sea $f\in k[x_1,\ldots , x_n]$. Decimos que $f$ es \textbf{simétrico} si $\sigma\cdot f = f$ para todo $\sigma\in S_n$. Es decir, si es un punto fijo bajo la acción de $S_n$.
+
+Consideremos el polinomio $f=(x-t_1)\ldots (x-t_n)\in k(t_1,\ldots, t_n)[x]$. Post-desarrollo, este polinomio se escribe como $f=x^n - s_1x^{n-1}+\ldots + (-1)^n s_n$ donde $s_\ell = \displaystyle\sum_{j_1< \ldots < j_\ell} t_{j_1}\cdots t_{j_\ell}$ para cada $1\leq \ell\leq n$. Como $\sigma\cdot f=f$ para todo $\sigma$, tenemos que $\sigma\cdot s_i = s_i$ para todo $\sigma\in S_n$, y así los $s_i$ son polinomios simétricos. Vamos a llamar a los $s_i$ \textbf{polinomios simétricos elementales}. Consideramos la extensión $k(t_1,\ldots , t_n)/k(s_1,\ldots , s_n)$. Esto es el cuerpo de descomposición de $f\in k(s_1,\ldots , s_n)[x]$. Como $\gr f = n$ y la extensión es algebraica, tenemos que $[k(t_1,\ldots, t_n):k(s_1,\ldots , s_n)]\leq n!$. Por otra parte, para cada $\sigma\in S_n$, considero el automorfismo $\widetilde{\sigma}\in \Aut(E/k)$ dado por $\widetilde{\sigma}(t_i) = t_{\sigma(i)}$. Sea $H=\{\widetilde{\sigma}\in\Aut(E)\}_{\sigma\in S_n}$. Es claro que si $\sigma\neq \sigma'$ entonces $\widetilde{\sigma}\neq\widetilde{\sigma'}$. Luego, $H\subseteq \Aut(E)$ y $H\simeq S_n$. Por el Teorema de Artin, tenemos que $k(t_1,\ldots ,t_n)/(k(t_1,\ldots ,t_n))^H$ es Galois con grupo de Galois $H$. Notemos que $s_i\in (k(t_1,\ldots ,t_n))^H$ para cada $i$ por ser polinomios simétricos. Entonces, $(k(t_1,\ldots ,t_n))^H/k(s_1,\ldots ,s_n)$ es una extensión intermedia de $k(t_1,\ldots ,t_n)/k(s_1,\ldots ,s_n)$. Pero como $k(t_1,\ldots ,t_n)/(k(t_1,\ldots ,t_n))^H$ tiene grado $n!$ (por ser su grupo de Galois $S_n$) y sabíamos que $[k(t_1,\ldots ,t_n):k(s_1,\ldots ,s_n)]\leq n!$, resulta que $[(k(t_1,\ldots ,t_n))^H : k(s_1,\ldots ,s_n)]=1$ y así $k(t_1,\ldots ,t_n)/k(s_1,\ldots ,s_n)$ es una extensión Galoisiana con grupo de Galois $S_n$.
+
+Esto nos dice que la ecuación general de grado $n$ no es resoluble por radicales para $n\geq 5$, pues $\Gal(k(t_1,\ldots ,t_n)/k(s_1,\ldots ,s_n))\simeq S_n$ que no es un grupo soluble para $n\geq 5$.
+\end{obs}
+
+\section{Construcciones con Regla y Compás}
+
+Tenemos un conjunto $E$ ($\sharp E>1$) de puntos en el plano. Se permiten las siguientes dos operaciones: \begin{itemize}\item Trazar una recta que pasa por dos puntos de $E$ (regla). \item Construir un círculo con centro un punto de $E$ y radio igual a la distancia entre dos puntos de $E$ (compás).\end{itemize}
+
+\begin{defn}
+Decimos que un punto $P$ en el plano es \textbf{construíble en un paso a partir de $E$} si $P$ está en la intersección de dos rectas distintas o una recta y un círculo o dos círculos distintos construídos con las dos operaciones anteriores.
+
+Decimos entonces que un punto $P$ es \textbf{construíble a partir de $E$} si existe una sucesión finita de conjuntos de puntos $E=E_0\subseteq\ldots \subseteq E_n$ tal que $E_i$ consiste de puntos que se construyen en un paso a partir de $E_{i-1}$ y $P\in E_n$.
+\end{defn}
+
+\begin{ex}
+Supongamos que $E=\{A,B,P\}$ es un conjunto de tres puntos no alineados. La proyección de $P$ en la recta $AB$ es construíble. En efecto, sólo debemos tomar la circunferencia de centro $A$ y radio $AP$ y la circunferencia de centro $B$ y radio $BP$ y tomar la recta que pasa por los puntos de intersección (también llamado eje radical).
+\end{ex}
+
+\begin{ex}
+Dado $E=\{O,A\}$ podemos construir una base ortonormal $\RR_O^2$ (centrada en $O$) tal que $A=(1,0)$. En efecto, trazamos la recta $OA$ y allí marcamos $A'$ como la intersección de la circunferencia de centro $O$ y radio $OA$ con la recta $OA$ (es decir, la reflexión de $A$ por $O$). Ahora, trazamos la mediatriz de $AA'$. Para eso consideramos la circunferencia de centro $A$ y radio $AA'$ y la circunferencia de centro $A'$ y radio $AA'$ y trazamos la recta que pasa por los puntos de intersección de estas dos circunferencias. Esta es una recta perpendicular a $OA$ que pasa por $O$. Entonces, tomamos $B$ alguno de los dos puntos de intersección de la circunferencia de centro $O$ y radio $OA$ con esta recta y obtenemos la base ortonormal $\{OA,OB\}$ que deseamos.
+\end{ex}
+
+\begin{ex}
+Dado un conjunto $E=\{O,A,P\}$ de puntos no alineados, podemos construir la recta paralela a $OA$ que pase por $P$. En efecto, sólo debemos construir la proyección $P'$ de $P$ en $OA$, trazar la reflexión $P''$ de $P'$ por $P$ y trazar la mediatriz de $P'P''$.
+\end{ex}
+
+\begin{obs}
+A partir del segundo ejemplo anterior, podemos suponer que $E\subseteq\RR^2$ y $(0,0),(1,0)\in E$. Entonces, identificamos al conjunto de puntos con las coordenadas en esta base $E=\{(x_i,y_i)\}$.
+\end{obs}
+
+\begin{obs}
+Sea $E\subseteq\RR^2$ ($(1,0),(0,0)\in E$). Un punto $(x,y)\in\RR^2$ es construíble a partir de $E$ si y sólo si $(x,0)$ y $(0,y)$ lo son. En efecto, si $(x,y)$ es construíble, como sabemos proyectar por el primer ejemplo anterior, podemos obtener $(x,0)$ y $(0,y)$. Por otra parte, si tenemos $(x,0)$ y $(0,y)$, entonces trazamos la paralela al eje $y$ por $(x,0)$ y al eje $x$ por $(0,y)$ y la intersección será el punto $(x,y)$.
+Si $(x,0)$ es construíble a partir de $E$, entonces $(0,x$ también lo es. En efecto, sólo tomo la circunferencia de centro $(0,0)$ y radio $x$.
+\end{obs}
+
+\begin{defn}
+Sea $E\subseteq\RR^2$. Decimos que $\alpha\in\RR$ es \textbf{construíble a partir de $E$} si es coordenada de un punto construíble a partir de $E$.
+\end{defn}
+
+\begin{obs}
+Por la observación anterior, $\alpha$ es construíble a partir de $E$ si y sólo si $(\alpha,0)$ lo es.
+\end{obs}
+
+\begin{defn}
+Decimos que $\alpha\in\RR$ es \textbf{construíble} (a secas) si es construíble a partir de $E=\{(0,0),(1,0)\}$.
+\end{defn}
+
+\begin{teo}
+Sea $E\subseteq\RR^2$, $E=\{(x_i,y_i)\}_{i=1,\ldots, r}$ y $\alpha\in\RR$. Entonces, $\alpha$ es construíble a partir de $E$ si y sólo si existe una torre de extensiones $k_0 \subset k_1\subset\ldots\subset k_m$ donde $k_0=\QQ(x_1,\ldots , x_r,y_1,\ldots , y_r)$ tal que $\alpha\in k_m$ y cada extensión $k_{i+1}/k_i$ con $0\leq i\leq m-1$ es una extensión cuadrática.
+\begin{proof}
+$(\Longrightarrow)$ Basta probar que si $P=(x,y)$ es construíble en un paso a partir de $E=\{(x_i,y_i)\}_{i=1,\ldots, r}$ entonces $[k(x,y):k]\leq 2$. Para eso, simplemente debemos considerar tres casos:
+
+En el primer caso, $(x,y)$ es intersección de dos rectas $ax+by+c=0$ y $a'x+b'x+c'=0$ con $a,b,c,a',b',c'\in k$ con $\det \begin{pmatrix}a & b\\ a' & b'\end{pmatrix} \neq 0$ (pues no son paralelas). Entonces, tenemos una solución en $k$ y así $x,y\in k$.
+
+En el segundo caso, $(x,y)$ es la intersección de una recta y un círculo. Es decir, satisfacen las ecuaciones $x^2 +y^2 + ax+by+c=0$ y $a'x+b'y+c'=0$ con $a,b,c,a',b',c'\in k$. De la segunda ecuación despejo a $y$ en términos de $x$ y lo reemplazo en la primera ecuación. Luego, $x$ satisface una ecuación cuadrática y así $[k(x):k]\leq 2$. Pero como pude despejar a $y$ en términos de $x$, tengo que $k(x,y)=k(x)$. Entonces, $[k(x,y):k]\leq 2$.
+
+En el tercer caso, $(x,y)$ es la intersección de dos círculos y así satisfacen las ecuaciones $x^2+ y^2 + ax+by+c=0$ y $x^2 + y^2 + a'x + b'y+ c'=0$ con $a,b,c,a',b',c'\in k$. Restándole la primera a la segunda vemos que la segunda ecuación se puede reemplazar por $(a'-a)x + (b'-b)y + (c'-c)=0$. Esto es, $(x,y)$ es la intersección de un círculo y una recta, como en el caso anterior.
+
+Ahora, simplemente procediendo por inducción en la cantidad de pasos necesarios para construir a un punto, la implicación sigue.
+
+$(\Longleftarrow)$ Supongamos que tenemos una torre $k_0\subseteq k_1\subseteq\ldots\subseteq k_m$ con $\alpha\in k_m$. Primero notemos que los números construíbles a partir de $E$ forman un subcuerpo de los reales. En efecto, $0$ y $1$ son trivialmente construíbles. Si tenemos que $x$ y $x'$ son construíbles, para la resta simplemente trasladamos con el compás el segmento $xx'$ en el eje $x$ al $0$. Para la suma, si $x<x'$ simplemente trasladamos con el compás el segmento $0x$ al $x'$. Para construirnos el inverso y la multiplicación, si tengo $x,x'$, consideremos la paralela a la recta que une $(0,1)$ y $(x',0)$ por $(x,0)$. Corta al eje $y$ en $(0,a)$. Entonces, $a/1 = x/x'$. Si tomamos $x=1$, obtenemos que $1/x'$ es construíble si $x'$ lo es. Por lo tanto, $x/(1/x') = xx'$ es construíble.
+
+Ahora bien, tomo $\widetilde{E}\subseteq\RR^2$ con $\widetilde{E} = \{(x_i,y_i)\}_{i=1,\ldots ,s}$ y $\widetilde{k}=\QQ(x_1,\ldots, x_s,y_1,\ldots , y_s)$. Veamos que si $\beta\in\RR$ es tal que $[\widetilde{k}(\beta):\widetilde{k}]=2$ entonces $\beta$ es construíble a partir de $\widetilde{E}$. En efecto, sea $m(\beta,\widetilde{k})=x^2 +bx+c$ con $b,c\in\widetilde{k}$. Entonces, $\beta = \dfrac{-b\pm\sqrt{b^2 -4c}}{2}$ para alguna elección de los signos. Como vimos que los construíbles forman un cuerpo, si probamos que para todo $\delta > 0 $ construíble, entonces $\sqrt{d}$ es construíble ya estaremos. Pero para esto, consideramos la circunferencia de centro $(\dfrac{\delta+1}{2},0)$ y radio $\dfrac{\delta+1}{2}$. Trazamos la perpendicular al eje $x$ por $(1,0)$ y nos fijamos el punto $(x,y)$ (con $y\geq 0$) en el que esta perpendicular corta a la circunferencia. Por el Teorema de Pitágoras, es fácil despejar que $y=\sqrt{d}$ y listo.
+
+Entonces, si $E=\{(x_i,y_i)\}_{i=1,\ldots , r}$, $k_0=\QQ(x_1,\ldots , x_r,y_1,\ldots , y_r)$ y tenemos una cadena $k_0\subseteq k_1\subseteq \ldots \subseteq k_m$ y $\alpha\in k_m$. Como $x_1,\ldots , x_r,y_1,\ldots ,y_r$ son construíbles, entonces $k_0$ que es el mínimo subcuerpo que los contiene está en $\RR$ y debe estar dentro del subcuerpo de los construíbles. Como $[k_1:k_0]=2$, debe ser que $k_1=k_0(\alpha_0)$ con $\alpha_0$ construíble (¡por el párrafo anterior!). Entonces, $k_1$ también resulta contenido en el subcuerpo de los construíbles. Inductivamente, obtenemos que $k_m$ también está incluído en el subcuerpo de los construíbles y así $\alpha\in k_m$ debe ser construíble. Y estamos.
+\end{proof}
+\end{teo}
+
+\begin{cor}
+Un número $\alpha\in\RR$ es construíble si y sólo si $\alpha\in \QQ(\sqrt{a_1},\ldots ,\sqrt{a_n})$ donde $a_i>0$ para todo $1\leq i\leq n$ y además $a_i\in\QQ(\sqrt{a_1},\ldots , \sqrt{a_{i-1}})$ para cada $1\leq i\leq n$.
+\end{cor}
+
+\begin{cor}
+Sea $E\subseteq\RR^2$ con $E=\{(x_i,y_i)\}_{i=1,\ldots ,r}$ y $k_0=\QQ(x_1,\ldots , x_r,y_1,\ldots ,y_r)$. Si $L/k$ es normal, $L\subseteq \RR$ y $[L:k]=2^n$ entonces todo $\alpha\in L$ es construíble.
+\begin{proof}
+Sea $G=\Gal(L/k)$. Como $G$ es un $2$-grupo, existe una cadena de subgrupos $G_0=1\subseteq G_1\subseteq\ldots\subseteq G_r=G$ con $G_i\triangleleft G_{i+1}$ y $|G_{i+1}/G_i|=2$ para cada $0\leq i\leq r-1$. Por la correspodencia de Galois, tomo los cuerpos fijos por estos grupos y obtengo lo deseado.
+\end{proof}
+\end{cor}
+
+Veamos un par de problemas clásicos que podemos resolver con estas técnicas.
+
+\begin{ex}
+No se puede duplicar un cubo. Es decir, si tenemos un cubo de lado $1$, no podemos construir con regla y compás un segmento que mira $\sqrt[3]{2}$. Pero esto es obvio pues $[\QQ(\sqrt[3]{2}):\QQ]=3$ que no es una potencia de $2$.
+\end{ex}
+
+\begin{ex}
+El problema de la cuadratura del círculo. Es decir, construir a partir de un círculo dado, un cuadrado con la misma superficie. Si tuvieramos un círculo de radio $1$, entonces su área sería $\pi$. Pero entonces, deberíamos construir un cuadrado de lado $\sqrt{\pi}$. Esto es ridículo, pues $\sqrt{\pi}$ ni siquiera es algebraico.
+\end{ex}
+
+\begin{ex}
+El problema de la trisección de un ángulo. Notemos que conocer a un ángulo $\alpha$ es conocer $\cos \alpha$ y $\sin\alpha$. Pero si suponemos que el ángulo es menor que $90^\circ$, es decir, $\alpha\in [0,\pi/2]$, entonces con conocer $\cos\alpha$ ya es suficiente. Entonces la pregunta es, sabiendo que $\cos(3\alpha)$ es construíble, ¿puedo construir $\cos\alpha$? Por la fórmula del ángulo triple, sabemos que $\cos (3\alpha) = 4\cos^3 \alpha - 3\cos \alpha$. Por lo tanto, $\cos\alpha$ es raíz de $4x^3 - 3x - \cos(3\alpha)\in\QQ(\cos(3\alpha))[x]$. Si $3\alpha = 60^\circ = \pi/3$, entonces $\cos \alpha$ es raíz de $8x^3 - 6x -1\in\QQ[x]$. Pero este polinomio tiene grado $3$ y no tiene raíces reales en $\QQ$ (pues sólo $\pm 1$ son los únicos candidatos posibles a raíz). Entonces $[\QQ(\cos\alpha):\QQ(\cos(3\alpha))]=3$ y así no es construíble.
+\end{ex}
 
 \end{document}
 
