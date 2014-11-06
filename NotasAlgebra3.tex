@@ -1969,6 +1969,57 @@ El problema de la cuadratura del círculo. Es decir, construir a partir de un c�
 El problema de la trisección de un ángulo. Notemos que conocer a un ángulo $\alpha$ es conocer $\cos \alpha$ y $\sin\alpha$. Pero si suponemos que el ángulo es menor que $90^\circ$, es decir, $\alpha\in [0,\pi/2]$, entonces con conocer $\cos\alpha$ ya es suficiente. Entonces la pregunta es, sabiendo que $\cos(3\alpha)$ es construíble, ¿puedo construir $\cos\alpha$? Por la fórmula del ángulo triple, sabemos que $\cos (3\alpha) = 4\cos^3 \alpha - 3\cos \alpha$. Por lo tanto, $\cos\alpha$ es raíz de $4x^3 - 3x - \cos(3\alpha)\in\QQ(\cos(3\alpha))[x]$. Si $3\alpha = 60^\circ = \pi/3$, entonces $\cos \alpha$ es raíz de $8x^3 - 6x -1\in\QQ[x]$. Pero este polinomio tiene grado $3$ y no tiene raíces reales en $\QQ$ (pues sólo $\pm 1$ son los únicos candidatos posibles a raíz). Entonces $[\QQ(\cos\alpha):\QQ(\cos(3\alpha))]=3$ y así no es construíble.
 \end{ex}
 
+\begin{ex}
+La constructibilidad de un $n$-ágono regular. De manera similar al ejemplo anterior, construir el polígono es equivalente a construir $\frac{2\pi}{n}$ y así $\cos\frac{2\pi}{n}$. Una condición necesaria es que $[\QQ(\cos\frac{2\pi}{n}):\QQ]=2^r$. Pero también es suficiente. En efecto, $\QQ(\cos\frac{2\pi}{n})/\QQ$ es una extensión normal metida en $\RR$. Para ver esto, notemos que si $\omega_n$ es una raíz $n$-ésima primitiva de la unidad entonces $\cos \frac{2\pi}{n} = \frac{\omega_n + \omega_n^{-1}}{2}$ y así $\QQ(\cos(\frac{2\pi}{n}))$ es una subextensión de $\QQ(\omega_n)$, que es abeliana y así la normalidad que queríamos sigue.
+
+Por lo tanto, para ver la constructibilidad del polígono regular de $n$ lados, solo debemos ver si $[\QQ(\cos\frac{2\pi}{n}):\QQ]=2^r$ para algún $r$. Sabemos que $[\QQ(\omega_n):\QQ]=\varphi(n)$. Pero además, como $\cos\frac{2\pi}{n} = \frac{\omega_n + \omega_n^{-1}}{2}$, se sigue que $\omega_n$ es raíz de $x^2 - 2\cos\frac{2\pi}{n} + 1\in\QQ(\cos\frac{2\pi}{n})$. Por lo tanto, $[\QQ(\omega_n):\QQ(\cos\frac{2\pi}{n})]\leq 2$. Entonces, por la multiplicidad en torre del grado, resulta que $[\QQ(\cos\frac{2\pi}{n}):\QQ]$ es potencia de $2$ si y sólo si $[\QQ(\omega_n):\QQ]$ lo es. Es decir, si $\varphi(n)$ es potencia de $2$. Pero factorizando a $n$ en primos, resulta que esto es equivalente a que $n = 2^m p_1\cdots p_\ell$ con $p_i\neq p_j$ si $i\neq j$ y cada $p_i$ es un primo de Fermat. Es decir, $p_i = 2^{k_i}+1$ (y equivalentemente, por ser primo, debe ser de la forma $2^{2^{s_i}}+1$).
+\end{ex}
+
+\section{Teoría de Kummer}
+
+\begin{defn}
+Sean $A,B,C$ grupos abelianos. Un morfismo bilineal $\psi:A\times B\to C$ es una función que cumple que para todo $a\in A$ fijo, $\psi_a:B\to C$, $\psi_a(b)=\psi(a,b)$ es un morfismo de grupos y para todo $b\in B$ fijo, $\psi_b:A\to C$, $\psi_b(a)=\psi(a,b)$ es un morfismo de grupos. Denotaremos $\psi(a,b)=\langle a,b\rangle$.
+\end{defn}
+
+\begin{defn}
+Sea $\psi:A\times B\to C$ un morfismo bilineal de grupos abelianos. Definimos el \textbf{núcleo a izquierda} $A' = \{a\in A : \psi_a=0\}=\{a\in A : \langle a,b\rangle = 0\;\forall b\in B\}$. De forma análoga, se define el \textbf{núcleo a derecha} $B'=\{b\in B : \langle a,b\rangle = 0\;\forall a\in A\}$. Es fácil ver que $A'\subseteq A, B'\subseteq B$ son subgrupos.
+\end{defn}
+
+Dado $b\in B$ considero $\psi_b:A\to C$, $a\mapsto \langle a,b\rangle$. Para todo $a\in A'$ tenemos que $\psi_b(a)=\psi_a(b)=0$ y así $\psi_b$ induce un morfismo $\widetilde{\psi_b}:A/A'\to C$ en el cociente. De la misma forma, fijado $a\in A$, $\psi_a:B\to C$ pasa al cociente como $\widetilde{\psi_a}:B/B'\to C$.
+
+Ahora bien, si $b_1,b_2\in B$ son tales que $\overline{b_1}=\overline{b_2}\in B/B'$. Como tenemos que $\widetilde{\psi_{b_1}}(\overline{a}) = \langle a,b_1\rangle$ y $\widetilde{\psi_{b_2}}(\overline{a}) = \langle a,b_2\rangle$, restando ambas, $\widetilde{\psi_{b_1}}(\overline{a})-\widetilde{\psi_{b_2}}(\overline{a}) = \langle a,b_1\rangle - \langle a,b_2\rangle = \langle a,b_1-b_2\rangle = 0$ donde la última igualdad se da porque $b_1-b_2\in B'$. Por lo tanto $\widetilde{\psi_{b_1}}=\widetilde{\psi_{b_2}}$. Podemos definirnos entonces un morfismo de grupos abelianos $\widetilde{\psi}:B/B'\to \hom(A/A',C)$ por $\widetilde{\psi}(\overline{b})=\widetilde{\psi_b}$ (la buena definición es lo que acabamos de probar) y con una cuenta muy similar podemos ver que en realidad es un monomorfismo. De la misma manera tenemos un monomorfismo $\widetilde{\psi}:A/A'\to\hom(B/B',C)$, $\widetilde{\psi}(\overline{a})=\widetilde{\psi_a}$.
+
+Sea $\psi:A\times B\to \ZZ_m$ un morfismo bilineal y sean $A',B'$ los núcleos a izquierda y derecha respectivamente. Sea $\overline{x}\in B/B'$. Entonces, $\widetilde{\psi}(m\overline{x}) = \widetilde{\psi_{mx}} = m\widetilde{\psi_x} = 0$ pues estamos en $\ZZ_m$. Entonces, como $\widetilde{\psi}$ es un monomorfismo, debemos tener que $m\overline{x}=0$ y así $B/B'$ es $m$-anulado. De forma análoga, $A/A'$ es $m$-anulado. Supongamos ahora que $A/A'$ es finito. Entonces, por el Teorema de Estructura, tenemos que $A/A' \simeq \ZZ_{n_1}\oplus\ldots\oplus \ZZ_{n_r}$ con $n_i\mid m$. Por lo tanto, $\hom(A/A',\ZZ_m)\simeq A/A'$ (pues el $\hom$ separa la suma directa y $\hom(\ZZ_{n_i},\ZZ_m)= \ZZ_{n_i}$ por ser $n_i\mid m$). Como teníamos un monomorfismo $B/B'\to\hom(A/A',\ZZ_m)$, debemos tener que $B/B'$ es isomorfo a un subgrupo de $A/A'$ y así $B/B'$ debe ser finito. Pero entonces podemos hacer lo mismo cambiando $A/A'$ por $B/B'$. Esto nos dice que $A/A'$ es isomorfo a un subgrupo de $B/B'$, y como ambos son finitos debe ser que los grupos son isomorfos. Hemos probado:
+
+\begin{prop}
+Sean $A,B$ grupos abelianos y $\psi:A\times B\to\ZZ_m$ un morfismo bilineal. Entonces, $A/A'$ y $B/B'$ son $m$-anulados y $A/A'$ es finito si y sólo si $B/B'$ lo es. En ese caso, resulta que $A/A'\simeq B/B'$. \qed
+\end{prop}
+
+Sea $k$ un cuerpo y $m\in\NN$ (en el caso que $\car k = p>0$ pedimos además que $p$ y $m$ sean coprimos). Supongamos que $k$ contiene $\xi_m$ una raíz $m$-ésima primitiva de $1$ y sean $U_m$ las raíces $m$-ésimas de la unidad en $\overline{k}$. Sabemos que $U_m\subseteq k^\times$. Si $a\in k^\times$, denotaremos por $a^{1/m}$ a alguna raíz de $x^m - a\in k[x]$. Notemos que $k(a^{1/m})/k$ es Galois ya que las otras raíces de $x^m - a$ son de la forma $a^{1/m}\xi_m^i$ para algún $i$ y el polinomio es separable (simplemente mirar su derivada).
+
+Notemos que tenemos un morfismo en el grupo de unidades $k^\times\to k^\times$, $x\mapsto x^m$. Denotaremos por $(k^\times)^m$ a la imagen de este morfismo. Consideremos un subgrupo $B\subseteq k^\times$ que contiene a las potencias $m$-ésimas. Es decir, $(k^\times)^m \subseteq B\subseteq k^\times$. Definimos entonces $k(B^{1/m})=k(a^{1/m})_{a\in B}$. Notemos que $k(B^{1/m})/k$ es Galois (pues cada elemento que agregamos tiene minimal separable y todas sus raíces están al agregar una).
+
+Sea $G=\Gal(k(B^{1/m})/k)$. Para cada $a\in B$ fijo tomo $\alpha\in k(B^{1/m})$ una raíz $m$-ésima de $a$. Es decir, $\alpha^m = a$. Sea $\sigma\in G$. Pero como $\sigma(\alpha)$ es otra raíz $m$-ésima de $a$, debemos tener que $\sigma(\alpha)=\omega_\sigma^a \alpha$ donde $\omega_\sigma^a$ es una raíz $m$-ésima de $1$. Entonces, se tiene una aplicación $G\to U_m$, $\sigma\mapsto \omega_\sigma^a$. Pero notemos que esta aplicación es un morfismo de grupos. En efecto, esto es pues $\omega_{\tau\sigma}^a\alpha = \tau(\sigma(\alpha)) = \tau(\omega_\sigma^a \alpha) = \omega_\sigma^a \tau(\alpha) = \omega_\sigma^a \omega_\tau^a \alpha$ y cancelamos $\alpha$ a ambos lados. Además, $\omega_\sigma^a$ no depende del $\alpha$ elegido. En efecto, si $\alpha'^m = a$ entonces $\alpha' = \gamma\alpha$ con $\gamma\in U_m$. Entonces, ${{\omega_{\sigma}}^a}' = \sigma(\alpha')/\alpha' = \sigma(\gamma\alpha)/\gamma\alpha = \gamma\sigma(\alpha)/\gamma\alpha = \sigma(\alpha)/\alpha = \omega_\sigma^a$.
+
+Tenemos entonces, $\psi:G\times B\to U_m$ una asignación $\psi(\sigma,a) = \omega_\sigma^a$. Vimos que para $a$ fijo, $\psi_a:G\to U_m$ es un morfismo de grupos. Veamos que para cada $\sigma\in G$ fijo, $\psi_\sigma:B\to U_m$ también resulta morfismo de grupos. En efecto, notemos que si $\alpha^m = a$ y $\beta^m = b$, tenemos que $\psi_\sigma(ab) = \omega_\sigma^{ab} = \sigma(\alpha\beta)/\alpha\beta = (\sigma(\alpha)/\alpha)( \sigma(\beta)/\beta) = \psi_\sigma(a)\psi_\sigma(b)$.
+
+Observemos que $G$ es un grupo abeliano pues para todo $\alpha$ tal que $\alpha^m\in B$ tenemos que $\sigma\tau(\alpha) = \sigma(\alpha\xi_m^{i(\tau)}) = \alpha\xi_m^{i(\sigma)}\xi_m^{i(\tau)} = \alpha\xi_m^{i(\tau)}\xi_m^{i(\sigma)} = \tau(\alpha\xi_m^{i(\sigma)}) = \tau\sigma(\alpha)$. Entonces, tenemos un morfismo bilineal $\psi:G\times B\to U_m\simeq \ZZ_m$. Sean $G',B'$ los núcleos a izquierda y derecha. Por lo tanto, sabemos que $G/G'$ y $B/B'$ son $m$-anulados y uno es finito si y sólo si el otro lo es. Veamos bien qué es cada cosa.
+
+Para $G'$, como $G'=\{\sigma\in G : \omega_\sigma^a = 1\;\forall a\in B\}$, si $\sigma\in G'$ tenemos que $\omega_\sigma^a = 1$ para todo $a\in B$. Entonces, para todo generador $\alpha$ de $k(B^{1/m})$ se tiene que $\sigma(\alpha) = \omega_\sigma^a \alpha = \alpha$. Por lo tanto, $\sigma = \id$ pues fija a todos los generadores. Es decir, $G'=1$. Luego, $G = G/G'$ es $m$-anulado.
+
+Para $B'$, sea $a\in B'\subseteq B$. Entonces, $\omega_\sigma^a = 1$ para todo $\sigma\in G$. Considero la torre de extensiones $k\subseteq k(a^{1/m})\subseteq k(B^{1/m})$. Veamos que $a^{1/m}\in k^\times$. Supongamos que no. Luego, existiría $\widetilde{\sigma}\in \Gal(k(a^{1/m})/k)$ tal que $\widetilde{\sigma}(a^{1/m})\neq a^{1/m}$. Extiendo $\widetilde{\sigma}$ a $\sigma\in \Gal(k(B^{1/m})/k)=G$. Pero como $\omega_\sigma^a=1$, no puede ser que $\sigma(a^{1/m}) = \widetilde{\sigma}(a^{1/m}) \neq a^{1/m}$. Absurdo. Por lo tanto, si $a\in B'$ tenemos que $a^{1/m}\in k^\times$ y así $a \in (k^\times)^m$. Esto implica que $B'\subseteq (k^\times)^m$. Ahora bien, la otra contención es obvia, pues si $b\in (k^\times)^m$, entonces $b= \beta^m$ para $\beta\in k^\times$ y así $\omega_\sigma^b = \sigma(b)/b = 1$ para todo $\sigma\in G$. Por lo tanto $B' = (k^\times)^m$. Hemos probado:
+
+\begin{teo}
+Sea $k$ un cuerpo y $m\in\NN$ (si $\car k =p>0$ pedimos $m$ y $p$ coprimos). Supongamos que $k$ contiene una raíz $m$-ésima primitiva de la unidad. Sea $B\subseteq k^\times$ subgrupo tal que $(k^\times)^m\subseteq B$. Entonces, $k(B^{1/m})/k$ es abeliana con grupo $G$ que es anulado por $m$. Además, $k(B^{1/m})/k$ es finita si y sólo si el índice de $(k^\times)^m$ en $B$ es finito. En ese caso, se tiene que el grupo de Galois $G$ es isomorfo a $B/(k^\times)^m$. \qed
+\end{teo}
+
+\begin{teo}
+Sea $k$ un cuerpo y $m\in\NN$ (si $\car k =p>0$ pedimos $m$ y $p$ coprimos). Supongamos que $k$ contiene una raíz $m$-ésima primitiva de la unidad. Sea $B\subseteq k^\times$ subgrupo tal que $(k^\times)^m\subseteq B$. La asignación $B\mapsto k(B^{1/m})$ determina una correspondencia biunívoca entre los subgrupos de $k^\times$ que contienen a $(k^\times)^m$ y las extensiones abelianas de $k$ tal que su grupo de Galois $G$ es anulado por $m$.
+\begin{proof}
+Ejercicio!
+\end{proof}
+\end{teo}
+
 \end{document}
 
 
