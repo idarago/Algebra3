@@ -48,6 +48,7 @@
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\FF}{\mathbb{F}}
+\newcommand{\mm}{\mathfrak{m}}
 \newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
 \newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
 \newcommand{\eps}{\varepsilon}
@@ -2019,6 +2020,112 @@ Sea $k$ un cuerpo y $m\in\NN$ (si $\car k =p>0$ pedimos $m$ y $p$ coprimos). Sup
 Ejercicio!
 \end{proof}
 \end{teo}
+
+\section{Extensiones de Anillos}
+\textbf{Aclaración:} En toda esta sección los anillos serán conmutativos y con unidad.
+\begin{defn}
+Un anillo $A$ se dice \textbf{local} si tiene un único ideal maximal $\mm$. En este caso, el \textbf{cuerpo residual} de $A$ es el cociente $A/\mm$.
+\end{defn}
+
+\begin{obs}
+Si $A$ es un anillo local, entonces $\mm = \{x\in A : x\notin A^\times\}$ es el único ideal maximal. En efecto, $\mm \subseteq \{x\in A : x\in A^\times\}$ pues si $x\in \mm$ y $x\in A^\times$ tendríamos que $1\in\mm$ y así $\mm=A$. Para la otra contención, si $x\notin A^\times$, entonces $\langle x\rangle$ es un ideal propio y así hay un ideal maximal que lo contiene. Pero como hay sólo un ideal maximal, debe ser $\langle x\rangle\subseteq\mm$ y así $x\in\mm$.
+
+Por otra parte, si $A$ es un anillo y $\mm = \{x\in A : x\notin A^\times\}$ es un ideal, entonces $A$ es local con ideal maximal $\mm$. En efecto, ver que es maximal es fácil pues si agregamos cualquier otro elemento, ya habría una unidad. Además, cualquier otro ideal propio debe estar incluído allí pues no hay unidades en ideales propios.
+\end{obs}
+
+\begin{defn}
+Sea $A$ un anillo. El \textbf{Radical de Jacobson} se define como la intersección de los ideales maximales de $A$, y lo notaremos $\mathcal{R}$.
+\end{defn}
+
+\begin{obs}
+Si $A$ es un anillo local con ideal maximal $\mm$, entonces $\mathcal{R} = \mm$.
+\end{obs}
+
+\begin{prop}
+Sea $A$ un anillo y $\mathcal{R}$ su radical de Jacobson. Entonces $$\mathcal{R} = \{x\in A : 1-xy\in A^\times \;\forall y\in A\}$$
+\begin{proof}
+$(\subseteq)$ Sea $x\in\mathcal{R}$. Supongamos que $1-xy\notin A^\times$ para algún $y\in A$. Entonces, existe algún ideal maximal $\mm$ tal que $1-xy\in\mm$. Pero como $x\in\mathcal{R}$, en particular, $x\in\mm$. Por lo tanto $xy\in\mm$ y así $1\in\mm$. Absurdo.
+
+$(\supseteq)$ Sea $x\in A$ tal que $1-xy\in A^\times$ para todo $y\in A$. Supongamos que $x\notin\mathcal{R}$. Entonces, existe un ideal maximal $\mm$ tal que $x\notin\mm$. Luego $\mm \subset \mm + \langle x\rangle$ y por la maximalidad de $\mm$ resulta $A = \mm+\langle x\rangle$. Por lo tanto, $1 = \mu + xy$ y así $1-xy = \mu \in \mm$. Es decir, $1-xy\notin A^\times$. La proposición sigue.
+\end{proof}
+\end{prop}
+
+\begin{lem}[Nakayama]
+Sea $A$ un anillo y $M$ un $A$-módulo finitamente generado. Sea $\mathcal{R}$ el radical de Jacobson y $\mathfrak{a}\subseteq\mathcal{R}$ un ideal. Entonces, si $\mathfrak{a}M=M$ debemos tener $M=0$.
+\begin{proof}
+Como $M$ es finitamente generado, existe un conjunto minimal de generadores finito $\{\omega_1,\ldots , \omega_n\}$. Notemos que $\omega_n\in M = \mathfrak{a}M$ y por lo tanto $\omega_n = a_1\omega_1 + \ldots + a_n\omega_n$ con $a_i\in \mathfrak{a}$. Por lo tanto, $(1-a_n)\omega_n = a_1\omega_1 + \ldots + a_{n-1}\omega_{n-1}$. Pero tenemos que $a_n\in\mathfrak{a}\subseteq\mathcal{R}$ y así $1-a_n$ debe ser una unidad. Por lo tanto, $\omega_n = (1-a_n)^{-1}a_1 \omega_1 + \ldots + (1-a_n)^{-1}a_{n-1}\omega_{n-1}$. Es decir, $\omega_n \in\langle \omega_1,\ldots , \omega_n\rangle$. Esto es absurdo, pues $\{\omega_1,\ldots ,\omega_n\}$ era un conjunto minimal de generadores.
+\end{proof}
+\end{lem}
+
+\begin{cor}
+Sea $M$ un $A$-módulo finitamente generado y $N\subseteq M$ un submódulo. Sea $\mathcal{R}$ el radical de Jacobson y $\mathfrak{a}\subseteq\mathcal{R}$ un ideal. Entonces, si $M=\mathfrak{a}M + N$ debemos tener $M=N$.
+\begin{proof}
+Como $M$ es finitamente generado, $M/N$ también resulta finitamente generado. Pero $\mathfrak(M/N) = (\mathfrak{a}M+N)/N = M/N$. Por el Lema de Nakayama, debemos tener $M/N=0$ y así $M=N$.
+\end{proof}
+\end{cor}
+
+\begin{defn}
+Sea $B$ un anillo y $A\subseteq B$ un subanillo. Decimos que $\iota: A\hookrightarrow B$ es una \textbf{extensión de anillos}.
+\end{defn}
+
+\begin{defn}
+Sea $A\subseteq B$ una extensión de anillos. Decimos que $\alpha\in B$ es \textbf{entero} sobre $A$ si existe un polinomio $f\in A[x]$ mónico que lo anule. Es decir, si existe una ecuación entera $\alpha^n + a_{n-1}\alpha^{n-1} + \ldots + a_1 \alpha + a_0=0$ con $a_i\in A$ (donde las sumas y productos se llevan a cabo en $B$).
+\end{defn}
+
+\begin{ex}\label{ex::Zintegramentecerrado}
+Consideremos la extensión de anillos $\ZZ\subseteq \QQ$. Veamos que los enteros de $\QQ$ sobre $\ZZ$ son en efecto $\ZZ$. Sea $x\in\QQ$ entero sobre $\ZZ$. Supongamos que $x=r/s$ con $r,s$ coprimos. Como $x$ es entero, $(r/s)^n + a_{n-1}(r/s)^{n-1}+\ldots + a_1 (r/s) + a_0 = 0$ con $a_i\in\ZZ$. Multiplicando por $s^n$ a ambos lados, obtenemos que $r^n + sa_{n-1} r^{n-1} + \ldots + s^na_0 = 0$. Por lo tanto, $s\mid r^n$. Pero como $r,s$ eran coprimos, debemos tener que $s=\pm 1$. Esto quiere decir que $x\in\ZZ$ y así nuestra noción nueva de enteros coincide con la noción previa que teníamos.
+\end{ex}
+
+\begin{defn}
+Un $A$ módulo $M$ se dice \textbf{fiel} sobre $A$ si $aM=0$ para algún $a\in A$ implica que $a=0$.
+\end{defn}
+
+\begin{teo}
+Sea $A\subseteq B$ una extensión de anillos y $\alpha\in B$. Son equivalentes:
+\begin{enumerate}
+\item $\alpha$ es entero sobre $A$.
+\item $A[\alpha]$ es un $A$-módulo finitamente generado.
+\item Existe $C$ subanillo de $B$ tal que $A[\alpha]\subseteq C\subseteq B$ y $C$ es un $A$-módulo finitamente generado.
+\item Existe un $A[\alpha]$ módulo $M$ fiel sobre $A[\alpha]$ que es finitamente generado como $A$-módulo.
+\end{enumerate}
+\begin{proof}
+$(1)\Longrightarrow (2)$ Sea $\alpha\in B$ entero sobre $A$. Entonces, debe cumplir una ecuación de la forma $\alpha^n + a_{n-1}\alpha^{n-1}+\ldots + a_1\alpha + a_0=0$ con $a_i\in A$. Equivalentemente, esto es $\alpha^n = -a_{n-1}\alpha^{n-1}-\ldots - a_1\alpha - a_0\in\langle 1,\alpha,\ldots , \alpha^{n-1}\rangle$. Si suponemos que $\alpha^{n+k}\in\langle 1,\ldots, \alpha^{n-1}\rangle$ para todo $0 \leq k< r$, entonces $\alpha^{n+r} = -a_{n-1}\alpha^{n+r-1}-\ldots -a_0\alpha^r\in\langle 1,\ldots , \alpha^{n-1}\rangle$. Es decir, $\alpha^t\in\langle 1,\ldots, \alpha^{n-1}\rangle$ para todo $t\in\NN$, y así $A[\alpha]$ es $A$-finitamente generado.
+
+$(2)\Longrightarrow (3)$ Tomo $C=A[\alpha]$.
+
+$(3)\Longrightarrow (4)$ Tomo $M=C$. Es fiel pues al ser $C$ subanillo, $1\in C$ y así si $b\in A[\alpha]$ es tal que $bC=0$ tenemos que $b\cdot 1=0$.
+
+$(4)\Longrightarrow (1)$ Sea $M$ un $A[\alpha]$-módulo fiel tal que es $A$-finitamente generado. Consideremos un conjunto $\{\omega_1,\ldots,\omega_n\}$ de generadores de $M$ como $A$-módulo. Entonces, $\alpha M\subseteq M$ y así $\alpha\omega_i = a_{i1}\omega_1 + \ldots + a_{in}\omega_n$. Tenemos entonces la ecuación $((a_{ij}) - \alpha I_{n})\cdot (\omega_i) = 0$. Multiplicando a izquierda por la matriz adjunta de $((a_{ij}) - \alpha I_n)$ obtenemos $\det ((a_{ij})-\alpha I_n) I_n \cdot (\omega_i) = 0$. Es decir, $\det((a_{ij})-\alpha I_n)$ anula a todos los generadores y así a todos los elementos de $M$. Pero como $M$ es $A[\alpha]$-fiel, debemos tener que $\det((a_{ij})-\alpha I_n)=0$. Esto ya es lo que queremos, pues $\det(a_{ij}-x I_n)$ es un polinomio mónico (a menos de un signo). Y estamos.
+\end{proof}
+\end{teo}
+
+\begin{cor}
+Sea $A\subseteq B$ una extensión de anillos y $\alpha_1,\ldots ,\alpha_n\in B$ enteros sobre $A$. Entonces $A[\alpha_1,\ldots ,\alpha_n]\subseteq B$ es finitamente generado como $A$-módulo.
+\begin{proof}
+Procederemos por inducción en $n$. Para $n=1$ ya lo sabemos por el teorema anterior. Supongamos que vale para $n-1$ y veamos que vale para $n$. Notemos que $A[\alpha_1,\ldots , \alpha_n] = (A[\alpha_1,\ldots , \alpha_{n-1}])[\alpha_n]$ es finitamente generado como $A[\alpha_1,\ldots , \alpha_{n-1}]$-módulo y así como $A$-módulo, pues por hipótesis inductiva $A[\alpha_1,\ldots, \alpha_{n-1}]$ es un $A$-módulo finitamente generado. Y estamos.
+\end{proof}
+\end{cor}
+
+\begin{cor}
+Sea $A\subseteq B$ una extensión de anillos. Consideramos la \textbf{clausura entera} de $A$ en $B$ dada por $\overline{A^B}=\{\alpha\in B : \alpha \text{ entero sobre }A\}$. Entonces, $\overline{A^B}$ es un subanillo de $B$ que contiene a $A$.
+\begin{proof}
+Si $x,y\in \overline{A^B}$, entonces $A[x,y]$ es un $A$-módulo finitamente generado por el corolario anterior y así $A[x+y]\subseteq A[x,y]$ y por lo tanto satisface la condición $3$ del teorema anterior. Entonces $x+y$ es entero. De la misma forma podemos ver que $xy$ es entero. El corolario sigue.
+\end{proof}
+\end{cor}
+
+\begin{defn}
+Sea $A\subseteq B$ una extensión de anillos. Si $A=\overline{A^B}$ decimos que $A$ es \textbf{íntegramente cerrado} en $B$. Si $\overline{A^B}=B$ se dice que $B$ es \textbf{entero} sobre $A$. Un dominio íntegro $A$ se dice \textbf{íntegramente cerrado} (a secas) si $A$ es íntegramente cerrado en su cuerpo de fracciones.
+\end{defn}
+
+\begin{prop}
+Si $A$ es un DFU, entonces es íntegramente cerrado.
+\begin{proof}
+Ejercicio: Es la misma demostración que hicimos para $\ZZ$ en ~\ref{ex::Zintegramentecerrado}.
+\end{proof}
+\end{prop}
+
+
+
 
 \end{document}
 
